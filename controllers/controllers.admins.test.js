@@ -15,6 +15,9 @@ function success (status) {
   }
 }
 
+// "prestart": "./node_modules/.bin/sequelize db:migrate && ./node_modules/.bin/sequelize db:seed:all",
+
+
 describe('API status and response', function () {
   let createdId
   let dummyData = [
@@ -36,18 +39,18 @@ describe('API status and response', function () {
           res.should.have.status(success(res.status))
           res.should.be.an('object')
           res.body.endpoints.should.deep.equal([
-            '/admin/events',
-            '/admin/events/:id'
+            '/admin/event',
+            '/admin/event/:id'
           ])
           done()
         })
     })
   })
 
-  describe('POST /api/event', function () {
+  describe('POST /admin/event', function () {
     it('return 200 <= status < 400, an object, and res.body.title should equal dummyData[0]', function (done) {
       chai.request(url)
-        .post('/api/event')
+        .post('/admin/event')
         .send({
           title: dummyData[0],
           description: dummyData[1],
@@ -66,10 +69,10 @@ describe('API status and response', function () {
     })
   })
 
-  describe('GET /api/event/scan', function () {
+  describe('GET /admin/event', function () {
     it('return 200 <= status < 400, an object, and res.body[0].description should equal dummyData[1]', function (done) {
       chai.request(url)
-        .get('/api/event/scan')
+        .get('/admin/event')
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.should.be.an('object')
@@ -79,10 +82,10 @@ describe('API status and response', function () {
     })
   })
 
-  describe('PUT /api/event/:id', function () {
+  describe('PUT /admin/event/:id', function () {
     it('return 200 <= status < 400, an object, and res.body.place should equal dummyData[6]', function (done) {
       chai.request(url)
-        .put(`/api/event/${createdId}`)
+        .put(`/admin/event/${createdId}`)
         .send({
           title: dummyData[4],
           description: dummyData[5],
@@ -98,10 +101,10 @@ describe('API status and response', function () {
     })
   })
 
-  describe('DELETE /api/event/:id', function () {
+  describe('DELETE /admin/event/:id', function () {
     it('return 200 <= status < 400, an object, and res.body should return message', function (done) {
       chai.request(url)
-        .delete(`/api/event/${createdId}`)
+        .delete(`/admin/event/${createdId}`)
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.body.should.be.an('object')
