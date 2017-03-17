@@ -10,7 +10,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        Events.hasMany(Quests),
+        Events.belongsToMany(Users, { through: User_Events })
       }
     }
   });
