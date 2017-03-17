@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       geolocation: {
-        type: Sequelize.STRING
+        type: Sequelize.GEOMETRY
       },
       score: {
         type: Sequelize.INTEGER
