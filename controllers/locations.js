@@ -1,4 +1,5 @@
 const models = require('../models')
+const sequelize = require('sequelize')
 
 module.exports = {
   getLocations: (req, res) => {
@@ -14,16 +15,18 @@ module.exports = {
     })
   },
   getLocation: (req, res) => {
-    models.Locations.findById(req.params.id).then(function (data) {
     models.Locations.findAll({
       attributes: [
         sequelize.fn('ST_DWithin',
-        sequelize.literal('the_geom'),
-        sequelize.literal(`ST_Point(${data.geolocation.coordinates[0]}, ${data.geolocation.coordinates[1]})::geography`),
+        sequelize.col('geolocation'),
+        sequelize.literal(`ST_Point(6.23242, 106.12312)::geography`),
         1000)]
+    // models.query("SELECT * FROM 'Locations' WHERE ST_DWithin('geolocation', ST_Point(6.23242, 106.12312)::geography, 10000);").spread(function(results, metadata) {
+    //   console.log(results);
+    //   console.log(metadata);
     }).then(function(filter) {
+      console.log(filter);
       res.send(filter)
-    })
     }).catch(function (err) {
       res.send(err)
     })
