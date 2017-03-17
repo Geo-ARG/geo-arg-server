@@ -6,8 +6,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        User_Events.belongsTo(models.Users);
-        User_Events.belongsTo(models.Events);
+        
       }
     }
   });

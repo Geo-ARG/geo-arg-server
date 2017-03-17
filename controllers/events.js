@@ -2,7 +2,11 @@ const models = require('../models')
 
 module.exports = {
   getEvents: (req, res) => {
-    models.Events.findAll().then(function (data) {
+    models.Events.findAll({
+      include: [
+        {model: models.Quests}
+      ]
+    }).then(function (data) {
       res.send(data)
     }).catch(function (err) {
       res.send(err)

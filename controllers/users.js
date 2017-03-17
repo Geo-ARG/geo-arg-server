@@ -5,7 +5,7 @@ module.exports = {
     models.Users.findAll({
       include: [
         {model: models.User_Locations},
-        {model: models.Locations}
+        {model: models.Locations},
       ]
     }).then(function (data) {
       res.send(data)
