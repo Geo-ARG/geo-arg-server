@@ -26,6 +26,9 @@ module.exports = {
       score: {
         type: Sequelize.INTEGER
       },
+      complete: {
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

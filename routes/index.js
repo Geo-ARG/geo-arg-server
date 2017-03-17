@@ -51,6 +51,8 @@ router.get('/api', function (req, res, next) {
   })
 })
 
+// Location
+
 router.get('/api/location/scan', locationController.getLocations)
 
 router.get('/api/location/scan/:id', locationController.getLocation)
@@ -61,9 +63,13 @@ router.put('/api/location/:id', locationController.updateLocation)
 
 router.delete('/api/location/:id', locationController.deleteLocation)
 
-// router.get('/api/events', userController.getEvents)
-//
-// router.get('/api/scan', userController.getUsers)
+router.get('/api/event', adminController.getEvents)
+
+router.get('/api/event/:id', adminController.getEvent)
+
+router.get('/api/location/scan', userController.getUsers)
+
+router.get('/api/location/scan/:id', userController.getUser)
 //
 // router.post('/api/location', userController.createLocation)
 //
@@ -81,5 +87,14 @@ router.get('/admin', function (req, res, next) {
   })
 })
 
+router.get('/api/admin/event', adminController.getEvents)
+
+router.get('/api/admin/event:id', adminController.getEvent)
+
+router.post('/api/admin/event', adminController.createEvent)
+
+router.put('/api/admin/event:id', adminController.updateEvent)
+
+router.delete('/api/admin/event:id', adminController.deleteEvent)
 
 module.exports = router;
