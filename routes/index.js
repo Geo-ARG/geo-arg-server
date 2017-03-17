@@ -41,9 +41,11 @@ router.delete('/auth/users/:id', userController.deleteUser)
 router.get('/api', function (req, res, next) {
   res.send({
     endpoints: [
-      '/api/events',
+      '/api/event',
+      '/api/event/:id',
       '/api/location',
       '/api/location/scan',
+      '/api/location/scan/:id',
       '/api/verification'
     ]
   })
