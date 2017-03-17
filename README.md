@@ -18,7 +18,7 @@ A game based on React Native and Redux where you can socialize with others at ce
     * I want to get notified whenever I enter an event
     * I want to get notified whenever another players are around me
 
-### Endpoints
+## Endpoints
 
 | Endpoints            | HTTP   | Description                                                    |
 |----------------------|--------|----------------------------------------------------------------|
@@ -26,7 +26,7 @@ A game based on React Native and Redux where you can socialize with others at ce
 | /auth/facebook       | POST   | Register user using facebookOauth                              |
 | /auth/users/:id      | GET    | Get user's data by userId                                      |
 | /api/events          | GET    | Get event list sorted by time                                  |
-| /api/scan            | GET    | Get list of nearby users                                       |
+| /api/location/scan   | GET    | Get list of nearby users                                       |
 | /api/location        | POST   | Post user's location                                           |
 | /api/verification    | POST   | Verificate data that submitted by user after completing a quest|
 | /api/admin/events    | GET    | Show event list sorted by time for admin purpose               |
@@ -34,6 +34,6 @@ A game based on React Native and Redux where you can socialize with others at ce
 | /api/admin/events/:id| PUT    | Update an event by eventId                                     |
 | /api/admin/events/:id| Delete | Delete an event by eventId                                     |
 
-### Models
+## Models
 
 ![Schema](https://raw.githubusercontent.com/Geo-ARG/geo-arg-server/fadly/assets/ARG-Schema.png)
