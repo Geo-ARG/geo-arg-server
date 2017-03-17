@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
     description: DataTypes.STRING,
     date: DataTypes.DATE,
     place: DataTypes.STRING,
-    geolocation: DataTypes.STRING,
+    geolocation: DataTypes.GEOMETRY,
     score: DataTypes.INTEGER
   }, {
     classMethods: {

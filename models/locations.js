@@ -1,8 +1,7 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Locations = sequelize.define('Locations', {
-    latitude: DataTypes.STRING,
-    longitude: DataTypes.STRING
+    geolocation: DataTypes.GEOMETRY
   }, {
     classMethods: {
       associate: function(models) {
