@@ -1,5 +1,5 @@
 branch-defaults:
-  fadly:
+  master:
     environment: geo-arg-server-dev
     group_suffix: null
 global:
