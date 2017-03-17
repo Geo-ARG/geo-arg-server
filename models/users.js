@@ -6,8 +6,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        Users.belongsToMany(Events, { through: User_Events }),
-        Users.belongsToMany(Locations, { through: User_Locations })
+        Users.belongsToMany(models.Events, { through: models.User_Events }),
+        Users.belongsToMany(models.Locations, { through: models.User_Locations })
       }
     }
   });

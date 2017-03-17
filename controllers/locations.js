@@ -33,10 +33,10 @@ module.exports = {
     }).then(function (data) {
       if(data.length === 0) {
         res.status(200).json({message: `Deleted location with ID: ${req.params.id}`})
-      },
-      else({
-        res.status(200).json({message: `There is no location with such ID`})
-      })
+      }
+      else {
+        res.send(`There is no location with such ID`)
+      }
     }).catch(function (err) {
       res.send(err)
     })
