@@ -6,11 +6,13 @@ module.exports = function(sequelize, DataTypes) {
     date: DataTypes.DATE,
     place: DataTypes.STRING,
     geolocation: DataTypes.GEOMETRY,
-    score: DataTypes.INTEGER
+    score: DataTypes.INTEGER,
+    complete: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {
         Events.hasMany(models.Quests),
+        Events.hasMany(models.User_Events);
         Events.belongsToMany(models.Users, { through: models.User_Events })
       }
     }

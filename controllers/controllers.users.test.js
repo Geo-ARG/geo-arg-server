@@ -15,7 +15,7 @@ function success (status) {
   }
 }
 
-describe('API status and response', function () {
+describe('Auth status and response', function () {
   let createdId
   let dummyData = ['fadly', 'fadly@gmail.com', 'gana', 'gana@yahoo.com']
 
@@ -31,42 +31,6 @@ describe('API status and response', function () {
             '/auth/facebook',
             '/auth/users',
             '/auth/users/:id'
-          ])
-          done()
-        })
-    })
-  })
-
-  describe('GET /api', function () {
-    it('should return /api endpoints', function (done) {
-      chai.request(url)
-        .get('/api')
-        .end(function (err, res) {
-          res.should.have.status(success(res.status))
-          res.should.be.an('object')
-          res.body.endpoints.should.deep.equal([
-            '/api/event',
-            '/api/event/:id',
-            '/api/location',
-            '/api/location/scan',
-            '/api/location/scan/:id',
-            '/api/verification'
-          ])
-          done()
-        })
-    })
-  })
-
-  describe('GET /admin', function () {
-    it('should return /admin endpoints', function (done) {
-      chai.request(url)
-        .get('/admin')
-        .end(function (err, res) {
-          res.should.have.status(success(res.status))
-          res.should.be.an('object')
-          res.body.endpoints.should.deep.equal([
-            '/admin/events',
-            '/admin/events/:id'
           ])
           done()
         })
