@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-// const userController = require('../controllers/users')
+const userController = require('../controllers/users')
+const locationController = require('../controllers/locations')
 
 /* GET home page. */
 let dummy = {
@@ -19,10 +20,21 @@ router.get('/auth', function (req, res, next) {
     endpoints: [
       '/auth/google',
       '/auth/facebook',
+      '/auth/users',
       '/auth/users/:id'
     ]
   })
 })
+
+router.get('/auth/users', userController.getUsers)
+
+router.get('/auth/users/:id', userController.getUser)
+
+router.post('/auth/users', userController.createUser)
+
+router.put('/auth/users/:id', userController.updateUser)
+
+router.delete('/auth/users/:id', userController.deleteUser)
 
 // ==== API ====
 
@@ -30,12 +42,22 @@ router.get('/api', function (req, res, next) {
   res.send({
     endpoints: [
       '/api/events',
-      '/api/scan',
       '/api/location',
+      '/api/location/scan',
       '/api/verification'
     ]
   })
 })
+
+router.get('/api/location/scan', locationController.getLocations)
+
+router.get('/api/location/scan/:id', locationController.getLocation)
+
+router.post('/api/location', locationController.createLocation)
+
+router.put('/api/location/:id', locationController.updateLocation)
+
+router.delete('/api/location/:id', locationController.deleteLocation)
 
 // router.get('/api/events', userController.getEvents)
 //
