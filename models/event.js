@@ -6,11 +6,12 @@ module.exports = function(sequelize, DataTypes) {
     date: DataTypes.DATE,
     location: DataTypes.STRING,
     rewards: DataTypes.STRING,
-    questId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        Event.belongsTo(User),
+        Event.hasMany(Quest)
       }
     }
   });
