@@ -12,7 +12,6 @@ var users = require('./routes/users');
 var app = express();
 
 // ====== Cors ======
-let cors = require('cors')
 app.use(cors())
 
 // view engine setup
