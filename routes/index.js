@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const userController = require('../controllers/users')
 const locationController = require('../controllers/locations')
+const adminController = require('../controllers/events')
 
 /* GET home page. */
 let dummy = {
@@ -81,20 +82,20 @@ router.get('/api/location/scan/:id', userController.getUser)
 router.get('/admin', function (req, res, next) {
   res.send({
     endpoints: [
-      '/admin/events',
-      '/admin/events/:id'
+      '/admin/event',
+      '/admin/event/:id'
     ]
   })
 })
 
-router.get('/api/admin/event', adminController.getEvents)
+router.get('/admin/event', adminController.getEvents)
 
-router.get('/api/admin/event:id', adminController.getEvent)
+router.get('/admin/event/:id', adminController.getEvent)
 
-router.post('/api/admin/event', adminController.createEvent)
+router.post('/admin/event', adminController.createEvent)
 
-router.put('/api/admin/event:id', adminController.updateEvent)
+router.put('/admin/event/:id', adminController.updateEvent)
 
-router.delete('/api/admin/event:id', adminController.deleteEvent)
+router.delete('/admin/event/:id', adminController.deleteEvent)
 
 module.exports = router;
