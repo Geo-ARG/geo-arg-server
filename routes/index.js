@@ -5,7 +5,7 @@ var router = express.Router();
 /* GET home page. */
 let dummy = {
   "id": 99,
-  "quote" "ARG semangaatttt!"
+  "quote": "ARG semangaatttt!"
 }
 
 router.get('/', function(req, res, next) {
