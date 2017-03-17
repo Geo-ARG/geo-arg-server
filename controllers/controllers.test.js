@@ -7,10 +7,16 @@ chai.use(chaiHTTP)
 
 const url = 'http://localhost:3000'
 
+//    "prestart": "./node_modules/.bin/sequelize db:migrate && ./node_modules/.bin/sequelize db:seed:all",
+
+
 function success (status) {
-  let isSuccess = status >= 200 && status < 400
+  let isSuccess = (status >= 200 && status < 400)
   if (isSuccess) return status
-  else return 'Client Error (404) or Server Error (500)'
+  else {
+    if (status === 404) return 404
+    else if (status === 500) return 500
+  }
 }
 
 describe('API status and response', function () {
@@ -22,9 +28,11 @@ describe('API status and response', function () {
       chai.request(url)
         .get('/auth')
         .end(function (err, res) {
+          console.log(res.body.endpoints);
+          console.log(res.status);
           res.should.have.status(success(res.status))
           res.should.be.an('object')
-          res.body.endpoints.should.equalTo([
+          res.body.endpoints.should.equal([
             '/auth/google',
             '/auth/facebook',
             '/auth/users/:id'
@@ -41,7 +49,7 @@ describe('API status and response', function () {
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.should.be.an('object')
-          res.body.endpoints.should.equalTo([
+          res.body.endpoints.should.equal([
             '/api/events',
             '/api/scan',
             '/api/location',
@@ -59,7 +67,7 @@ describe('API status and response', function () {
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.should.be.an('object')
-          res.body.endpoints.should.equalTo([
+          res.body.endpoints.should.equal([
             '/admin/events',
             '/admin/events/:id'
           ])
