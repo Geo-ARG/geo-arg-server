@@ -36,4 +36,4 @@ A game based on React Native and Redux where you can socialize with others at ce
 
 ### Models
 
-![Schema] (./assets/ARG-Schema.png)
+![Schema] (/assets/ARG-Schema.png)
