@@ -1,30 +1,24 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('Events', {
+    return queryInterface.createTable('Quests', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      eventTitle: {
+      title: {
         type: Sequelize.STRING
       },
-      description: {
+      task: {
         type: Sequelize.STRING
       },
-      date: {
-        type: Sequelize.DATE
-      },
-      location: {
-        type: Sequelize.STRING
-      },
-      rewards: {
-        type: Sequelize.STRING
-      },
-      questId: {
+      eventId: {
         type: Sequelize.INTEGER
+      },
+      verification: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -37,6 +31,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Events');
+    return queryInterface.dropTable('Quests');
   }
 };
