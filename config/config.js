@@ -1,3 +1,4 @@
+module.exports =
 {
   "development": {
     "username": "kaioo",
@@ -14,10 +15,11 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "kaioo",
-    "password": null,
-    "database": "geo_arg_production",
-    "host": "127.0.0.1",
+    "username": process.env.RDS_USERNAME || '',
+    "password": process.env.RDS_PASSWORD || '',
+    "database": process.env.RDS_DB_NAME || "geo_arg_production",
+    "host": process.env.RDS_HOSTNAME || '',
+    "port": process.env.RDS_PORT || '5432',
     "dialect": "postgres"
   }
 }
