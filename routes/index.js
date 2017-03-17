@@ -2,7 +2,10 @@ var express = require('express');
 var router = express.Router();
 const userController = require('../controllers/users')
 const locationController = require('../controllers/locations')
-const adminController = require('../controllers/events')
+const eventController = require('../controllers/events')
+const questController = require('../controllers/quests')
+const userEventController = require('../controllers/user_events')
+const userLocationController = require('../controllers/user_locations')
 
 /* GET home page. */
 let dummy = {
@@ -47,12 +50,14 @@ router.get('/api', function (req, res, next) {
       '/api/location',
       '/api/location/scan',
       '/api/location/scan/:id',
-      '/api/verification'
+      '/api/quest/verification',
+      '/api/quest',
+      '/api/quest/:id',
     ]
   })
 })
 
-// Location
+// ==== Location ====
 
 router.get('/api/location/scan', locationController.getLocations)
 
@@ -64,9 +69,9 @@ router.put('/api/location/:id', locationController.updateLocation)
 
 router.delete('/api/location/:id', locationController.deleteLocation)
 
-router.get('/api/event', adminController.getEvents)
+router.get('/api/event', eventController.getEvents)
 
-router.get('/api/event/:id', adminController.getEvent)
+router.get('/api/event/:id', eventController.getEvent)
 
 router.get('/api/location/scan', userController.getUsers)
 
@@ -74,12 +79,45 @@ router.get('/api/location/scan/:id', userController.getUser)
 
 router.get('/api/test', userController.getUser)
 
-// router.post('/api/location', userController.createLocation)
+// router.post('/api/quest/verification', userController.createVerification)
 
-// router.post('/api/verification', userController.createVerification)
+// ==== Quest ====
 
+router.get('/api/quest', questController.getQuests)
 
-// ==== Admin ====
+router.get('/api/quest/:id', questController.getQuest)
+
+router.post('/api/quest', questController.createQuest)
+
+router.put('/api/quest/:id', questController.updateQuest)
+
+router.delete('/api/quest/:id', questController.deleteQuest)
+
+// ==== User_Events ====
+
+router.get('/api/userevent', userEventController.getUserEvents)
+
+router.get('/api/userevent/:id', userEventController.getUserEvent)
+
+router.post('/api/userevent', userEventController.createUserEvent)
+
+router.put('/api/userevent/:id', userEventController.updateUserEvent)
+
+router.delete('/api/userevent/:id', userEventController.deleteUserEvent)
+
+// ==== User_Locations ====
+
+router.get('/api/userlocation', userLocationController.getUserLocations)
+
+router.get('/api/userlocation/:id', userLocationController.getUserLocation)
+
+router.post('/api/userlocation', userLocationController.createUserLocation)
+
+router.put('/api/userlocation/:id', userLocationController.updateUserLocation)
+
+router.delete('/api/userlocation/:id', userLocationController.deleteUserLocation)
+
+// ==== Event ====
 
 router.get('/admin', function (req, res, next) {
   res.send({
@@ -90,14 +128,14 @@ router.get('/admin', function (req, res, next) {
   })
 })
 
-router.get('/admin/event', adminController.getEvents)
+router.get('/admin/event', eventController.getEvents)
 
-router.get('/admin/event/:id', adminController.getEvent)
+router.get('/admin/event/:id', eventController.getEvent)
 
-router.post('/admin/event', adminController.createEvent)
+router.post('/admin/event', eventController.createEvent)
 
-router.put('/admin/event/:id', adminController.updateEvent)
+router.put('/admin/event/:id', eventController.updateEvent)
 
-router.delete('/admin/event/:id', adminController.deleteEvent)
+router.delete('/admin/event/:id', eventController.deleteEvent)
 
 module.exports = router;

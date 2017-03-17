@@ -41,7 +41,9 @@ describe('API status and response', function () {
             '/api/location',
             '/api/location/scan',
             '/api/location/scan/:id',
-            '/api/verification'
+            '/api/quest/verification',
+            '/api/quest',
+            '/api/quest/:id',
           ])
           done()
         })
