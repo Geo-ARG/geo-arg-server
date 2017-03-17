@@ -2,7 +2,12 @@ const models = require('../models')
 
 module.exports = {
   getLocations: (req, res) => {
-    models.Locations.findAll().then(function (data) {
+    models.Locations.findAll({
+      include: [
+        {model: models.User_Locations},
+        {model: models.Users}
+      ]
+    }).then(function (data) {
       res.send(data)
     }).catch(function (err) {
       res.send(err)
