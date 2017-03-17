@@ -19,6 +19,7 @@ describe('Scan Nearby User', function() {
       .end(function (err, res) {
         expect(res).to.have.status(success(res.status))
         expect(res.body).be.an('array')
+        expect(res.body.nearby).to.include.keys('user');
         done()
       })
   })
