@@ -10,7 +10,15 @@ module.exports = {
   },
   getLocation: (req, res) => {
     models.Locations.findById(req.params.id).then(function (data) {
-      res.send(data)
+    models.Locations.findAll({
+      attributes: [
+        sequelize.fn('ST_DWithin',
+        sequelize.literal('the_geom'),
+        sequelize.literal(`ST_Point(${data.geolocation.coordinates[0]}, ${data.geolocation.coordinates[1]})::geography`),
+        1000)]
+    }).then(function(filter) {
+      res.send(filter)
+    })
     }).catch(function (err) {
       res.send(err)
     })
@@ -49,7 +57,7 @@ module.exports = {
   updateLocation: (req, res) => {
     var point = {
       type: 'Point',
-      coordinates: [req.body.longitude, req.body.latitude],
+      coordinates: [+req.body.longitude, +req.body.latitude],
       crs: { type: 'name', properties: { name: 'EPSG:4326'} }
     };
     models.Locations.findById(req.params.id).then(function (location) {
