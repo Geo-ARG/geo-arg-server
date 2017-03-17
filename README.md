@@ -35,3 +35,5 @@ A game based on React Native and Redux where you can socialize with others at ce
 | /api/admin/events/:id| Delete | Delete an event by eventId                                     |
 
 ### Models
+
+![Schema] (/assets/ARG-Schema.png)

@@ -1,15 +1,14 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var Location = sequelize.define('Location', {
-    latitude: DataTypes.INTEGER,
-    longitude: DataTypes.INTEGER,
+  var User_Events = sequelize.define('User_Events', {
+    eventId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
-        Location.belongsTo(User)
+        // associations can be defined here
       }
     }
   });
-  return Location;
+  return User_Events;
 };
