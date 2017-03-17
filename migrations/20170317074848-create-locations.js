@@ -8,11 +8,8 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      latitude: {
-        type: Sequelize.STRING
-      },
-      longitude: {
-        type: Sequelize.STRING
+      geolocation: {
+        type: Sequelize.GEOMETRY
       },
       createdAt: {
         allowNull: false,
