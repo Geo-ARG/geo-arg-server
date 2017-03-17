@@ -16,9 +16,13 @@ module.exports = {
     })
   },
   createLocation: (req, res) => {
+    var point = {
+      type: 'Point',
+      coordinates: [req.body.longitude, req.body.latitude],
+      crs: { type: 'name', properties: { name: 'EPSG:4326'} }
+    };
     models.Locations.create({
-      latitude: req.body.latitude,
-      longitude: req.body.longitude
+      geolocation: point,
     }).then(function (data) {
       res.send(data)
     }).catch(function (err) {
@@ -42,10 +46,14 @@ module.exports = {
     })
   },
   updateLocation: (req, res) => {
+    var point = {
+      type: 'Point',
+      coordinates: [req.body.longitude, req.body.latitude],
+      crs: { type: 'name', properties: { name: 'EPSG:4326'} }
+    };
     models.Locations.findById(req.params.id).then(function (location) {
       location.update({
-        latitude: req.body.latitude,
-        longitude: req.body.longitude
+        geolocation: point
       }).then(function (data) {
         res.send(data)
       }).catch(function (err) {
