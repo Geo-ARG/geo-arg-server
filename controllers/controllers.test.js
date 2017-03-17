@@ -92,13 +92,13 @@ describe('API status and response', function () {
   })
 
   describe('GET /auth/users', function () {
-    it('return 200 <= status < 400, an object, and res.body[0].username should equal dummyData[0]', function (done) {
+    it('return 200 <= status < 400, an object, and res.body[0].email should equal dummyData[1]', function (done) {
       chai.request(url)
         .get('/auth/users')
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.should.be.an('object')
-          res.body[0].username.should.equal(dummyData[0])
+          res.body[0].email.should.equal(dummyData[1])
           done()
         })
     })
@@ -122,7 +122,7 @@ describe('API status and response', function () {
   })
 
   describe('DELETE /auth/users/:id', function () {
-    it('return 200 <= status < 400, an object, and res.body[0].username should equal dummyData[0]', function (done) {
+    it('return 200 <= status < 400, an object, and res.body should return message', function (done) {
       chai.request(url)
         .delete(`/auth/users/${createdId}`)
         .end(function (err, res) {

@@ -31,7 +31,7 @@ module.exports = {
         id: req.params.id
       }
     }).then(function (data) {
-      if(data.length === 0) {
+      if(data) {
         res.status(200).json({message: `Deleted location with ID: ${req.params.id}`})
       }
       else {
