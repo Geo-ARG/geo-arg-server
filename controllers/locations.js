@@ -18,11 +18,12 @@ module.exports = {
   createLocation: (req, res) => {
     var point = {
       type: 'Point',
-      coordinates: [req.body.longitude, req.body.latitude],
+      coordinates: [+req.body.longitude, +req.body.latitude],
       crs: { type: 'name', properties: { name: 'EPSG:4326'} }
     };
     models.Locations.create({
       geolocation: point,
+      userId: req.body.userId
     }).then(function (data) {
       res.send(data)
     }).catch(function (err) {
