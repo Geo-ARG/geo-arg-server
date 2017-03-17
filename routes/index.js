@@ -71,9 +71,11 @@ router.get('/api/event/:id', adminController.getEvent)
 router.get('/api/location/scan', userController.getUsers)
 
 router.get('/api/location/scan/:id', userController.getUser)
-//
+
+router.get('/api/test', userController.getUser)
+
 // router.post('/api/location', userController.createLocation)
-//
+
 // router.post('/api/verification', userController.createVerification)
 
 
