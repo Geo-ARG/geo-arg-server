@@ -58,7 +58,6 @@ describe('Api/userlocations status and response', function () {
         })
         .end(function (err, res) {
           createdId = res.body.id
-          console.log('atas ', createdId);
           res.should.have.status(success(res.status))
           res.should.be.an('object')
           res.body.LocationId.should.equal(dummyData[0])
@@ -89,8 +88,6 @@ describe('Api/userlocations status and response', function () {
           UserId: dummyData[0]
         })
         .end(function (err, res) {
-          console.log('bawah ', createdId);
-          console.log(res.body);
           res.should.have.status(success(res.status))
           res.body.should.be.an('object')
           res.body.LocationId.should.equal(dummyData[2])
