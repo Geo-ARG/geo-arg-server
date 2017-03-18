@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const userController = require('../controllers/users')
+const adminController = require('../controllers/admins')
 const locationController = require('../controllers/locations')
 const eventController = require('../controllers/events')
 const questController = require('../controllers/quests')
@@ -121,13 +122,14 @@ router.delete('/api/userlocations/:id', userLocationController.deleteUserLocatio
 
 // ==== Admin ====
 
-router.get('/admins', function (req, res, next) {
-  res.send({
-    endpoints: [
-      '/admins',
-      '/admins/:id'
-    ]
-  })
-})
+router.get('/admins', adminController.getAdmins)
+
+router.get('/admins/:id', adminController.getAdmin)
+
+router.post('/admins', adminController.createAdmin)
+
+router.put('/admins/:id', adminController.updateAdmin)
+
+router.delete('/admins/:id', adminController.deleteAdmin)
 
 module.exports = router;
