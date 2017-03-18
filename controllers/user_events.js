@@ -47,7 +47,7 @@ module.exports = {
       userevent.update({
         UserId: req.body.UserId,
         EventId: req.body.EventId,
-        completion: false
+        completion: req.body.completion
       }).then(function (data) {
         res.send(data)
       }).catch(function (err) {

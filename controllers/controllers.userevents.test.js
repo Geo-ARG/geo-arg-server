@@ -15,17 +15,13 @@ function success (status) {
   }
 }
 
-describe('API/events status and response', function () {
+describe('Api/userevents status and response', function () {
   let createdId
   let dummyData = [
-    'Hacktiv8 Campus Hunt',
-    'Find an instructor whose nickname Spiderman',
-    'Campus Hacktiv8, Pondok Indah, Jak-Sel',
-    300,
-    'Pizza Hut Treasure Hunt',
-    'Find all you can eat vouchers',
-    'Pizza Hut, Mall Pondok Indah, Jak-Sel',
-    150
+    1,
+    2,
+    3,
+    4
   ]
 
   describe('GET /api', function () {
@@ -52,67 +48,65 @@ describe('API/events status and response', function () {
     })
   })
 
-  describe('POST /api/events', function () {
-    it('return 200 <= status < 400, an object, and res.body.title should equal dummyData[0]', function (done) {
+  describe('POST /api/userevents', function () {
+    it('return 200 <= status < 400, an object, and res.body.EventId should equal dummyData[0]', function (done) {
       chai.request(url)
-        .post('/api/events')
+        .post('/api/userevents')
         .send({
-          title: dummyData[0],
-          description: dummyData[1],
-          date: new Date(),
-          place: dummyData[2],
-          eventScore: dummyData[3]
+          EventId: dummyData[0],
+          UserId: dummyData[1]
         })
         .end(function (err, res) {
           createdId = res.body.id
+          console.log('atas ', createdId);
           res.should.have.status(success(res.status))
           res.should.be.an('object')
-          res.body.title.should.equal(dummyData[0])
+          res.body.EventId.should.equal(dummyData[0])
           done()
         })
     })
   })
 
-  describe('GET /api/events', function () {
-    it('return 200 <= status < 400, an object, and res.body[0].description should equal dummyData[1]', function (done) {
+  describe('GET /api/userevents', function () {
+    it('return 200 <= status < 400, an object, and res.body[0].UserId should equal dummyData[1]', function (done) {
       chai.request(url)
-        .get('/api/events')
+        .get('/api/userevents')
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.should.be.an('object')
-          res.body[0].description.should.equal(dummyData[1])
+          res.body[0].UserId.should.equal(dummyData[1])
           done()
         })
     })
   })
 
-  describe('PUT /api/events/:id', function () {
-    it('return 200 <= status < 400, an object, and res.body.place should equal dummyData[6]', function (done) {
+  describe('PUT /api/userevents/:id', function () {
+    it('return 200 <= status < 400, an object, and res.body.EventId should equal dummyData[2]', function (done) {
       chai.request(url)
-        .put(`/api/events/${createdId}`)
+        .put(`/api/userevents/${createdId}`)
         .send({
-          title: dummyData[4],
-          description: dummyData[5],
-          place: dummyData[6],
-          eventScore: dummyData[7]
+          EventId: dummyData[2],
+          UserId: dummyData[0]
         })
         .end(function (err, res) {
+          console.log('bawah ', createdId);
+          console.log(res.body);
           res.should.have.status(success(res.status))
           res.body.should.be.an('object')
-          res.body.place.should.equal(dummyData[6])
+          res.body.EventId.should.equal(dummyData[2])
           done()
         })
     })
   })
 
-  describe('DELETE /api/events/:id', function () {
+  describe('DELETE /api/userevents/:id', function () {
     it('return 200 <= status < 400, an object, and res.body should return message', function (done) {
       chai.request(url)
-        .delete(`/api/events/${createdId}`)
+        .delete(`/api/userevents/${createdId}`)
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.body.should.be.an('object')
-          res.body.should.deep.equal({message: `Deleted event with ID: ${createdId}`})
+          res.body.should.deep.equal({message: `Deleted userEvent with ID: ${createdId}`})
           done()
         })
     })
