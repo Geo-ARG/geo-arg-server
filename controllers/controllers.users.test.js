@@ -15,7 +15,7 @@ function success (status) {
   }
 }
 
-describe('Auth status and response', function () {
+describe('Auth/users status and response', function () {
   let createdId
   let dummyData = ['fadly', 'fadly@gmail.com', 'gana', 'gana@yahoo.com']
 
@@ -47,7 +47,6 @@ describe('Auth status and response', function () {
         })
         .end(function (err, res) {
           createdId = res.body.id
-          console.log(res.body);
           res.should.have.status(success(res.status))
           res.should.be.an('object')
           res.body.username.should.equal(dummyData[0])

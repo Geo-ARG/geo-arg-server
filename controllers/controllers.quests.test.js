@@ -15,17 +15,17 @@ function success (status) {
   }
 }
 
-describe('API status and response', function () {
+describe('API/quest status and response', function () {
   let createdId
   let dummyData = [
-    'Hacktiv8 Campus Hunt',
-    'Find an instructor whose nickname Spiderman',
-    'Campus Hacktiv8, Pondok Indah, Jak-Sel',
-    300,
-    'Pizza Hut Treasure Hunt',
-    'Find all you can eat vouchers',
-    'Pizza Hut, Mall Pondok Indah, Jak-Sel',
-    150
+    'Go to PIM 3rd F',
+    'Find a girl',
+    'Text',
+    'Chelsea Islan',
+    'Go to PIM 2nd F',
+    'Find a boy',
+    'Text',
+    'Syanmil'
   ]
 
   describe('GET /api', function () {
@@ -36,83 +36,82 @@ describe('API status and response', function () {
           res.should.have.status(success(res.status))
           res.should.be.an('object')
           res.body.endpoints.should.deep.equal([
-            '/api/event',
-            '/api/event/:id',
-            '/api/location',
-            '/api/location/:id',
-            '/api/quest',
-            '/api/quest/:id',
-            '/api/userevent',
-            '/api/userevent/:id',
-            '/api/userlocation',
-            '/api/userlocation/:id'
+            '/api/events',
+            '/api/events/:id',
+            '/api/locations',
+            '/api/locations/:id',
+            '/api/quests',
+            '/api/quests/:id',
+            '/api/userevents',
+            '/api/userevents/:id',
+            '/api/userlocations',
+            '/api/userlocations/:id'
           ])
           done()
         })
     })
   })
 
-  describe('POST /api/event', function () {
-    it('return 200 <= status < 400, an object, and res.body.title should equal dummyData[0]', function (done) {
+  describe('POST /api/quests', function () {
+    it('return 200 <= status < 400, an object, and res.body.task should equal dummyData[1]', function (done) {
       chai.request(url)
-        .post('/api/event')
+        .post('/api/quests')
         .send({
           title: dummyData[0],
-          description: dummyData[1],
-          date: new Date(),
-          place: dummyData[2],
-          eventScore: dummyData[3]
+          task: dummyData[1],
+          type: dummyData[2],
+          answerKey: dummyData[3]
         })
         .end(function (err, res) {
           createdId = res.body.id
           res.should.have.status(success(res.status))
           res.should.be.an('object')
-          res.body.title.should.equal(dummyData[0])
+          res.body.task.should.equal(dummyData[1])
           done()
         })
     })
   })
 
-  describe('GET /api/event', function () {
-    it('return 200 <= status < 400, an object, and res.body[0].description should equal dummyData[1]', function (done) {
+  describe('GET /api/quests', function () {
+    it('return 200 <= status < 400, an object, and res.body[0].answerKey should equal dummyData[3]', function (done) {
       chai.request(url)
-        .get('/api/event')
+        .get('/api/quests')
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.should.be.an('object')
-          res.body[0].description.should.equal(dummyData[1])
+          res.body[0].answerKey.should.equal(dummyData[3])
           done()
         })
     })
   })
 
-  describe('PUT /api/event/:id', function () {
-    it('return 200 <= status < 400, an object, and res.body.place should equal dummyData[6]', function (done) {
+  describe('PUT /api/quests/:id', function () {
+    it('return 200 <= status < 400, an object, and res.body.type should equal dummyData[6]', function (done) {
       chai.request(url)
-        .put(`/api/event/${createdId}`)
+        .put(`/api/quests/${createdId}`)
         .send({
           title: dummyData[4],
-          description: dummyData[5],
-          place: dummyData[6],
-          eventScore: dummyData[7]
+          task: dummyData[5],
+          type: dummyData[6],
+          answerKey: dummyData[7]
         })
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.body.should.be.an('object')
-          res.body.place.should.equal(dummyData[6])
+          res.body.type.should.equal(dummyData[6])
           done()
         })
     })
   })
 
-  describe('DELETE /admin/event/:id', function () {
+  describe('DELETE /api/quests/:id', function () {
     it('return 200 <= status < 400, an object, and res.body should return message', function (done) {
       chai.request(url)
-        .delete(`/admin/event/${createdId}`)
+        .delete(`/api/quests/${createdId}`)
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.body.should.be.an('object')
-          res.body.should.deep.equal({message: `Deleted event with ID: ${createdId}`})
+          res.body.should.deep.equal({message: `Deleted quest with ID: ${createdId}`})
           done()
         })
     })

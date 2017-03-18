@@ -45,87 +45,87 @@ router.delete('/auth/users/:id', userController.deleteUser)
 router.get('/api', function (req, res, next) {
   res.send({
     endpoints: [
-      '/api/event',
-      '/api/event/:id',
-      '/api/location',
-      '/api/location/:id',
-      '/api/quest',
-      '/api/quest/:id',
-      '/api/userevent',
-      '/api/userevent/:id',
-      '/api/userlocation',
-      '/api/userlocation/:id'
+      '/api/events',
+      '/api/events/:id',
+      '/api/locations',
+      '/api/locations/:id',
+      '/api/quests',
+      '/api/quests/:id',
+      '/api/userevents',
+      '/api/userevents/:id',
+      '/api/userlocations',
+      '/api/userlocations/:id'
     ]
   })
 })
 
 // ==== Event ====
 
-router.get('/api/event', eventController.getEvents)
+router.get('/api/events', eventController.getEvents)
 
-router.get('/api/event/:id', eventController.getEvent)
+router.get('/api/events/:id', eventController.getEvent)
 
-router.post('/api/event', eventController.createEvent)
+router.post('/api/events', eventController.createEvent)
 
-router.put('/api/event/:id', eventController.updateEvent)
+router.put('/api/events/:id', eventController.updateEvent)
 
-router.delete('/api/event/:id', eventController.deleteEvent)
+router.delete('/api/events/:id', eventController.deleteEvent)
 
 // ==== Location ====
 
-router.get('/api/location', locationController.getLocations)
+router.get('/api/locations', locationController.getLocations)
 
-router.get('/api/location/:id', locationController.getLocation)
+router.get('/api/locations/:id', locationController.getLocation)
 
-router.post('/api/location', locationController.createLocation)
+router.post('/api/locations', locationController.createLocation)
 
-router.put('/api/location/:id', locationController.updateLocation)
+router.put('/api/locations/:id', locationController.updateLocation)
 
-router.delete('/api/location/:id', locationController.deleteLocation)
+router.delete('/api/locations/:id', locationController.deleteLocation)
 
 // ==== Quest ====
 
-router.get('/api/quest', questController.getQuests)
+router.get('/api/quests', questController.getQuests)
 
-router.get('/api/quest/:id', questController.getQuest)
+router.get('/api/quests/:id', questController.getQuest)
 
-router.post('/api/quest', questController.createQuest)
+router.post('/api/quests', questController.createQuest)
 
-router.put('/api/quest/:id', questController.updateQuest)
+router.put('/api/quests/:id', questController.updateQuest)
 
-router.delete('/api/quest/:id', questController.deleteQuest)
+router.delete('/api/quests/:id', questController.deleteQuest)
 
 // ==== User_Events ====
 
-router.get('/api/userevent', userEventController.getUserEvents)
+router.get('/api/userevents', userEventController.getUserEvents)
 
-router.get('/api/userevent/:id', userEventController.getUserEvent)
+router.get('/api/userevents/:id', userEventController.getUserEvent)
 
-router.post('/api/userevent', userEventController.createUserEvent)
+router.post('/api/userevents', userEventController.createUserEvent)
 
-router.put('/api/userevent/:id', userEventController.updateUserEvent)
+router.put('/api/userevents/:id', userEventController.updateUserEvent)
 
-router.delete('/api/userevent/:id', userEventController.deleteUserEvent)
+router.delete('/api/userevents/:id', userEventController.deleteUserEvent)
 
 // ==== User_Locations ====
 
-router.get('/api/userlocation', userLocationController.getUserLocations)
+router.get('/api/userlocations', userLocationController.getUserLocations)
 
-router.get('/api/userlocation/:id', userLocationController.getUserLocation)
+router.get('/api/userlocations/:id', userLocationController.getUserLocation)
 
-router.post('/api/userlocation', userLocationController.createUserLocation)
+router.post('/api/userlocations', userLocationController.createUserLocation)
 
-router.put('/api/userlocation/:id', userLocationController.updateUserLocation)
+router.put('/api/userlocations/:id', userLocationController.updateUserLocation)
 
-router.delete('/api/userlocation/:id', userLocationController.deleteUserLocation)
+router.delete('/api/userlocations/:id', userLocationController.deleteUserLocation)
 
 // ==== Admin ====
 
-router.get('/admin', function (req, res, next) {
+router.get('/admins', function (req, res, next) {
   res.send({
     endpoints: [
-      '/admin/event',
-      '/admin/event/:id'
+      '/admins',
+      '/admins/:id'
     ]
   })
 })
