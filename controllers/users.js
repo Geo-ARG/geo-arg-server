@@ -7,15 +7,15 @@ module.exports = {
         {model: models.Locations},
         {model: models.Events}
       ]
-    }).then(function (data) {
-      res.send(data)
+    }).then(function (user) {
+      res.send(user)
     }).catch(function (err) {
       res.send(err)
     })
   },
   getUser: (req, res) => {
-    models.Users.findById(req.params.id).then(function (data) {
-      res.send(data)
+    models.Users.findById(req.params.id).then(function (user) {
+      res.send(user)
     }).catch(function (err) {
       res.send(err)
     })
@@ -25,8 +25,8 @@ module.exports = {
       username: req.body.username,
       email: req.body.email,
       totalScore: 0
-    }).then(function (data) {
-      res.send(data)
+    }).then(function (user) {
+      res.send(user)
     }).catch(function (err) {
       res.send(err)
     })
@@ -36,8 +36,8 @@ module.exports = {
       where: {
         id: req.params.id
       }
-    }).then(function (data) {
-      if(data) {
+    }).then(function (user) {
+      if(user) {
         res.status(200).json({message: `Deleted user with ID: ${req.params.id}`})
       }
       else {
@@ -53,8 +53,8 @@ module.exports = {
         username: req.body.username,
         email: req.body.email,
         totalScore: req.body.totalScore
-      }).then(function (data) {
-        res.send(data)
+      }).then(function (user) {
+        res.send(user)
       }).catch(function (err) {
         res.send(err)
       })

@@ -2,15 +2,15 @@ const models = require('../models')
 
 module.exports = {
   getQuests: (req, res) => {
-    models.Quests.findAll().then(function (data) {
-      res.send(data)
+    models.Quests.findAll().then(function (quest) {
+      res.send(quest)
     }).catch(function (err) {
       res.send(err)
     })
   },
   getQuest: (req, res) => {
-    models.Quests.findById(req.params.id).then(function (data) {
-      res.send(data)
+    models.Quests.findById(req.params.id).then(function (quest) {
+      res.send(quest)
     }).catch(function (err) {
       res.send(err)
     })
@@ -24,8 +24,8 @@ module.exports = {
       answerKey: req.body.answerKey,
       photoUrl: req.body.photoUrl,
       verification: false
-    }).then(function (data) {
-      res.send(data)
+    }).then(function (quest) {
+      res.send(quest)
     }).catch(function (err) {
       res.send(err)
     })
@@ -35,8 +35,8 @@ module.exports = {
       where: {
         id: req.params.id
       }
-    }).then(function (data) {
-      if(data) {
+    }).then(function (quest) {
+      if(quest) {
         res.status(200).json({message: `Deleted quest with ID: ${req.params.id}`})
       }
       else {
@@ -56,8 +56,8 @@ module.exports = {
         answerKey: req.body.answerKey,
         photoUrl: req.body.photoUrl,
         verification: req.body.verification
-      }).then(function (data) {
-        res.send(data)
+      }).then(function (quest) {
+        res.send(quest)
       }).catch(function (err) {
         res.send(err)
       })

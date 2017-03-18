@@ -2,15 +2,15 @@ const models = require('../models')
 
 module.exports = {
   getUserEvents: (req, res) => {
-    models.User_Events.findAll().then(function (data) {
-      res.send(data)
+    models.User_Events.findAll().then(function (userevent) {
+      res.send(userevent)
     }).catch(function (err) {
       res.send(err)
     })
   },
   getUserEvent: (req, res) => {
-    models.User_Events.findById(req.params.id).then(function (data) {
-      res.send(data)
+    models.User_Events.findById(req.params.id).then(function (userevent) {
+      res.send(userevent)
     }).catch(function (err) {
       res.send(err)
     })
@@ -20,8 +20,8 @@ module.exports = {
       UserId: req.body.UserId,
       EventId: req.body.EventId,
       completion: false
-    }).then(function (data) {
-      res.send(data)
+    }).then(function (userevent) {
+      res.send(userevent)
     }).catch(function (err) {
       res.send(err)
     })
@@ -31,8 +31,8 @@ module.exports = {
       where: {
         id: req.params.id
       }
-    }).then(function (data) {
-      if(data) {
+    }).then(function (userevent) {
+      if(userevent) {
         res.status(200).json({message: `Deleted userEvent with ID: ${req.params.id}`})
       }
       else {
@@ -48,8 +48,8 @@ module.exports = {
         UserId: req.body.UserId,
         EventId: req.body.EventId,
         completion: false
-      }).then(function (data) {
-        res.send(data)
+      }).then(function (userevent) {
+        res.send(userevent)
       }).catch(function (err) {
         res.send(err)
       })

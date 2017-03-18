@@ -7,15 +7,15 @@ module.exports = {
         {model: models.Quests},
         {model: models.Users}
       ]
-    }).then(function (data) {
-      res.send(data)
+    }).then(function (events) {
+      res.send(events)
     }).catch(function (err) {
       res.send(err)
     })
   },
   getEvent: (req, res) => {
-    models.Events.findById(req.params.id).then(function (data) {
-      res.send(data)
+    models.Events.findById(req.params.id).then(function (events) {
+      res.send(events)
     }).catch(function (err) {
       res.send(err)
     })
@@ -29,8 +29,8 @@ module.exports = {
       eventScore: req.body.eventScore,
       geolocation: req.body.geolocation,
       completion: false
-    }).then(function (data) {
-      res.send(data)
+    }).then(function (events) {
+      res.send(events)
     }).catch(function (err) {
       res.send(err)
     })
@@ -40,8 +40,8 @@ module.exports = {
       where: {
         id: req.params.id
       }
-    }).then(function (data) {
-      if(data) {
+    }).then(function (events) {
+      if(events) {
         res.status(200).json({message: `Deleted event with ID: ${req.params.id}`})
       }
       else {
@@ -61,8 +61,8 @@ module.exports = {
         eventScore: req.body.eventScore,
         geolocation: req.body.geolocation,
         completion: req.body.complete
-      }).then(function (data) {
-        res.send(data)
+      }).then(function (events) {
+        res.send(events)
       }).catch(function (err) {
         res.send(err)
       })

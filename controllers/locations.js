@@ -7,8 +7,8 @@ module.exports = {
       include: [
         {model: models.Users}
       ]
-    }).then(function (data) {
-      res.send(data)
+    }).then(function (location) {
+      res.send(location)
     }).catch(function (err) {
       res.send(err)
     })
@@ -23,9 +23,8 @@ module.exports = {
           1000), 'nearby'
         ]]
       }
-    }).then(function(data) {
-      console.log(data);
-      res.send(data)
+    }).then(function(location) {
+      res.send(location)
     }).catch(function (err) {
       res.send(err)
     })
@@ -38,8 +37,8 @@ module.exports = {
     };
     models.Locations.create({
       geolocation: point
-    }).then(function (data) {
-      res.send(data)
+    }).then(function (location) {
+      res.send(location)
     }).catch(function (err) {
       res.send(err)
     })
@@ -49,8 +48,8 @@ module.exports = {
       where: {
         id: req.params.id
       }
-    }).then(function (data) {
-      if(data) {
+    }).then(function (location) {
+      if(location) {
         res.status(200).json({message: `Deleted location with ID: ${req.params.id}`})
       }
       else {
@@ -69,8 +68,8 @@ module.exports = {
     models.Locations.findById(req.params.id).then(function (location) {
       location.update({
         geolocation: point
-      }).then(function (data) {
-        res.send(data)
+      }).then(function (location) {
+        res.send(location)
       }).catch(function (err) {
         res.send(err)
       })
