@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
   res.send(dummy);
 });
 
-// ==== Auth ====
+// ==== Auth/User ====
 
 router.get('/auth', function (req, res, next) {
   res.send({
@@ -48,6 +48,7 @@ router.get('/api', function (req, res, next) {
       '/api/event',
       '/api/event/:id',
       '/api/location',
+      '/api/location/:id',
       '/api/location/scan',
       '/api/location/scan/:id',
       '/api/quest/verification',
@@ -59,15 +60,15 @@ router.get('/api', function (req, res, next) {
 
 // ==== Location ====
 
-router.get('/api/location/scan', locationController.getLocations)
-
-router.post('/api/location/scan', locationController.getLocation)
+router.get('/api/location', locationController.getLocations)
 
 router.post('/api/location', locationController.createLocation)
 
 router.put('/api/location/:id', locationController.updateLocation)
 
 router.delete('/api/location/:id', locationController.deleteLocation)
+
+
 
 router.get('/api/event', eventController.getEvents)
 
@@ -76,8 +77,6 @@ router.get('/api/event/:id', eventController.getEvent)
 router.get('/api/location/scan', userController.getUsers)
 
 router.get('/api/location/scan/:id', userController.getUser)
-
-router.get('/api/test', userController.getUser)
 
 // router.post('/api/quest/verification', userController.createVerification)
 
