@@ -15,6 +15,9 @@ function success (status) {
   }
 }
 
+//    "prestart": "./node_modules/.bin/sequelize db:migrate && ./node_modules/.bin/sequelize db:seed:all",
+
+
 describe('API status and response', function () {
   let createdId
   let dummyData = [
@@ -39,6 +42,7 @@ describe('API status and response', function () {
             '/api/event',
             '/api/event/:id',
             '/api/location',
+            '/api/location/:id',
             '/api/location/scan',
             '/api/location/scan/:id',
             '/api/quest/verification',
