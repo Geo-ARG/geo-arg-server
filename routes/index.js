@@ -61,7 +61,7 @@ router.get('/api', function (req, res, next) {
 
 router.get('/api/location/scan', locationController.getLocations)
 
-router.get('/api/location/scan/:id', locationController.getLocation)
+router.post('/api/location/scan', locationController.getLocation)
 
 router.post('/api/location', locationController.createLocation)
 

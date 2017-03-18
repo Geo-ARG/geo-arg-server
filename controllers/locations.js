@@ -1,12 +1,9 @@
 const models = require('../models')
+const sequelize = require('sequelize')
 
 module.exports = {
   getLocations: (req, res) => {
     models.Locations.findAll({
-      include: [
-        {model: models.User_Locations},
-        {model: models.Users},
-      ]
     }).then(function (data) {
       res.send(data)
     }).catch(function (err) {
@@ -14,7 +11,17 @@ module.exports = {
     })
   },
   getLocation: (req, res) => {
-    models.Locations.findById(req.params.id).then(function (data) {
+    models.Locations.findAll({
+      attributes: {
+        include:[[
+          sequelize.fn('ST_DWithin',
+          sequelize.col('geolocation'),
+          sequelize.literal(`ST_Point(${req.body.latitude}, ${req.body.longitude})::geography`),
+          1000), 'nearby'
+        ]]
+      }
+    }).then(function(data) {
+      console.log(data);
       res.send(data)
     }).catch(function (err) {
       res.send(err)
@@ -54,7 +61,7 @@ module.exports = {
   updateLocation: (req, res) => {
     var point = {
       type: 'Point',
-      coordinates: [req.body.longitude, req.body.latitude],
+      coordinates: [+req.body.longitude, +req.body.latitude],
       crs: { type: 'name', properties: { name: 'EPSG:4326'} }
     };
     models.Locations.findById(req.params.id).then(function (location) {
