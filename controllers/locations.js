@@ -4,6 +4,9 @@ const sequelize = require('sequelize')
 module.exports = {
   getLocations: (req, res) => {
     models.Locations.findAll({
+      include: [
+        {model: models.Users}
+      ]
     }).then(function (data) {
       res.send(data)
     }).catch(function (err) {
@@ -34,8 +37,7 @@ module.exports = {
       crs: { type: 'name', properties: { name: 'EPSG:4326'} }
     };
     models.Locations.create({
-      geolocation: point,
-      userId: req.body.userId
+      geolocation: point
     }).then(function (data) {
       res.send(data)
     }).catch(function (err) {

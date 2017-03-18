@@ -17,8 +17,8 @@ module.exports = {
   },
   createUserLocation: (req, res) => {
     models.User_Locations.create({
-      userId: req.body.userId,
-      locationId: req.body.locationId
+      UserId: req.body.UserId,
+      LocationId: req.body.LocationId
     }).then(function (data) {
       res.send(data)
     }).catch(function (err) {
@@ -44,8 +44,8 @@ module.exports = {
   updateUserLocation: (req, res) => {
     models.User_Locations.findById(req.params.id).then(function (user) {
       user.update({
-        userId: req.body.userId,
-        locationId: req.body.locationId
+        UserId: req.body.UserId,
+        LocationId: req.body.LocationId
       }).then(function (data) {
         res.send(data)
       }).catch(function (err) {

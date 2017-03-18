@@ -1,7 +1,7 @@
 module.exports =
 {
   "development": {
-    "username": "admin",
+    "username": "kaioo",
     "password": "password",
     "database": "geo_arg_development",
     "host": "127.0.0.1",

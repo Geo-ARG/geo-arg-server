@@ -4,8 +4,8 @@ module.exports = {
   getUsers: (req, res) => {
     models.Users.findAll({
       include: [
-        {model: models.User_Locations},
         {model: models.Locations},
+        {model: models.Events}
       ]
     }).then(function (data) {
       res.send(data)
@@ -23,7 +23,8 @@ module.exports = {
   createUser: (req, res) => {
     models.Users.create({
       username: req.body.username,
-      email: req.body.email
+      email: req.body.email,
+      totalScore: 0
     }).then(function (data) {
       res.send(data)
     }).catch(function (err) {
@@ -50,7 +51,8 @@ module.exports = {
     models.Users.findById(req.params.id).then(function (user) {
       user.update({
         username: req.body.username,
-        email: req.body.email
+        email: req.body.email,
+        totalScore: req.body.totalScore
       }).then(function (data) {
         res.send(data)
       }).catch(function (err) {

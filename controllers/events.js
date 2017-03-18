@@ -4,7 +4,8 @@ module.exports = {
   getEvents: (req, res) => {
     models.Events.findAll({
       include: [
-        {model: models.Quests}
+        {model: models.Quests},
+        {model: models.Users}
       ]
     }).then(function (data) {
       res.send(data)
@@ -25,9 +26,9 @@ module.exports = {
       description: req.body.description,
       date: req.body.date,
       place: req.body.place,
+      eventScore: req.body.eventScore,
       geolocation: req.body.geolocation,
-      score: req.body.score,
-      complete: req.body.complete
+      completion: false
     }).then(function (data) {
       res.send(data)
     }).catch(function (err) {
@@ -51,15 +52,15 @@ module.exports = {
     })
   },
   updateEvent: (req, res) => {
-    models.Events.findById(req.params.id).then(function (event) {
-      event.update({
+    models.Events.findById(req.params.id).then(function (events) {
+      events.update({
         title: req.body.title,
         description: req.body.description,
         date: req.body.date,
         place: req.body.place,
+        eventScore: req.body.eventScore,
         geolocation: req.body.geolocation,
-        score: req.body.score,
-        complete: req.body.complete
+        completion: req.body.complete
       }).then(function (data) {
         res.send(data)
       }).catch(function (err) {

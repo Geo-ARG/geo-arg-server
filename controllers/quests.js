@@ -19,8 +19,11 @@ module.exports = {
     models.Quests.create({
       title: req.body.title,
       task: req.body.task,
-      eventId: req.body.eventId,
-      verification: req.body.verification
+      EventId: req.body.EventId,
+      type: req.body.type,
+      answerKey: req.body.answerKey,
+      photoUrl: req.body.photoUrl,
+      verification: false
     }).then(function (data) {
       res.send(data)
     }).catch(function (err) {
@@ -48,7 +51,10 @@ module.exports = {
       quest.update({
         title: req.body.title,
         task: req.body.task,
-        eventId: req.body.eventId,
+        EventId: req.body.EventId,
+        type: req.body.type,
+        answerKey: req.body.answerKey,
+        photoUrl: req.body.photoUrl,
         verification: req.body.verification
       }).then(function (data) {
         res.send(data)

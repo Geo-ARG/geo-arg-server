@@ -17,8 +17,9 @@ module.exports = {
   },
   createUserEvent: (req, res) => {
     models.User_Events.create({
-      userId: req.body.userId,
-      eventId: req.body.eventId
+      UserId: req.body.UserId,
+      EventId: req.body.EventId,
+      completion: false
     }).then(function (data) {
       res.send(data)
     }).catch(function (err) {
@@ -44,8 +45,9 @@ module.exports = {
   updateUserEvent: (req, res) => {
     models.User_Events.findById(req.params.id).then(function (user) {
       user.update({
-        userId: req.body.userId,
-        eventId: req.body.eventId
+        UserId: req.body.UserId,
+        EventId: req.body.EventId,
+        completion: false
       }).then(function (data) {
         res.send(data)
       }).catch(function (err) {
