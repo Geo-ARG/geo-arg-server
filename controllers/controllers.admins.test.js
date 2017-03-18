@@ -18,16 +18,16 @@ function success (status) {
 describe('Admin status and response', function () {
   let createdId
 
-  describe('GET /admin', function () {
+  describe('GET /admins', function () {
     it('should return /admin endpoints', function (done) {
       chai.request(url)
-        .get('/admin')
+        .get('/admins')
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.should.be.an('object')
           res.body.endpoints.should.deep.equal([
-            '/admin/event',
-            '/admin/event/:id'
+            '/admins',
+            '/admins/:id'
           ])
           done()
         })
