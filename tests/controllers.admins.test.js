@@ -42,7 +42,6 @@ describe('Admin status and response', function () {
       chai.request(url)
         .get('/admins')
         .end(function (err, res) {
-          console.log(res.body);
           res.should.have.status(success(res.status))
           res.should.be.an('object')
           res.body[0].password.should.equal(dummyData[1])

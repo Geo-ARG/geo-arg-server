@@ -82,7 +82,7 @@ A game based on React Native and Redux where you can socialize with others at ce
 | /api/userlocations/:id |   PUT  | Update an userlocation by UserLocationId               |
 | /api/userlocations/:id | DELETE | Delete an userlocation by UserLocationId               |
 
-### Api/Admin
+### Admin
 
 | Endpoint              |  HTTP  | Description                                            |
 |-----------------------|:------:|--------------------------------------------------------|
