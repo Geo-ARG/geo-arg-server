@@ -43,13 +43,13 @@ module.exports = {
     })
   },
   updateUserEvent: (req, res) => {
-    models.User_Events.findById(req.params.id).then(function (user) {
-      user.update({
+    models.User_Events.findById(req.params.id).then(function (userevent) {
+      userevent.update({
         UserId: req.body.UserId,
         EventId: req.body.EventId,
         completion: false
-      }).then(function (userevent) {
-        res.send(userevent)
+      }).then(function (data) {
+        res.send(data)
       }).catch(function (err) {
         res.send(err)
       })

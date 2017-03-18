@@ -42,12 +42,12 @@ module.exports = {
     })
   },
   updateUserLocation: (req, res) => {
-    models.User_Locations.findById(req.params.id).then(function (user) {
-      user.update({
+    models.User_Locations.findById(req.params.id).then(function (userlocation) {
+      userlocation.update({
         UserId: req.body.UserId,
         LocationId: req.body.LocationId
-      }).then(function (userlocation) {
-        res.send(userlocation)
+      }).then(function (data) {
+        res.send(data)
       }).catch(function (err) {
         res.send(err)
       })

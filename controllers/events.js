@@ -61,8 +61,8 @@ module.exports = {
         eventScore: req.body.eventScore,
         geolocation: req.body.geolocation,
         completion: req.body.complete
-      }).then(function (events) {
-        res.send(events)
+      }).then(function (data) {
+        res.send(data)
       }).catch(function (err) {
         res.send(err)
       })

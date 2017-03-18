@@ -68,8 +68,8 @@ module.exports = {
     models.Locations.findById(req.params.id).then(function (location) {
       location.update({
         geolocation: point
-      }).then(function (location) {
-        res.send(location)
+      }).then(function (data) {
+        res.send(data)
       }).catch(function (err) {
         res.send(err)
       })

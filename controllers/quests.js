@@ -56,8 +56,8 @@ module.exports = {
         answerKey: req.body.answerKey,
         photoUrl: req.body.photoUrl,
         verification: req.body.verification
-      }).then(function (quest) {
-        res.send(quest)
+      }).then(function (data) {
+        res.send(data)
       }).catch(function (err) {
         res.send(err)
       })
