@@ -62,6 +62,8 @@ router.get('/api', function (req, res, next) {
 
 router.get('/api/location', locationController.getLocations)
 
+router.get('/api/location/:id', locationController.getLocation)
+
 router.post('/api/location', locationController.createLocation)
 
 router.put('/api/location/:id', locationController.updateLocation)
