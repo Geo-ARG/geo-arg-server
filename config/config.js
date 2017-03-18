@@ -5,8 +5,7 @@ module.exports =
     "password": null,
     "database": "geo_arg_development",
     "host": "127.0.0.1",
-    "dialect": "postgres",
-    "logging": "false"
+    "dialect": "postgres"
   },
   "test": {
     "username": "kaioo",

@@ -4,7 +4,7 @@ const expect = chai.expect
 const chaiHTTP = require('chai-http')
 chai.use(chaiHTTP)
 
-const url = 'http://geo-arg-server-dev.ap-southeast-1.elasticbeanstalk.com/'
+const url = 'http://localhost:3000'
 
 function success (status) {
   let isSuccess = (status >= 200 && status < 400)
@@ -15,21 +15,8 @@ function success (status) {
   }
 }
 
-// "prestart": "./node_modules/.bin/sequelize db:migrate && ./node_modules/.bin/sequelize db:seed:all",
-
-
 describe('Admin status and response', function () {
   let createdId
-  let dummyData = [
-    'Hacktiv8 Campus Hunt',
-    'Find an instructor whose nickname Spiderman',
-    'Campus Hacktiv8, Pondok Indah, Jak-Sel',
-    '300 pts',
-    'Pizza Hut Treasure Hunt',
-    'Find all you can eat vouchers',
-    'Pizza Hut, Mall Pondok Indah, Jak-Sel',
-    '150 pts'
-  ]
 
   describe('GET /admin', function () {
     it('should return /admin endpoints', function (done) {
@@ -42,73 +29,6 @@ describe('Admin status and response', function () {
             '/admin/event',
             '/admin/event/:id'
           ])
-          done()
-        })
-    })
-  })
-
-  describe('POST /admin/event', function () {
-    it('return 200 <= status < 400, an object, and res.body.title should equal dummyData[0]', function (done) {
-      chai.request(url)
-        .post('/admin/event')
-        .send({
-          title: dummyData[0],
-          description: dummyData[1],
-          date: new Date(),
-          place: dummyData[2],
-          score: dummyData[3],
-          complete: false
-        })
-        .end(function (err, res) {
-          createdId = res.body.id
-          res.should.have.status(success(res.status))
-          res.should.be.an('object')
-          res.body.title.should.equal(dummyData[0])
-          done()
-        })
-    })
-  })
-
-  describe('GET /admin/event', function () {
-    it('return 200 <= status < 400, an object, and res.body[0].description should equal dummyData[1]', function (done) {
-      chai.request(url)
-        .get('/admin/event')
-        .end(function (err, res) {
-          res.should.have.status(success(res.status))
-          res.should.be.an('object')
-          res.body[0].description.should.equal(dummyData[1])
-          done()
-        })
-    })
-  })
-
-  describe('PUT /admin/event/:id', function () {
-    it('return 200 <= status < 400, an object, and res.body.place should equal dummyData[6]', function (done) {
-      chai.request(url)
-        .put(`/admin/event/${createdId}`)
-        .send({
-          title: dummyData[4],
-          description: dummyData[5],
-          place: dummyData[6],
-          score: dummyData[7]
-        })
-        .end(function (err, res) {
-          res.should.have.status(success(res.status))
-          res.body.should.be.an('object')
-          res.body.place.should.equal(dummyData[6])
-          done()
-        })
-    })
-  })
-
-  describe('DELETE /admin/event/:id', function () {
-    it('return 200 <= status < 400, an object, and res.body should return message', function (done) {
-      chai.request(url)
-        .delete(`/admin/event/${createdId}`)
-        .end(function (err, res) {
-          res.should.have.status(success(res.status))
-          res.body.should.be.an('object')
-          res.body.should.deep.equal({message: `Deleted event with ID: ${createdId}`})
           done()
         })
     })

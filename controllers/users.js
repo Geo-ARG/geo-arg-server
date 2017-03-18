@@ -7,15 +7,15 @@ module.exports = {
         {model: models.Locations},
         {model: models.Events}
       ]
-    }).then(function (user) {
-      res.send(user)
+    }).then(function (data) {
+      res.send(data)
     }).catch(function (err) {
       res.send(err)
     })
   },
   getUser: (req, res) => {
-    models.Users.findById(req.params.id).then(function (user) {
-      res.send(user)
+    models.Users.findById(req.params.id).then(function (data) {
+      res.send(data)
     }).catch(function (err) {
       res.send(err)
     })
@@ -25,8 +25,9 @@ module.exports = {
       username: req.body.username,
       email: req.body.email,
       totalScore: 0
-    }).then(function (user) {
-      res.send(user)
+    }).then(function (data) {
+      console.log('masuk', data);
+      res.send(data)
     }).catch(function (err) {
       res.send(err)
     })
@@ -36,8 +37,8 @@ module.exports = {
       where: {
         id: req.params.id
       }
-    }).then(function (user) {
-      if(user) {
+    }).then(function (data) {
+      if(data) {
         res.status(200).json({message: `Deleted user with ID: ${req.params.id}`})
       }
       else {
@@ -48,13 +49,13 @@ module.exports = {
     })
   },
   updateUser: (req, res) => {
-    models.Users.findById(req.params.id).then(function (user) {
-      user.update({
+    models.Users.findById(req.params.id).then(function (data) {
+      data.update({
         username: req.body.username,
         email: req.body.email,
         totalScore: req.body.totalScore
-      }).then(function (user) {
-        res.send(user)
+      }).then(function (data) {
+        res.send(data)
       }).catch(function (err) {
         res.send(err)
       })
