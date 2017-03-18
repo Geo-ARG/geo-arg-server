@@ -4,8 +4,11 @@ const sequelize = require('sequelize')
 module.exports = {
   getLocations: (req, res) => {
     models.Locations.findAll({
-    }).then(function (data) {
-      res.send(data)
+      include: [
+        {model: models.Users}
+      ]
+    }).then(function (location) {
+      res.send(location)
     }).catch(function (err) {
       res.send(err)
     })
@@ -20,9 +23,8 @@ module.exports = {
           1000), 'nearby'
         ]]
       }
-    }).then(function(data) {
-      console.log(data);
-      res.send(data)
+    }).then(function(location) {
+      res.send(location)
     }).catch(function (err) {
       res.send(err)
     })
@@ -34,10 +36,9 @@ module.exports = {
       crs: { type: 'name', properties: { name: 'EPSG:4326'} }
     };
     models.Locations.create({
-      geolocation: point,
-      userId: req.body.userId
-    }).then(function (data) {
-      res.send(data)
+      geolocation: point
+    }).then(function (location) {
+      res.send(location)
     }).catch(function (err) {
       res.send(err)
     })
@@ -47,8 +48,8 @@ module.exports = {
       where: {
         id: req.params.id
       }
-    }).then(function (data) {
-      if(data) {
+    }).then(function (location) {
+      if(location) {
         res.status(200).json({message: `Deleted location with ID: ${req.params.id}`})
       }
       else {
@@ -67,8 +68,8 @@ module.exports = {
     models.Locations.findById(req.params.id).then(function (location) {
       location.update({
         geolocation: point
-      }).then(function (data) {
-        res.send(data)
+      }).then(function (location) {
+        res.send(location)
       }).catch(function (err) {
         res.send(err)
       })

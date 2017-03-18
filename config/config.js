@@ -1,11 +1,12 @@
 module.exports =
 {
   "development": {
-    "username": "admin",
-    "password": "password",
+    "username": "kaioo",
+    "password": null,
     "database": "geo_arg_development",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": "false"
   },
   "test": {
     "username": "kaioo",

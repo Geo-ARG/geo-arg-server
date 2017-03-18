@@ -45,41 +45,43 @@ router.delete('/auth/users/:id', userController.deleteUser)
 router.get('/api', function (req, res, next) {
   res.send({
     endpoints: [
-      '/api/event',
-      '/api/event/:id',
+      '/api/admin/event',
+      '/api/admin/event/:id',
       '/api/location',
-      '/api/location/scan',
-      '/api/location/scan/:id',
-      '/api/quest/verification',
+      '/api/location/:id',
       '/api/quest',
       '/api/quest/:id',
+      '/api/userevent',
+      '/api/userevent/:id',
+      '/api/userlocation',
+      '/api/userlocation/:id',
     ]
   })
 })
 
+// ==== Event ====
+
+router.get('/api/admin/event', eventController.getEvents)
+
+router.get('/api/admin/event/:id', eventController.getEvent)
+
+router.post('/api/admin/event', eventController.createEvent)
+
+router.put('/api/admin/event/:id', eventController.updateEvent)
+
+router.delete('/api/admin/event/:id', eventController.deleteEvent)
+
 // ==== Location ====
 
-router.get('/api/location/scan', locationController.getLocations)
+router.get('/api/location', locationController.getLocations)
 
-router.post('/api/location/scan', locationController.getLocation)
+router.get('/api/location/:id', locationController.getLocation)
 
 router.post('/api/location', locationController.createLocation)
 
 router.put('/api/location/:id', locationController.updateLocation)
 
 router.delete('/api/location/:id', locationController.deleteLocation)
-
-router.get('/api/event', eventController.getEvents)
-
-router.get('/api/event/:id', eventController.getEvent)
-
-router.get('/api/location/scan', userController.getUsers)
-
-router.get('/api/location/scan/:id', userController.getUser)
-
-router.get('/api/test', userController.getUser)
-
-// router.post('/api/quest/verification', userController.createVerification)
 
 // ==== Quest ====
 
@@ -116,26 +118,5 @@ router.post('/api/userlocation', userLocationController.createUserLocation)
 router.put('/api/userlocation/:id', userLocationController.updateUserLocation)
 
 router.delete('/api/userlocation/:id', userLocationController.deleteUserLocation)
-
-// ==== Event ====
-
-router.get('/admin', function (req, res, next) {
-  res.send({
-    endpoints: [
-      '/admin/event',
-      '/admin/event/:id'
-    ]
-  })
-})
-
-router.get('/admin/event', eventController.getEvents)
-
-router.get('/admin/event/:id', eventController.getEvent)
-
-router.post('/admin/event', eventController.createEvent)
-
-router.put('/admin/event/:id', eventController.updateEvent)
-
-router.delete('/admin/event/:id', eventController.deleteEvent)
 
 module.exports = router;
