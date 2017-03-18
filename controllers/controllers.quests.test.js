@@ -15,7 +15,7 @@ function success (status) {
   }
 }
 
-describe('API/quest status and response', function () {
+describe('API/quests status and response', function () {
   let createdId
   let dummyData = [
     'Go to PIM 3rd F',

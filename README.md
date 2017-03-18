@@ -36,61 +36,61 @@ A game based on React Native and Redux where you can socialize with others at ce
 
 | Endpoint              |  HTTP  | Description                                            |
 |-----------------------|:------:|--------------------------------------------------------|
-| /api/event            |   GET  | Get list of events (including quest and user)          |
-| /api/event/:id        |   GET  | Get event by EventId (including quest and user)        |
-| /api/event            |  POST  | Create new event                                       |
-| /api/event/:id        |   PUT  | Update an event by EventId                             |
-| /api/event/:id        | DELETE | Delete an event by EventId                             |
+| /api/events            |   GET  | Get list of events (including quest and user)          |
+| /api/events/:id        |   GET  | Get event by EventId (including quest and user)        |
+| /api/events            |  POST  | Create new event                                       |
+| /api/events/:id        |   PUT  | Update an event by EventId                             |
+| /api/events/:id        | DELETE | Delete an event by EventId                             |
 
 ### Api/Location
 
 | Endpoint              |  HTTP  | Description                                            |
 |-----------------------|:------:|--------------------------------------------------------|
-| /api/location         |   GET  | Get all locations data (including user)                |
-| /api/location/:id     |   GET  | Get location by LocationId (including user)            |
-| /api/location         |  POST  | Create new location                                    |
-| /api/location/:id     |   PUT  | Update a location by LocationId                        |
-| /api/location/:id     | DELETE | Delete a location by LocationId                        |
+| /api/locations         |   GET  | Get all locations data (including user)                |
+| /api/locations/:id     |   GET  | Get location by LocationId (including user)            |
+| /api/locations         |  POST  | Create new location                                    |
+| /api/locations/:id     |   PUT  | Update a location by LocationId                        |
+| /api/locations/:id     | DELETE | Delete a location by LocationId                        |
 
 ### Api/Quest
 
 | Endpoint              |  HTTP  | Description                                            |
 |-----------------------|:------:|--------------------------------------------------------|
-| /api/quest            |   GET  | Get all quests data                                    |
-| /api/quest/:id        |   GET  | Get quest by QuestId                                   |
-| /api/quest            |  POST  | Create new quest                                       |
-| /api/quest/:id        |   PUT  | Update a quest by QuestId                              |
-| /api/quest/:id        | DELETE | Delete a quest by QuestId                              |
+| /api/quests            |   GET  | Get all quests data                                    |
+| /api/quests/:id        |   GET  | Get quest by QuestId                                   |
+| /api/quests            |  POST  | Create new quest                                       |
+| /api/quests/:id        |   PUT  | Update a quest by QuestId                              |
+| /api/quests/:id        | DELETE | Delete a quest by QuestId                              |
 
 ### Api/UserEvent
 
 | Endpoint              |  HTTP  | Description                                            |
 |-----------------------|:------:|--------------------------------------------------------|
-| /api/userevent        |   GET  | Get all userevents data                                |
-| /api/userevent/:id    |   GET  | Get userevent by UserEventId                           |
-| /api/userevent        |  POST  | Create new userevent                                   |
-| /api/userevent/:id    |   PUT  | Update an userevent by UserEventId                     |
-| /api/userevent/:id    | DELETE | Delete an userevent by UserEventId                     |
+| /api/userevents        |   GET  | Get all userevents data                                |
+| /api/userevents/:id    |   GET  | Get userevent by UserEventId                           |
+| /api/userevents        |  POST  | Create new userevent                                   |
+| /api/userevents/:id    |   PUT  | Update an userevent by UserEventId                     |
+| /api/userevents/:id    | DELETE | Delete an userevent by UserEventId                     |
 
 ### Api/UserLocation
 
 | Endpoint              |  HTTP  | Description                                            |
 |-----------------------|:------:|--------------------------------------------------------|
-| /api/userlocation     |   GET  | Get all userlocations data                             |
-| /api/userlocation/:id |   GET  | Get userlocation by UserLocationId                     |
-| /api/userlocation     |  POST  | Create new userlocation                                |
-| /api/userlocation/:id |   PUT  | Update an userlocation by UserLocationId               |
-| /api/userlocation/:id | DELETE | Delete an userlocation by UserLocationId               |
+| /api/userlocations     |   GET  | Get all userlocations data                             |
+| /api/userlocations/:id |   GET  | Get userlocation by UserLocationId                     |
+| /api/userlocations     |  POST  | Create new userlocation                                |
+| /api/userlocations/:id |   PUT  | Update an userlocation by UserLocationId               |
+| /api/userlocations/:id | DELETE | Delete an userlocation by UserLocationId               |
 
 ### Api/Admin
 
 | Endpoint              |  HTTP  | Description                                            |
 |-----------------------|:------:|--------------------------------------------------------|
-| /admin                |   GET  | Get list of admins                                     |
-| /admin/:id            |   GET  | Get admin data by AdminId                              |
-| /admin                |  POST  | Create new admin                                       |
-| /admin/:id            |   PUT  | Update an admin by AdminId                             |
-| /admin/:id            | DELETE | Delete an admin by AdminId                             |
+| /admins                |   GET  | Get list of admins                                     |
+| /admins/:id            |   GET  | Get admin data by AdminId                              |
+| /admins                |  POST  | Create new admin                                       |
+| /admins/:id            |   PUT  | Update an admin by AdminId                             |
+| /admins/:id            | DELETE | Delete an admin by AdminId                             |
 
 ## Models
 
