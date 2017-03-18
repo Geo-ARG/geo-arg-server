@@ -105,10 +105,10 @@ describe('API status and response', function () {
     })
   })
 
-  describe('DELETE /admin/event/:id', function () {
+  describe('DELETE /api/event/:id', function () {
     it('return 200 <= status < 400, an object, and res.body should return message', function (done) {
       chai.request(url)
-        .delete(`/admin/event/${createdId}`)
+        .delete(`/api/event/${createdId}`)
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.body.should.be.an('object')

@@ -5,10 +5,11 @@ const url = 'http://localhost:3000'
 chai.use(chaiHTTP)
 
 function success (status) {
-  if (status >= 200 && status < 300 || status === 304) {
-    return status
-  } else {
-    return '500 or 404'
+  let isSuccess = (status >= 200 && status < 400)
+  if (isSuccess) return status
+  else {
+    if (status === 404) return 404
+    else if (status === 500) return 500
   }
 }
 
