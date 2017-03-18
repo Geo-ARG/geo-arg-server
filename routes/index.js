@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
   res.send(dummy);
 });
 
-// ==== Auth/User ====
+// ==== Auth ====
 
 router.get('/auth', function (req, res, next) {
   res.send({
@@ -49,11 +49,12 @@ router.get('/api', function (req, res, next) {
       '/api/event/:id',
       '/api/location',
       '/api/location/:id',
-      '/api/location/scan',
-      '/api/location/scan/:id',
-      '/api/quest/verification',
       '/api/quest',
       '/api/quest/:id',
+      '/api/userevent',
+      '/api/userevent/:id',
+      '/api/userlocation',
+      '/api/userlocation/:id',
     ]
   })
 })
@@ -70,17 +71,26 @@ router.put('/api/location/:id', locationController.updateLocation)
 
 router.delete('/api/location/:id', locationController.deleteLocation)
 
+// ==== Event ====
 
+router.get('/admin', function (req, res, next) {
+  res.send({
+    endpoints: [
+      '/admin/event',
+      '/admin/event/:id'
+    ]
+  })
+})
 
-router.get('/api/event', eventController.getEvents)
+router.get('/admin/event', eventController.getEvents)
 
-router.get('/api/event/:id', eventController.getEvent)
+router.get('/admin/event/:id', eventController.getEvent)
 
-router.get('/api/location/scan', userController.getUsers)
+router.post('/admin/event', eventController.createEvent)
 
-router.get('/api/location/scan/:id', userController.getUser)
+router.put('/admin/event/:id', eventController.updateEvent)
 
-// router.post('/api/quest/verification', userController.createVerification)
+router.delete('/admin/event/:id', eventController.deleteEvent)
 
 // ==== Quest ====
 
@@ -117,26 +127,5 @@ router.post('/api/userlocation', userLocationController.createUserLocation)
 router.put('/api/userlocation/:id', userLocationController.updateUserLocation)
 
 router.delete('/api/userlocation/:id', userLocationController.deleteUserLocation)
-
-// ==== Event ====
-
-router.get('/admin', function (req, res, next) {
-  res.send({
-    endpoints: [
-      '/admin/event',
-      '/admin/event/:id'
-    ]
-  })
-})
-
-router.get('/admin/event', eventController.getEvents)
-
-router.get('/admin/event/:id', eventController.getEvent)
-
-router.post('/admin/event', eventController.createEvent)
-
-router.put('/admin/event/:id', eventController.updateEvent)
-
-router.delete('/admin/event/:id', eventController.deleteEvent)
 
 module.exports = router;
