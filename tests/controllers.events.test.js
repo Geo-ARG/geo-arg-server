@@ -4,7 +4,7 @@ const expect = chai.expect
 const chaiHTTP = require('chai-http')
 chai.use(chaiHTTP)
 
-const url = 'http://geo-arg-server-dev.ap-southeast-1.elasticbeanstalk.com/'
+const url = 'http://localhost:3000'
 
 function success (status) {
   let isSuccess = (status >= 200 && status < 400)
@@ -15,49 +15,53 @@ function success (status) {
   }
 }
 
-// "prestart": "./node_modules/.bin/sequelize db:migrate && ./node_modules/.bin/sequelize db:seed:all",
-
-
-describe('Admin status and response', function () {
+describe('API/events status and response', function () {
   let createdId
   let dummyData = [
     'Hacktiv8 Campus Hunt',
     'Find an instructor whose nickname Spiderman',
     'Campus Hacktiv8, Pondok Indah, Jak-Sel',
-    '300 pts',
+    300,
     'Pizza Hut Treasure Hunt',
     'Find all you can eat vouchers',
     'Pizza Hut, Mall Pondok Indah, Jak-Sel',
-    '150 pts'
+    150
   ]
 
-  describe('GET /admin', function () {
-    it('should return /admin endpoints', function (done) {
+  describe('GET /api', function () {
+    it('should return /api endpoints', function (done) {
       chai.request(url)
-        .get('/admin')
+        .get('/api')
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.should.be.an('object')
           res.body.endpoints.should.deep.equal([
-            '/admin/event',
-            '/admin/event/:id'
+            '/api/events',
+            '/api/events/:id',
+            '/api/locations',
+            '/api/locations/:id',
+            '/api/quests',
+            '/api/quests/:id',
+            '/api/userevents',
+            '/api/userevents/:id',
+            '/api/userlocations',
+            '/api/userlocations/:id'
           ])
           done()
         })
     })
   })
 
-  describe('POST /admin/event', function () {
+  describe('POST /api/events', function () {
     it('return 200 <= status < 400, an object, and res.body.title should equal dummyData[0]', function (done) {
       chai.request(url)
-        .post('/admin/event')
+        .post('/api/events')
         .send({
           title: dummyData[0],
           description: dummyData[1],
           date: new Date(),
           place: dummyData[2],
-          score: dummyData[3],
-          complete: false
+          eventScore: dummyData[3]
         })
         .end(function (err, res) {
           createdId = res.body.id
@@ -69,10 +73,10 @@ describe('Admin status and response', function () {
     })
   })
 
-  describe('GET /admin/event', function () {
+  describe('GET /api/events', function () {
     it('return 200 <= status < 400, an object, and res.body[0].description should equal dummyData[1]', function (done) {
       chai.request(url)
-        .get('/admin/event')
+        .get('/api/events')
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.should.be.an('object')
@@ -82,15 +86,15 @@ describe('Admin status and response', function () {
     })
   })
 
-  describe('PUT /admin/event/:id', function () {
+  describe('PUT /api/events/:id', function () {
     it('return 200 <= status < 400, an object, and res.body.place should equal dummyData[6]', function (done) {
       chai.request(url)
-        .put(`/admin/event/${createdId}`)
+        .put(`/api/events/${createdId}`)
         .send({
           title: dummyData[4],
           description: dummyData[5],
           place: dummyData[6],
-          score: dummyData[7]
+          eventScore: dummyData[7]
         })
         .end(function (err, res) {
           res.should.have.status(success(res.status))
@@ -101,10 +105,10 @@ describe('Admin status and response', function () {
     })
   })
 
-  describe('DELETE /admin/event/:id', function () {
+  describe('DELETE /api/events/:id', function () {
     it('return 200 <= status < 400, an object, and res.body should return message', function (done) {
       chai.request(url)
-        .delete(`/admin/event/${createdId}`)
+        .delete(`/api/events/${createdId}`)
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.body.should.be.an('object')

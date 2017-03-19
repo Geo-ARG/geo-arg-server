@@ -1,12 +1,19 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var User_Events = sequelize.define('User_Events', {
-    eventId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
+    EventId: DataTypes.INTEGER,
+    UserId: DataTypes.INTEGER,
+    completion: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {
-        
+        // associations can be defined here
       }
     }
   });

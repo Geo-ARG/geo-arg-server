@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const userController = require('../controllers/users')
+const adminController = require('../controllers/admins')
 const locationController = require('../controllers/locations')
 const eventController = require('../controllers/events')
 const questController = require('../controllers/quests')
@@ -45,97 +46,90 @@ router.delete('/auth/users/:id', userController.deleteUser)
 router.get('/api', function (req, res, next) {
   res.send({
     endpoints: [
-      '/api/event',
-      '/api/event/:id',
-      '/api/location',
-      '/api/location/scan',
-      '/api/location/scan/:id',
-      '/api/quest/verification',
-      '/api/quest',
-      '/api/quest/:id',
+      '/api/events',
+      '/api/events/:id',
+      '/api/locations',
+      '/api/locations/:id',
+      '/api/quests',
+      '/api/quests/:id',
+      '/api/userevents',
+      '/api/userevents/:id',
+      '/api/userlocations',
+      '/api/userlocations/:id'
     ]
   })
 })
-
-// ==== Location ====
-
-router.get('/api/location/scan', locationController.getLocations)
-
-router.post('/api/location/scan', locationController.getLocation)
-
-router.post('/api/location', locationController.createLocation)
-
-router.put('/api/location/:id', locationController.updateLocation)
-
-router.delete('/api/location/:id', locationController.deleteLocation)
-
-router.get('/api/event', eventController.getEvents)
-
-router.get('/api/event/:id', eventController.getEvent)
-
-router.get('/api/location/scan', userController.getUsers)
-
-router.get('/api/location/scan/:id', userController.getUser)
-
-router.get('/api/test', userController.getUser)
-
-// router.post('/api/quest/verification', userController.createVerification)
-
-// ==== Quest ====
-
-router.get('/api/quest', questController.getQuests)
-
-router.get('/api/quest/:id', questController.getQuest)
-
-router.post('/api/quest', questController.createQuest)
-
-router.put('/api/quest/:id', questController.updateQuest)
-
-router.delete('/api/quest/:id', questController.deleteQuest)
-
-// ==== User_Events ====
-
-router.get('/api/userevent', userEventController.getUserEvents)
-
-router.get('/api/userevent/:id', userEventController.getUserEvent)
-
-router.post('/api/userevent', userEventController.createUserEvent)
-
-router.put('/api/userevent/:id', userEventController.updateUserEvent)
-
-router.delete('/api/userevent/:id', userEventController.deleteUserEvent)
-
-// ==== User_Locations ====
-
-router.get('/api/userlocation', userLocationController.getUserLocations)
-
-router.get('/api/userlocation/:id', userLocationController.getUserLocation)
-
-router.post('/api/userlocation', userLocationController.createUserLocation)
-
-router.put('/api/userlocation/:id', userLocationController.updateUserLocation)
-
-router.delete('/api/userlocation/:id', userLocationController.deleteUserLocation)
 
 // ==== Event ====
 
-router.get('/admin', function (req, res, next) {
-  res.send({
-    endpoints: [
-      '/admin/event',
-      '/admin/event/:id'
-    ]
-  })
-})
+router.get('/api/events', eventController.getEvents)
 
-router.get('/admin/event', eventController.getEvents)
+router.get('/api/events/:id', eventController.getEvent)
 
-router.get('/admin/event/:id', eventController.getEvent)
+router.post('/api/events', eventController.createEvent)
 
-router.post('/admin/event', eventController.createEvent)
+router.put('/api/events/:id', eventController.updateEvent)
 
-router.put('/admin/event/:id', eventController.updateEvent)
+router.delete('/api/events/:id', eventController.deleteEvent)
 
-router.delete('/admin/event/:id', eventController.deleteEvent)
+// ==== Location ====
+
+router.get('/api/locations', locationController.getLocations)
+
+router.get('/api/locations/:id', locationController.getLocation)
+
+router.post('/api/locations', locationController.createLocation)
+
+router.put('/api/locations/:id', locationController.updateLocation)
+
+router.delete('/api/locations/:id', locationController.deleteLocation)
+
+// ==== Quest ====
+
+router.get('/api/quests', questController.getQuests)
+
+router.get('/api/quests/:id', questController.getQuest)
+
+router.post('/api/quests', questController.createQuest)
+
+router.put('/api/quests/:id', questController.updateQuest)
+
+router.delete('/api/quests/:id', questController.deleteQuest)
+
+// ==== User_Events ====
+
+router.get('/api/userevents', userEventController.getUserEvents)
+
+router.get('/api/userevents/:id', userEventController.getUserEvent)
+
+router.post('/api/userevents', userEventController.createUserEvent)
+
+router.put('/api/userevents/:id', userEventController.updateUserEvent)
+
+router.delete('/api/userevents/:id', userEventController.deleteUserEvent)
+
+// ==== User_Locations ====
+
+router.get('/api/userlocations', userLocationController.getUserLocations)
+
+router.get('/api/userlocations/:id', userLocationController.getUserLocation)
+
+router.post('/api/userlocations', userLocationController.createUserLocation)
+
+router.put('/api/userlocations/:id', userLocationController.updateUserLocation)
+
+router.delete('/api/userlocations/:id', userLocationController.deleteUserLocation)
+
+// ==== Admin ====
+
+router.get('/admins', adminController.getAdmins)
+
+router.get('/admins/:id', adminController.getAdmin)
+
+router.post('/admins', adminController.createAdmin)
+
+router.put('/admins/:id', adminController.updateAdmin)
+
+router.delete('/admins/:id', adminController.deleteAdmin)
 
 module.exports = router;

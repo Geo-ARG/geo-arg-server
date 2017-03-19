@@ -4,32 +4,38 @@ module.exports = {
   getEvents: (req, res) => {
     models.Events.findAll({
       include: [
-        {model: models.Quests}
+        {model: models.Quests},
+        {model: models.Users}
       ]
-    }).then(function (data) {
-      res.send(data)
+    }).then(function (events) {
+      res.send(events)
     }).catch(function (err) {
       res.send(err)
     })
   },
   getEvent: (req, res) => {
-    models.Events.findById(req.params.id).then(function (data) {
-      res.send(data)
+    models.Events.findById(req.params.id).then(function (events) {
+      res.send(events)
     }).catch(function (err) {
       res.send(err)
     })
   },
   createEvent: (req, res) => {
+    var point = {
+      type: 'Point',
+      coordinates: [+req.body.longitude, +req.body.latitude],
+      crs: { type: 'name', properties: { name: 'EPSG:4326'} }
+    };
     models.Events.create({
       title: req.body.title,
       description: req.body.description,
       date: req.body.date,
       place: req.body.place,
-      geolocation: req.body.geolocation,
-      score: req.body.score,
-      complete: req.body.complete
-    }).then(function (data) {
-      res.send(data)
+      eventScore: req.body.eventScore,
+      geolocation: point,
+      completion: false
+    }).then(function (events) {
+      res.send(events)
     }).catch(function (err) {
       res.send(err)
     })
@@ -39,8 +45,8 @@ module.exports = {
       where: {
         id: req.params.id
       }
-    }).then(function (data) {
-      if(data) {
+    }).then(function (events) {
+      if(events) {
         res.status(200).json({message: `Deleted event with ID: ${req.params.id}`})
       }
       else {
@@ -51,15 +57,20 @@ module.exports = {
     })
   },
   updateEvent: (req, res) => {
-    models.Events.findById(req.params.id).then(function (event) {
-      event.update({
+    var point = {
+      type: 'Point',
+      coordinates: [+req.body.longitude, +req.body.latitude],
+      crs: { type: 'name', properties: { name: 'EPSG:4326'} }
+    };
+    models.Events.findById(req.params.id).then(function (events) {
+      events.update({
         title: req.body.title,
         description: req.body.description,
         date: req.body.date,
         place: req.body.place,
-        geolocation: req.body.geolocation,
-        score: req.body.score,
-        complete: req.body.complete
+        eventScore: req.body.eventScore,
+        geolocation: point,
+        completion: req.body.complete
       }).then(function (data) {
         res.send(data)
       }).catch(function (err) {

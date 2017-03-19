@@ -20,20 +20,78 @@ A game based on React Native and Redux where you can socialize with others at ce
 
 ## Endpoints
 
-| Endpoints            | HTTP   | Description                                                    |
-|----------------------|--------|----------------------------------------------------------------|
-| /auth/google         | POST   | Register user using googleOauth                                |
-| /auth/facebook       | POST   | Register user using facebookOauth                              |
-| /auth/users/:id      | GET    | Get user's data by userId                                      |
-| /api/events          | GET    | Get event list sorted by time                                  |
-| /api/location/scan   | GET    | Get list of nearby users                                       |
-| /api/location        | POST   | Post user's location                                           |
-| /api/verification    | POST   | Verificate data that submitted by user after completing a quest|
-| /api/admin/events    | GET    | Show event list sorted by time for admin purpose               |
-| /api/admin/events    | POST   | Create a new event                                             |
-| /api/admin/events/:id| PUT    | Update an event by eventId                                     |
-| /api/admin/events/:id| Delete | Delete an event by eventId                                     |
+### Auth
+
+| Endpoint              |  HTTP  | Description                                            |
+|-----------------------|:------:|--------------------------------------------------------|
+| /auth/google          |  POST  | Register user via Google                               |
+| /auth/facebook        |  POST  | Register user via Facebook                             |
+| /auth/users           |   GET  | Get all users data (including location and event)      |
+| /auth/users/:id       |   GET  | Get user by UserId (including location and event)      |
+| /auth/users           |  POST  | Create new user                                        |
+| /auth/users/:id       |   PUT  | Update an user by UserId                               |
+| /auth/users/:id       | DELETE | Delete an user by UserId                               |
+
+### Api/Event
+
+| Endpoint              |  HTTP  | Description                                            |
+|-----------------------|:------:|--------------------------------------------------------|
+| /api/events            |   GET  | Get list of events (including quest and user)          |
+| /api/events/:id        |   GET  | Get event by EventId (including quest and user)        |
+| /api/events            |  POST  | Create new event                                       |
+| /api/events/:id        |   PUT  | Update an event by EventId                             |
+| /api/events/:id        | DELETE | Delete an event by EventId                             |
+
+### Api/Location
+
+| Endpoint              |  HTTP  | Description                                            |
+|-----------------------|:------:|--------------------------------------------------------|
+| /api/locations         |   GET  | Get all locations data (including user)                |
+| /api/locations/:id     |   GET  | Get location by LocationId (including user)            |
+| /api/locations         |  POST  | Create new location                                    |
+| /api/locations/:id     |   PUT  | Update a location by LocationId                        |
+| /api/locations/:id     | DELETE | Delete a location by LocationId                        |
+
+### Api/Quest
+
+| Endpoint              |  HTTP  | Description                                            |
+|-----------------------|:------:|--------------------------------------------------------|
+| /api/quests            |   GET  | Get all quests data                                    |
+| /api/quests/:id        |   GET  | Get quest by QuestId                                   |
+| /api/quests            |  POST  | Create new quest                                       |
+| /api/quests/:id        |   PUT  | Update a quest by QuestId                              |
+| /api/quests/:id        | DELETE | Delete a quest by QuestId                              |
+
+### Api/UserEvent
+
+| Endpoint              |  HTTP  | Description                                            |
+|-----------------------|:------:|--------------------------------------------------------|
+| /api/userevents        |   GET  | Get all userevents data                                |
+| /api/userevents/:id    |   GET  | Get userevent by UserEventId                           |
+| /api/userevents        |  POST  | Create new userevent                                   |
+| /api/userevents/:id    |   PUT  | Update an userevent by UserEventId                     |
+| /api/userevents/:id    | DELETE | Delete an userevent by UserEventId                     |
+
+### Api/UserLocation
+
+| Endpoint              |  HTTP  | Description                                            |
+|-----------------------|:------:|--------------------------------------------------------|
+| /api/userlocations     |   GET  | Get all userlocations data                             |
+| /api/userlocations/:id |   GET  | Get userlocation by UserLocationId                     |
+| /api/userlocations     |  POST  | Create new userlocation                                |
+| /api/userlocations/:id |   PUT  | Update an userlocation by UserLocationId               |
+| /api/userlocations/:id | DELETE | Delete an userlocation by UserLocationId               |
+
+### Admin
+
+| Endpoint              |  HTTP  | Description                                            |
+|-----------------------|:------:|--------------------------------------------------------|
+| /admins                |   GET  | Get list of admins                                     |
+| /admins/:id            |   GET  | Get admin data by AdminId                              |
+| /admins                |  POST  | Create new admin                                       |
+| /admins/:id            |   PUT  | Update an admin by AdminId                             |
+| /admins/:id            | DELETE | Delete an admin by AdminId                             |
 
 ## Models
 
-![Schema](https://raw.githubusercontent.com/Geo-ARG/geo-arg-server/fadly/assets/ARG-Schema.png)
+![Schema](https://raw.githubusercontent.com/Geo-ARG/geo-arg-server/fadly/assets/ARG-Schema-Ver2.png)

@@ -2,25 +2,25 @@ const models = require('../models')
 
 module.exports = {
   getUserLocations: (req, res) => {
-    models.User_Locations.findAll().then(function (data) {
-      res.send(data)
+    models.User_Locations.findAll().then(function (userlocation) {
+      res.send(userlocation)
     }).catch(function (err) {
       res.send(err)
     })
   },
   getUserLocation: (req, res) => {
-    models.User_Locations.findById(req.params.id).then(function (data) {
-      res.send(data)
+    models.User_Locations.findById(req.params.id).then(function (userlocation) {
+      res.send(userlocation)
     }).catch(function (err) {
       res.send(err)
     })
   },
   createUserLocation: (req, res) => {
     models.User_Locations.create({
-      userId: req.body.userId,
-      locationId: req.body.locationId
-    }).then(function (data) {
-      res.send(data)
+      UserId: req.body.UserId,
+      LocationId: req.body.LocationId
+    }).then(function (userlocation) {
+      res.send(userlocation)
     }).catch(function (err) {
       res.send(err)
     })
@@ -30,8 +30,8 @@ module.exports = {
       where: {
         id: req.params.id
       }
-    }).then(function (data) {
-      if(data) {
+    }).then(function (userlocation) {
+      if(userlocation) {
         res.status(200).json({message: `Deleted userLocation with ID: ${req.params.id}`})
       }
       else {
@@ -42,10 +42,10 @@ module.exports = {
     })
   },
   updateUserLocation: (req, res) => {
-    models.User_Locations.findById(req.params.id).then(function (user) {
-      user.update({
-        userId: req.body.userId,
-        locationId: req.body.locationId
+    models.User_Locations.findById(req.params.id).then(function (userlocation) {
+      userlocation.update({
+        UserId: req.body.UserId,
+        LocationId: req.body.LocationId
       }).then(function (data) {
         res.send(data)
       }).catch(function (err) {

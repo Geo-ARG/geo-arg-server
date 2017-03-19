@@ -15,7 +15,7 @@ function success (status) {
   }
 }
 
-describe('Auth status and response', function () {
+describe('Auth/users status and response', function () {
   let createdId
   let dummyData = ['fadly', 'fadly@gmail.com', 'gana', 'gana@yahoo.com']
 
