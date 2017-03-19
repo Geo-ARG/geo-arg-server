@@ -21,13 +21,18 @@ module.exports = {
     })
   },
   createEvent: (req, res) => {
+    var point = {
+      type: 'Point',
+      coordinates: [+req.body.latitude, +req.body.longitude],
+      crs: { type: 'name', properties: { name: 'EPSG:4326'} }
+    };
     models.Events.create({
       title: req.body.title,
       description: req.body.description,
       date: req.body.date,
       place: req.body.place,
       eventScore: req.body.eventScore,
-      geolocation: req.body.geolocation,
+      geolocation: point,
       completion: false
     }).then(function (events) {
       res.send(events)
@@ -52,6 +57,11 @@ module.exports = {
     })
   },
   updateEvent: (req, res) => {
+    var point = {
+      type: 'Point',
+      coordinates: [+req.body.latitude, +req.body.longitude],
+      crs: { type: 'name', properties: { name: 'EPSG:4326'} }
+    };
     models.Events.findById(req.params.id).then(function (events) {
       events.update({
         title: req.body.title,
@@ -59,7 +69,7 @@ module.exports = {
         date: req.body.date,
         place: req.body.place,
         eventScore: req.body.eventScore,
-        geolocation: req.body.geolocation,
+        geolocation: point,
         completion: req.body.complete
       }).then(function (data) {
         res.send(data)
