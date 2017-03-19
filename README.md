@@ -94,4 +94,4 @@ A game based on React Native and Redux where you can socialize with others at ce
 
 ## Models
 
-![Schema](https://raw.githubusercontent.com/Geo-ARG/geo-arg-server/fadly/assets/ARG-Schema-Ver3.png)
+![Schema](https://raw.githubusercontent.com/Geo-ARG/geo-arg-server/development/assets/ARG-Schema-Ver3.png)
