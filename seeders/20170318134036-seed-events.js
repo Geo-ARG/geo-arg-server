@@ -34,7 +34,6 @@ module.exports = {
         place: "Pondok Indah Mall 2",
         eventScore: 300,
         geolocation: points[0],
-        completion: false,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -44,8 +43,7 @@ module.exports = {
         date: new Date(),
         place: "Hacktiv8 Indonesia",
         eventScore: 300,
-        geolocation: points[1],
-        completion: false,
+        geolocation: points[1]
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -55,8 +53,7 @@ module.exports = {
         date: new Date(),
         place: "Cilandak Town Square",
         eventScore: 300,
-        geolocation: points[2],
-        completion: false,
+        geolocation: points[2]
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -66,8 +63,7 @@ module.exports = {
         date: new Date(),
         place: "Mal Taman Anggrek",
         eventScore: 300,
-        geolocation: points[3],
-        completion: false,
+        geolocation: points[3]
         createdAt: new Date(),
         updatedAt: new Date()
       }
