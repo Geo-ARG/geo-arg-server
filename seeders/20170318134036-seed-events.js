@@ -43,7 +43,7 @@ module.exports = {
         date: new Date(),
         place: "Hacktiv8 Indonesia",
         eventScore: 300,
-        geolocation: points[1]
+        geolocation: points[1],
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -53,7 +53,7 @@ module.exports = {
         date: new Date(),
         place: "Cilandak Town Square",
         eventScore: 300,
-        geolocation: points[2]
+        geolocation: points[2],
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -63,7 +63,7 @@ module.exports = {
         date: new Date(),
         place: "Mal Taman Anggrek",
         eventScore: 300,
-        geolocation: points[3]
+        geolocation: points[3],
         createdAt: new Date(),
         updatedAt: new Date()
       }
