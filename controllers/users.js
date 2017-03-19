@@ -5,7 +5,8 @@ module.exports = {
     models.Users.findAll({
       include: [
         {model: models.Locations},
-        {model: models.Events}
+        {model: models.Events},
+        {model: models.Quests}
       ]
     }).then(function (user) {
       res.send(user)

@@ -26,9 +26,6 @@ module.exports = {
       geolocation: {
         type: Sequelize.GEOMETRY
       },
-      completion: {
-        type: Sequelize.BOOLEAN
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

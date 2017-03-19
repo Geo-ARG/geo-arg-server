@@ -2,7 +2,11 @@ const models = require('../models')
 
 module.exports = {
   getQuests: (req, res) => {
-    models.Quests.findAll().then(function (quest) {
+    models.Quests.findAll({
+      include: [
+        {model: models.Users}
+      ]
+    }).then(function (quest) {
       res.send(quest)
     }).catch(function (err) {
       res.send(err)

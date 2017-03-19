@@ -6,8 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     date: DataTypes.DATE,
     place: DataTypes.STRING,
     eventScore: DataTypes.INTEGER,
-    geolocation: DataTypes.GEOMETRY,
-    completion: DataTypes.BOOLEAN
+    geolocation: DataTypes.GEOMETRY
   }, {
     classMethods: {
       associate: function(models) {

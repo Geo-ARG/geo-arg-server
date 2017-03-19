@@ -9,6 +9,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     EventId: DataTypes.INTEGER,
     UserId: DataTypes.INTEGER,
+    QuestId: DataTypes.INTEGER,
     completion: DataTypes.BOOLEAN
   }, {
     classMethods: {

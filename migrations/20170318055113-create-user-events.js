@@ -14,6 +14,9 @@ module.exports = {
       UserId: {
         type: Sequelize.INTEGER
       },
+      QuestId: {
+        type: Sequelize.INTEGER
+      },
       completion: {
         type: Sequelize.BOOLEAN
       },

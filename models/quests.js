@@ -13,6 +13,8 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         // associations can be defined here
         Quests.belongsTo(models.Events)
+        Quests.hasMany(models.User_Events)
+        Quests.belongsToMany(models.Users, { through: 'User_Events' })
       }
     }
   });
