@@ -96,6 +96,8 @@ router.put('/api/quests/:id', questController.updateQuest)
 
 router.delete('/api/quests/:id', questController.deleteQuest)
 
+router.delete('/api/quests/event/:id', questController.deleteQuestByEventId)
+
 // ==== User_Events ====
 
 router.get('/api/userevents', userEventController.getUserEvents)

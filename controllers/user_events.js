@@ -19,6 +19,7 @@ module.exports = {
     models.User_Events.create({
       UserId: req.body.UserId,
       EventId: req.body.EventId,
+      QuestId: req.body.QuestId,
       completion: false
     }).then(function (userevent) {
       res.send(userevent)
@@ -47,6 +48,7 @@ module.exports = {
       userevent.update({
         UserId: req.body.UserId,
         EventId: req.body.EventId,
+        QuestId: req.body.QuestId,
         completion: req.body.completion
       }).then(function (data) {
         res.send(data)

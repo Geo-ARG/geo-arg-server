@@ -50,6 +50,22 @@ module.exports = {
       res.send(err)
     })
   },
+  deleteQuestByEventId: (req, res) => {
+    models.Quests.destroy({
+      where: {
+        EventId: req.params.id
+      }
+    }).then(function (quest) {
+      if(quest) {
+        res.status(200).json({message: `Deleted quest with ID: ${req.params.id}`})
+      }
+      else {
+        res.send(`There is no quest with such ID`)
+      }
+    }).catch(function (err) {
+      res.send(err)
+    })
+  },
   updateQuest: (req, res) => {
     models.Quests.findById(req.params.id).then(function (quest) {
       quest.update({
