@@ -1,4 +1,5 @@
 const chai = require('chai')
+const models = require('../models')
 const should = chai.should()
 const expect = chai.expect
 const chaiHTTP = require('chai-http')
@@ -15,7 +16,15 @@ function success (status) {
   }
 }
 
-describe('Api/userevents status and response', function () {
+function deleteData() {
+  return models.User_Events.destroy({
+    where: {}
+  }).then(function () {
+
+  })
+}
+
+describe('API/userevents status and response', function () {
   let createdId
   let dummyData = [
     1,
@@ -23,6 +32,8 @@ describe('Api/userevents status and response', function () {
     3,
     4
   ]
+
+  deleteData()
 
   describe('GET /api', function () {
     it('should return /api endpoints', function (done) {

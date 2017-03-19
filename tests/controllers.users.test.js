@@ -1,4 +1,5 @@
 const chai = require('chai')
+const models = require('../models')
 const should = chai.should()
 const expect = chai.expect
 const chaiHTTP = require('chai-http')
@@ -15,9 +16,19 @@ function success (status) {
   }
 }
 
+function deleteData() {
+  return models.Users.destroy({
+    where: {}
+  }).then(function () {
+
+  })
+}
+
 describe('Auth/users status and response', function () {
   let createdId
   let dummyData = ['fadly', 'fadly@gmail.com', 'gana', 'gana@yahoo.com']
+
+  deleteData()
 
   describe('GET /auth', function () {
     it('should return /auth endpoints', function (done) {

@@ -1,4 +1,5 @@
 const chai = require('chai');
+const models = require('../models')
 const expect = chai.expect
 const should = chai.should()
 const chaiHTTP = require('chai-http')
@@ -15,8 +16,16 @@ function success (status) {
   }
 }
 
+function deleteData() {
+  return models.Locations.destroy({
+    where: {}
+  }).then(function () {
+
+  })
+}
+
 describe('API/locations status and response', function() {
-  let createdId
+  let createdId, dummyId1, dummyId2
   let dummyData = [
     6.12345,
     106.4321,
@@ -46,8 +55,10 @@ describe('API/locations status and response', function() {
     }
   ]
 
+  deleteData()
+
   describe('POST /api/locations', function () {
-    it('return 200 <= status < 400, an object, and res.body.geolocation should be object geometry', function (done) {
+    it('return 200 <= status < 400, an object, and res.body.geolocation should be an object geometry', function (done) {
       chai.request(url)
         .post('/api/locations')
         .send({
@@ -66,7 +77,7 @@ describe('API/locations status and response', function() {
   })
 
   describe('GET /api/locations', function () {
-    it('return 200 <= status < 400, an object, and res.body[0].geolocation should be geometry', function (done) {
+    it('return 200 <= status < 400, an object, and res.body[0].geolocation should deep equal dummyData[6]', function (done) {
       chai.request(url)
         .get('/api/locations')
         .end(function (err, res) {
@@ -78,7 +89,7 @@ describe('API/locations status and response', function() {
     })
   })
   describe('POST /api/locations', function () {
-    it('return 200 <= status < 400, an object, add new user faraway', function (done) {
+    it('return 200 <= status < 400, an object, should add new user whose location is far', function (done) {
       chai.request(url)
         .post('/api/locations')
         .send({
@@ -86,6 +97,7 @@ describe('API/locations status and response', function() {
           longitude: dummyData[3],
         })
         .end(function (err, res) {
+          dummyId1 = res.body.id
           res.should.have.status(success(res.status))
           res.should.be.an('object')
           res.body.geolocation.type.should.equal('Point')
@@ -93,7 +105,7 @@ describe('API/locations status and response', function() {
           done()
         })
     })
-    it('return 200 <= status < 400, an object, add new user close', function (done) {
+    it('return 200 <= status < 400, an object, should add new user whose location is nearby', function (done) {
       chai.request(url)
         .post('/api/locations')
         .send({
@@ -101,6 +113,7 @@ describe('API/locations status and response', function() {
           longitude: dummyData[5],
         })
         .end(function (err, res) {
+          dummyId2 = res.body.id
           res.should.have.status(success(res.status))
           res.should.be.an('object')
           res.body.geolocation.type.should.equal('Point')
@@ -111,7 +124,7 @@ describe('API/locations status and response', function() {
   })
 
   describe('POST /api/locations/scan', function () {
-    it('return 200 <= status < 400, an object, and res.body.geolocation should be object geometry', function (done) {
+    it('return 200 <= status < 400, an object, and res.body[0].nearby should deep equal true', function (done) {
       chai.request(url)
         .post('/api/locations/scan')
         .send({
@@ -119,7 +132,6 @@ describe('API/locations status and response', function() {
           longitude: dummyData[5],
         })
         .end(function (err, res) {
-          console.log(res.body);
           res.should.have.status(success(res.status))
           res.should.be.an('object')
           res.body.should.be.an('array')
@@ -130,7 +142,7 @@ describe('API/locations status and response', function() {
   })
 
   describe('PUT /api/locations/:id', function () {
-    it('return 200 <= status < 400, an object, and res.body.geolocation should equal dummyData[6]', function (done) {
+    it('return 200 <= status < 400, an object, and res.body.geolocation should deep equal dummyData[7]', function (done) {
       chai.request(url)
         .put(`/api/locations/${createdId}`)
         .send({
@@ -154,6 +166,26 @@ describe('API/locations status and response', function() {
           res.should.have.status(success(res.status))
           res.body.should.be.an('object')
           res.body.should.deep.equal({message: `Deleted location with ID: ${createdId}`})
+          done()
+        })
+    })
+    it('return 200 <= status < 400, an object, and res.body should return message', function (done) {
+      chai.request(url)
+        .delete(`/api/locations/${dummyId1}`)
+        .end(function (err, res) {
+          res.should.have.status(success(res.status))
+          res.body.should.be.an('object')
+          res.body.should.deep.equal({message: `Deleted location with ID: ${dummyId1}`})
+          done()
+        })
+    })
+    it('return 200 <= status < 400, an object, and res.body should return message', function (done) {
+      chai.request(url)
+        .delete(`/api/locations/${dummyId2}`)
+        .end(function (err, res) {
+          res.should.have.status(success(res.status))
+          res.body.should.be.an('object')
+          res.body.should.deep.equal({message: `Deleted location with ID: ${dummyId2}`})
           done()
         })
     })
