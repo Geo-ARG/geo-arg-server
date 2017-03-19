@@ -20,11 +20,14 @@ module.exports = {
       place: {
         type: Sequelize.STRING
       },
-      geolocation: {
-        type: Sequelize.STRING
-      },
-      score: {
+      eventScore: {
         type: Sequelize.INTEGER
+      },
+      geolocation: {
+        type: Sequelize.GEOMETRY
+      },
+      completion: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

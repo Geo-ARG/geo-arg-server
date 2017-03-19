@@ -3,12 +3,16 @@ module.exports = function(sequelize, DataTypes) {
   var Quests = sequelize.define('Quests', {
     title: DataTypes.STRING,
     task: DataTypes.STRING,
-    eventId: DataTypes.INTEGER,
-    verification: DataTypes.STRING
+    EventId: DataTypes.INTEGER,
+    type: DataTypes.STRING,
+    answerKey: DataTypes.STRING,
+    photoUrl: DataTypes.STRING,
+    verification: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {
-        Quests.belongsTo(Events)
+        // associations can be defined here
+        Quests.belongsTo(models.Events)
       }
     }
   });

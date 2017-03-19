@@ -5,13 +5,15 @@ module.exports = function(sequelize, DataTypes) {
     description: DataTypes.STRING,
     date: DataTypes.DATE,
     place: DataTypes.STRING,
-    geolocation: DataTypes.STRING,
-    score: DataTypes.INTEGER
+    eventScore: DataTypes.INTEGER,
+    geolocation: DataTypes.GEOMETRY,
+    completion: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {
-        Events.hasMany(Quests),
-        Events.belongsToMany(Users, { through: User_Events })
+        // associations can be defined here
+        Events.hasMany(models.Quests)
+        Events.belongsToMany(models.Users, { through: 'User_Events' })
       }
     }
   });
