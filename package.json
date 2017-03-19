@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "prestart": "./node_modules/.bin/sequelize db:migrate && ./node_modules/.bin/sequelize db:seed:all",
+    "prestart": "./node_modules/.bin/sequelize db:migrate",
     "dev": "nodemon ./bin/www",
     "test": "mocha */*.test.js"
   },
