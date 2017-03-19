@@ -76,7 +76,7 @@ router.delete('/api/events/:id', eventController.deleteEvent)
 
 router.get('/api/locations', locationController.getLocations)
 
-router.get('/api/locations/:id', locationController.getLocation)
+router.post('/api/locations/scan', locationController.getLocation)
 
 router.post('/api/locations', locationController.createLocation)
 

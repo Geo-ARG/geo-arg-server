@@ -23,7 +23,7 @@ module.exports = {
   createEvent: (req, res) => {
     var point = {
       type: 'Point',
-      coordinates: [+req.body.longitude, +req.body.latitude],
+      coordinates: [+req.body.latitude, +req.body.longitude],
       crs: { type: 'name', properties: { name: 'EPSG:4326'} }
     };
     models.Events.create({
@@ -59,7 +59,7 @@ module.exports = {
   updateEvent: (req, res) => {
     var point = {
       type: 'Point',
-      coordinates: [+req.body.longitude, +req.body.latitude],
+      coordinates: [+req.body.latitude, +req.body.longitude],
       crs: { type: 'name', properties: { name: 'EPSG:4326'} }
     };
     models.Events.findById(req.params.id).then(function (events) {

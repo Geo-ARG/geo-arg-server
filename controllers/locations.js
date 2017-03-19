@@ -24,7 +24,7 @@ module.exports = {
         ]]
       }
     }).then(function(location) {
-      res.send(location)
+      res.send(location.filter(user => user.dataValues.nearby))
     }).catch(function (err) {
       res.send(err)
     })
@@ -32,7 +32,7 @@ module.exports = {
   createLocation: (req, res) => {
     var point = {
       type: 'Point',
-      coordinates: [+req.body.longitude, +req.body.latitude],
+      coordinates: [+req.body.latitude, +req.body.longitude],
       crs: { type: 'name', properties: { name: 'EPSG:4326'} }
     };
     models.Locations.create({
@@ -62,7 +62,7 @@ module.exports = {
   updateLocation: (req, res) => {
     var point = {
       type: 'Point',
-      coordinates: [+req.body.longitude, +req.body.latitude],
+      coordinates: [+req.body.latitude, +req.body.longitude],
       crs: { type: 'name', properties: { name: 'EPSG:4326'} }
     };
     models.Locations.findById(req.params.id).then(function (location) {
