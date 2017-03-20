@@ -38,8 +38,6 @@ describe('Auth/users status and response', function () {
           res.should.have.status(success(res.status))
           res.should.be.an('object')
           res.body.endpoints.should.deep.equal([
-            '/auth/google',
-            '/auth/facebook',
             '/auth/users',
             '/auth/users/:id'
           ])

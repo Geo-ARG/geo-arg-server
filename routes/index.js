@@ -25,8 +25,6 @@ router.get('/', function(req, res, next) {
 router.get('/auth', function (req, res, next) {
   res.send({
     endpoints: [
-      '/auth/google',
-      '/auth/facebook',
       '/auth/users',
       '/auth/users/:id'
     ]

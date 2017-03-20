@@ -22,60 +22,60 @@ A game based on React Native and Redux where you can socialize with others at ce
 
 ### Auth
 
-| Endpoint              |  HTTP  | Description                                            |
-|-----------------------|:------:|--------------------------------------------------------|
-| /auth/google          |  POST  | Register user via Google                               |
-| /auth/facebook        |  POST  | Register user via Facebook                             |
-| /auth/users           |   GET  | Get all users data (including location and event)      |
-| /auth/users/:id       |   GET  | Get user by UserId (including location and event)      |
-| /auth/users           |  POST  | Create new user                                        |
-| /auth/users/:id       |   PUT  | Update an user by UserId                               |
-| /auth/users/:id       | DELETE | Delete an user by UserId                               |
+| Endpoint              |  HTTP  | Description                                             |
+|-----------------------|:------:|---------------------------------------------------------|
+| /auth/users           |   GET  | Get all users data (including location, event and quest)|
+| /auth/users/:id       |   GET  | Get user by UserId (including location, event and quest)|
+| /auth/users           |  POST  | Create new user                                         |
+| /auth/users/:id       |   PUT  | Update an user by UserId                                |
+| /auth/users/:id       | DELETE | Delete an user by UserId                                |
 
 ### Api/Event
 
 | Endpoint              |  HTTP  | Description                                            |
 |-----------------------|:------:|--------------------------------------------------------|
-| /api/events            |   GET  | Get list of events (including quest and user)          |
-| /api/events/:id        |   GET  | Get event by EventId (including quest and user)        |
-| /api/events            |  POST  | Create new event                                       |
-| /api/events/:id        |   PUT  | Update an event by EventId                             |
-| /api/events/:id        | DELETE | Delete an event by EventId                             |
+| /api/events           |   GET  | Get list of events (including quest and user)          |
+| /api/events/:id       |   GET  | Get event by EventId (including quest and user)        |
+| /api/events           |  POST  | Create new event                                       |
+| /api/events/:id       |   PUT  | Update an event by EventId                             |
+| /api/events/:id       | DELETE | Delete an event by EventId                             |
 
 ### Api/Location
 
 | Endpoint              |  HTTP  | Description                                            |
 |-----------------------|:------:|--------------------------------------------------------|
-| /api/locations         |   GET  | Get all locations data (including user)                |
-| /api/locations/:id     |   GET  | Get location by LocationId (including user)            |
-| /api/locations         |  POST  | Create new location                                    |
-| /api/locations/:id     |   PUT  | Update a location by LocationId                        |
-| /api/locations/:id     | DELETE | Delete a location by LocationId                        |
+| /api/locations        |   GET  | Get all locations data (including user)                |
+| /api/locations/scan   |   GET  | Get user location and other players nearby             |
+| /api/locations        |  POST  | Create new location                                    |
+| /api/locations/:id    |   PUT  | Update a location by LocationId                        |
+| /api/locations/:id    | DELETE | Delete a location by LocationId                        |
 
 ### Api/Quest
 
-| Endpoint              |  HTTP  | Description                                            |
-|-----------------------|:------:|--------------------------------------------------------|
+| Endpoint               |  HTTP  | Description                                            |
+|------------------------|:------:|--------------------------------------------------------|
 | /api/quests            |   GET  | Get all quests data                                    |
 | /api/quests/:id        |   GET  | Get quest by QuestId                                   |
 | /api/quests            |  POST  | Create new quest                                       |
 | /api/quests/:id        |   PUT  | Update a quest by QuestId                              |
 | /api/quests/:id        | DELETE | Delete a quest by QuestId                              |
+| /api/quests/event/:id  | DELETE | Delete a quest by EventId                              |
 
 ### Api/UserEvent
 
-| Endpoint              |  HTTP  | Description                                            |
-|-----------------------|:------:|--------------------------------------------------------|
-| /api/userevents        |   GET  | Get all userevents data                                |
-| /api/userevents/:id    |   GET  | Get userevent by UserEventId                           |
-| /api/userevents        |  POST  | Create new userevent                                   |
-| /api/userevents/:id    |   PUT  | Update an userevent by UserEventId                     |
-| /api/userevents/:id    | DELETE | Delete an userevent by UserEventId                     |
+| Endpoint                 |  HTTP  | Description                                            |
+|--------------------------|:------:|--------------------------------------------------------|
+| /api/userevents          |   GET  | Get all userevents data                                |
+| /api/userevents/:id      |   GET  | Get userevent by UserEventId                           |
+| /api/userevents          |  POST  | Create new userevent                                   |
+| /api/userevents/:id      |   PUT  | Update an userevent by UserEventId                     |
+| /api/userevents/:id      | DELETE | Delete an userevent by UserEventId                     |
+| /api/userevents/event/:id| DELETE | Delete an userevent by EventId                         |
 
 ### Api/UserLocation
 
-| Endpoint              |  HTTP  | Description                                            |
-|-----------------------|:------:|--------------------------------------------------------|
+| Endpoint               |  HTTP  | Description                                            |
+|------------------------|:------:|--------------------------------------------------------|
 | /api/userlocations     |   GET  | Get all userlocations data                             |
 | /api/userlocations/:id |   GET  | Get userlocation by UserLocationId                     |
 | /api/userlocations     |  POST  | Create new userlocation                                |
@@ -84,8 +84,8 @@ A game based on React Native and Redux where you can socialize with others at ce
 
 ### Admin
 
-| Endpoint              |  HTTP  | Description                                            |
-|-----------------------|:------:|--------------------------------------------------------|
+| Endpoint               |  HTTP  | Description                                            |
+|------------------------|:------:|--------------------------------------------------------|
 | /admins                |   GET  | Get list of admins                                     |
 | /admins/:id            |   GET  | Get admin data by AdminId                              |
 | /admins                |  POST  | Create new admin                                       |
@@ -94,4 +94,4 @@ A game based on React Native and Redux where you can socialize with others at ce
 
 ## Models
 
-![Schema](https://raw.githubusercontent.com/Geo-ARG/geo-arg-server/development/assets/ARG-Schema-Ver3.png)
+![Schema](https://raw.githubusercontent.com/Geo-ARG/geo-arg-server/development/assets/ARG-Schema-Ver4.png)
