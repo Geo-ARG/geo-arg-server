@@ -25,7 +25,7 @@ function deleteData() {
 }
 
 describe('API/locations status and response', function() {
-  let createdId, dummyId1, dummyId2
+  let createdId, dummyId1, dummyId2, dummyId3, dummyId4, dummyId5
   let dummyData = [
     6.12345,
     106.4321,
@@ -52,7 +52,8 @@ describe('API/locations status and response', function() {
           "name": "EPSG:4326"
         }
       }
-    }
+    },
+    1
   ]
 
   deleteData()
@@ -64,13 +65,15 @@ describe('API/locations status and response', function() {
         .send({
           latitude: dummyData[0],
           longitude: dummyData[1],
+          UserId: dummyData[8]
         })
         .end(function (err, res) {
-          createdId = res.body.id
+          createdId = res.body.Locations.id
+          dummyId3 = res.body.User_Locations.id
           res.should.have.status(success(res.status))
           res.should.be.an('object')
-          res.body.geolocation.type.should.equal('Point')
-          res.body.geolocation.coordinates.should.be.an('array')
+          res.body.Locations.geolocation.type.should.equal('Point')
+          res.body.Locations.geolocation.coordinates.should.be.an('array')
           done()
         })
     })
@@ -95,13 +98,15 @@ describe('API/locations status and response', function() {
         .send({
           latitude: dummyData[2],
           longitude: dummyData[3],
+          UserId: dummyData[8]
         })
         .end(function (err, res) {
-          dummyId1 = res.body.id
+          dummyId1 = res.body.Locations.id
+          dummyId4 = res.body.User_Locations.id
           res.should.have.status(success(res.status))
           res.should.be.an('object')
-          res.body.geolocation.type.should.equal('Point')
-          res.body.geolocation.coordinates.should.be.an('array')
+          res.body.Locations.geolocation.type.should.equal('Point')
+          res.body.Locations.geolocation.coordinates.should.be.an('array')
           done()
         })
     })
@@ -111,13 +116,15 @@ describe('API/locations status and response', function() {
         .send({
           latitude: dummyData[4],
           longitude: dummyData[5],
+          UserId: dummyData[8]
         })
         .end(function (err, res) {
-          dummyId2 = res.body.id
+          dummyId2 = res.body.Locations.id
+          dummyId5 = res.body.User_Locations.id
           res.should.have.status(success(res.status))
           res.should.be.an('object')
-          res.body.geolocation.type.should.equal('Point')
-          res.body.geolocation.coordinates.should.be.an('array')
+          res.body.Locations.geolocation.type.should.equal('Point')
+          res.body.Locations.geolocation.coordinates.should.be.an('array')
           done()
         })
     })
@@ -129,7 +136,7 @@ describe('API/locations status and response', function() {
         .post('/api/locations/scan')
         .send({
           latitude: dummyData[4],
-          longitude: dummyData[5],
+          longitude: dummyData[5]
         })
         .end(function (err, res) {
           res.should.have.status(success(res.status))
@@ -147,7 +154,7 @@ describe('API/locations status and response', function() {
         .put(`/api/locations/${createdId}`)
         .send({
           latitude: dummyData[2],
-          longitude: dummyData[3],
+          longitude: dummyData[3]
         })
         .end(function (err, res) {
           res.should.have.status(success(res.status))
@@ -186,6 +193,36 @@ describe('API/locations status and response', function() {
           res.should.have.status(success(res.status))
           res.body.should.be.an('object')
           res.body.should.deep.equal({message: `Deleted location with ID: ${dummyId2}`})
+          done()
+        })
+    })
+    it('return 200 <= status < 400, an object, and res.body should return message', function (done) {
+      chai.request(url)
+        .delete(`/api/userlocations/${dummyId3}`)
+        .end(function (err, res) {
+          res.should.have.status(success(res.status))
+          res.body.should.be.an('object')
+          res.body.should.deep.equal({message: `Deleted userLocation with ID: ${dummyId3}`})
+          done()
+        })
+    })
+    it('return 200 <= status < 400, an object, and res.body should return message', function (done) {
+      chai.request(url)
+        .delete(`/api/userlocations/${dummyId4}`)
+        .end(function (err, res) {
+          res.should.have.status(success(res.status))
+          res.body.should.be.an('object')
+          res.body.should.deep.equal({message: `Deleted userLocation with ID: ${dummyId4}`})
+          done()
+        })
+    })
+    it('return 200 <= status < 400, an object, and res.body should return message', function (done) {
+      chai.request(url)
+        .delete(`/api/userlocations/${dummyId5}`)
+        .end(function (err, res) {
+          res.should.have.status(success(res.status))
+          res.body.should.be.an('object')
+          res.body.should.deep.equal({message: `Deleted userLocation with ID: ${dummyId5}`})
           done()
         })
     })

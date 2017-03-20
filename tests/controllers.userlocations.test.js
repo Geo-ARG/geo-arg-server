@@ -64,8 +64,8 @@ describe('API/userlocations status and response', function () {
       chai.request(url)
         .post('/api/userlocations')
         .send({
-          LocationId: dummyData[0],
-          UserId: dummyData[1]
+          UserId: dummyData[1],
+          LocationId: dummyData[0]
         })
         .end(function (err, res) {
           createdId = res.body.id

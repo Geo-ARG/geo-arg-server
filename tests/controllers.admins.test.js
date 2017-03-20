@@ -28,7 +28,9 @@ describe('Admin status and response', function () {
   let createdId
   let dummyData = ['fadly@gmail.com', '123', 'gana@yahoo.com', '345']
 
-  deleteData()
+  setTimeout(function () {
+    deleteData()
+  }, 3000)
 
   describe('POST /admins', function () {
     it('return 200 <= status < 400, an object, and res.body.email should equal dummyData[0]', function (done) {

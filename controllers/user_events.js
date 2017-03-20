@@ -52,21 +52,37 @@ module.exports = {
       }
     }).then(function (quests) {
       let arr = []
-      quests.map((quest) => {
+      if (quests.length > 0) {
+        quests.map((quest) => {
+          models.User_Events.create({
+            UserId: req.body.UserId,
+            EventId: req.body.EventId,
+            QuestId: quest.dataValues.id,
+            userAnswer: '',
+            completion: false
+          }).then(function (userevents) {
+            arr.push(userevents)
+            if (arr.length === quests.length) {
+              res.send(arr)
+            }
+          }).catch(function (err) {
+            res.send(err)
+          })
+        })
+      }
+      else {
         models.User_Events.create({
           UserId: req.body.UserId,
           EventId: req.body.EventId,
-          QuestId: quest.dataValues.id,
+          QuestId: req.body.QuestId,
+          userAnswer: '',
           completion: false
         }).then(function (userevents) {
-          arr.push(userevents)
-          if (arr.length === quests.length) {
-            res.send(arr)
-          }
+          res.send(userevents)
         }).catch(function (err) {
           res.send(err)
         })
-      })
+      }
     }).catch(function (err) {
       res.send(err)
     })

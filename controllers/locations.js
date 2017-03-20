@@ -44,8 +44,8 @@ module.exports = {
       models.User_Locations.create({
         UserId: req.body.UserId,
         LocationId: location.id
-      }).then(function () {
-        res.send(location)
+      }).then(function (userlocation) {
+        res.send({Locations: location, User_Locations: userlocation})
       })
     }).catch(function (err) {
       res.send(err)

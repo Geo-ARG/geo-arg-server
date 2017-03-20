@@ -36,8 +36,7 @@ module.exports = {
       date: req.body.date,
       place: req.body.place,
       eventScore: req.body.eventScore,
-      geolocation: point,
-      completion: false
+      geolocation: point
     }).then(function (events) {
       res.send(events)
     }).catch(function (err) {
@@ -73,8 +72,7 @@ module.exports = {
         date: req.body.date,
         place: req.body.place,
         eventScore: req.body.eventScore,
-        geolocation: point,
-        completion: req.body.complete
+        geolocation: point
       }).then(function (data) {
         res.send(data)
       }).catch(function (err) {
