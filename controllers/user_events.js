@@ -16,13 +16,20 @@ module.exports = {
     })
   },
   createUserEvent: (req, res) => {
-    models.User_Events.create({
-      UserId: req.body.UserId,
-      EventId: req.body.EventId,
-      QuestId: req.body.QuestId,
-      completion: false
-    }).then(function (userevent) {
-      res.send(userevent)
+    models.Quests.findAll({
+      where: {
+        EventId: req.body.EventId
+      }
+    }).then(function (quests) {
+      quests.map((quest) => {
+        models.User_Events.create({
+          UserId: req.body.UserId,
+          EventId: req.body.EventId,
+          QuestId: quest.dataValues.id,
+          completion: false
+        })
+      })
+      res.send('OK')
     }).catch(function (err) {
       res.send(err)
     })
