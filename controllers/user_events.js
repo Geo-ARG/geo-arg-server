@@ -16,21 +16,31 @@ module.exports = {
   },
   getUserEvent: (req, res) => {
     models.User_Events.findById(req.params.id).then(function (userevent) {
-      res.send(userevent)
+      userevent.getUser().then(function (user) {
+        userevent.getEvent().then(function (events) {
+          userevent.getQuest().then(function (quest) {
+            res.send({User_Events: userevent, Users: user, Events: events, Quests: quest})
+          })
+        })
+      })
     }).catch(function (err) {
       res.send(err)
     })
   },
-  getImageList: (req, res) => {
-    models.Quests.findAll({
+  getUserEventByPhotoCompletion: (req, res) => {
+    models.User_Events.findAll({
+      include: [
+        {model: models.Users},
+        {model: models.Events},
+        {model: models.Quests}
+      ],
       where: {
-        type: 'Photo'
+        completion: false
       }
-    }).then(function (quests) {
-      console.log(quests[1].dataValues);
-    })
-    models.User_Events.findById(req.params.id).then(function (userevent) {
-      res.send(userevent)
+    }).then(function (userevents) {
+      res.send(userevents.filter(userevent => {
+        return userevent.Quest.type === 'Photo'
+      }))
     }).catch(function (err) {
       res.send(err)
     })
