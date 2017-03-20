@@ -27,7 +27,7 @@ module.exports = {
       res.send(err)
     })
   },
-  getUserEventByPhotoCompletion: (req, res) => {
+  getUserEventByCompletionAndTypePhoto: (req, res) => {
     models.User_Events.findAll({
       include: [
         {model: models.Users},
@@ -115,6 +115,50 @@ module.exports = {
       }).catch(function (err) {
         res.send(err)
       })
+    })
+  },
+  updateUserEventByQuestVerification: (req, res) => {
+    models.User_Events.findById(req.params.id).then(function (userevent) {
+      if (req.body.status) {
+        userevent.update({
+          completion: true
+        }).then(function (data) {
+          res.send(data)
+        }).catch(function (err) {
+          res.send(err)
+        })
+      }
+      else {
+        userevent.update({
+          userAnswer: null
+        }).then(function (data) {
+          res.send(data)
+        }).catch(function (err) {
+          res.send(err)
+        })
+      }
+    })
+  },
+  updateUserEventByUserAnswer: (req, res) => {
+    models.User_Events.findById(req.params.id).then(function (userevent) {
+      if (req.body.userAnswer === userevent.Quest.answerKey) {
+        userevent.update({
+          completion: true
+        }).then(function (data) {
+          res.send(data)
+        }).catch(function (err) {
+          res.send(err)
+        })
+      }
+      else {
+        userevent.update({
+          completion: false
+        }).then(function (data) {
+          res.send(data)
+        }).catch(function (err) {
+          res.send(err)
+        })
+      }
     })
   }
 }

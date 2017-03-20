@@ -14,8 +14,6 @@ let dummy = {
   "quote": "ARG semangaatttt!"
 }
 
-router.get('/api/userevents/quests/image', userEventController.getUserEventByPhotoCompletion)
-
 router.get('/', function(req, res, next) {
   res.send(dummy);
 });
@@ -104,9 +102,15 @@ router.get('/api/userevents', userEventController.getUserEvents)
 
 router.get('/api/userevents/:id', userEventController.getUserEvent)
 
+router.get('/api/userevents/quests/photo', userEventController.getUserEventByCompletionAndTypePhoto)
+
 router.post('/api/userevents', userEventController.createUserEvent)
 
 router.put('/api/userevents/:id', userEventController.updateUserEvent)
+
+router.put('/api/userevents/quests/verification', userEventController.updateUserEventByQuestVerification)
+
+router.put('/api/userevents/quests/useranswer', userEventController.updateUserEventByUserAnswer)
 
 router.delete('/api/userevents/:id', userEventController.deleteUserEvent)
 
