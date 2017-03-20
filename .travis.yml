@@ -1,8 +1,12 @@
 language: node_js
 node_js:
   - "6"
+services:
+  - postgresql
 before_script:
   - npm install
+  - psql -c 'create database geo_arg_production;' -U postgres
+  - psql -c 'create extension postgis;' -U postgres
   - npm start
 script:
   - npm test
