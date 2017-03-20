@@ -14,7 +14,9 @@ module.exports = {
   },
   getQuest: (req, res) => {
     models.Quests.findById(req.params.id).then(function (quest) {
-      res.send(quest)
+      quest.getUsers().then(function (user) {
+        res.send({Quests: quest, Users: user})
+      })  
     }).catch(function (err) {
       res.send(err)
     })

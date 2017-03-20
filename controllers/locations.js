@@ -15,6 +15,9 @@ module.exports = {
   },
   getLocation: (req, res) => {
     models.Locations.findAll({
+      include: [
+        {model: models.Users}
+      ],
       attributes: {
         include:[[
           sequelize.fn('ST_DWithin',

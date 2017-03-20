@@ -16,7 +16,13 @@ module.exports = {
   },
   getUser: (req, res) => {
     models.Users.findById(req.params.id).then(function (user) {
-      res.send(user)
+      user.getLocations().then(function (location) {
+        user.getEvents().then(function (events) {
+          user.getQuests().then(function (quest) {
+            res.send({Users: user, Locations: location, Events: events, Quests: quest})
+          })
+        })
+      })
     }).catch(function (err) {
       res.send(err)
     })

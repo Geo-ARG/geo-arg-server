@@ -19,7 +19,6 @@ module.exports = {
         events.getQuests().then(function (quest) {
           res.send({Events: events, Users: user, Quests: quest})
         })
-
       })
     }).catch(function (err) {
       res.send(err)
