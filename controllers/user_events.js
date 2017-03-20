@@ -15,6 +15,20 @@ module.exports = {
       res.send(err)
     })
   },
+  getImageList: (req, res) => {
+    models.Quests.findAll({
+      where: {
+        type: 'Photo'
+      }
+    }).then(function (quests) {
+      console.log(quests[1].dataValues);
+    })
+    models.User_Events.findById(req.params.id).then(function (userevent) {
+      res.send(userevent)
+    }).catch(function (err) {
+      res.send(err)
+    })
+  },
   createUserEvent: (req, res) => {
     models.Quests.findAll({
       where: {

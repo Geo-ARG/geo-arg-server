@@ -14,6 +14,8 @@ let dummy = {
   "quote": "ARG semangaatttt!"
 }
 
+router.get('/api/imageList', userEventController.getImageList)
+
 router.get('/', function(req, res, next) {
   res.send(dummy);
 });
