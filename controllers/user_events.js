@@ -2,7 +2,13 @@ const models = require('../models')
 
 module.exports = {
   getUserEvents: (req, res) => {
-    models.User_Events.findAll().then(function (userevent) {
+    models.User_Events.findAll({
+      include: [
+        {model: models.Users},
+        {model: models.Events},
+        {model: models.Quests}
+      ]
+    }).then(function (userevent) {
       res.send(userevent)
     }).catch(function (err) {
       res.send(err)
@@ -35,15 +41,22 @@ module.exports = {
         EventId: req.body.EventId
       }
     }).then(function (quests) {
+      let arr = []
       quests.map((quest) => {
         models.User_Events.create({
           UserId: req.body.UserId,
           EventId: req.body.EventId,
           QuestId: quest.dataValues.id,
           completion: false
+        }).then(function (userevents) {
+          arr.push(userevents)
+          if (arr.length === quests.length) {
+            res.send(arr)
+          }
+        }).catch(function (err) {
+          res.send(err)
         })
       })
-      res.send('OK')
     }).catch(function (err) {
       res.send(err)
     })

@@ -15,6 +15,9 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        User_Events.belongsTo(models.Users)
+        User_Events.belongsTo(models.Events)
+        User_Events.belongsTo(models.Quests)
       }
     }
   });
