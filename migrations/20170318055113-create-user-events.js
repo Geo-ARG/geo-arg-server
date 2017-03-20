@@ -8,6 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      userAnswer: {
+        type: Sequelize.STRING
+      },
       EventId: {
         type: Sequelize.INTEGER
       },

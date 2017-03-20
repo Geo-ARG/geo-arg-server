@@ -7,6 +7,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
+    userAnswer: DataTypes.STRING,
     EventId: DataTypes.INTEGER,
     UserId: DataTypes.INTEGER,
     QuestId: DataTypes.INTEGER,
