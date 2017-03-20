@@ -110,6 +110,9 @@ router.put('/api/userevents/:id', userEventController.updateUserEvent)
 
 router.delete('/api/userevents/:id', userEventController.deleteUserEvent)
 
+router.delete('/api/userevents/event/:id', userEventController.deleteUserEventByEventId)
+
+
 // ==== User_Locations ====
 
 router.get('/api/userlocations', userLocationController.getUserLocations)

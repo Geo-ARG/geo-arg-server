@@ -15,7 +15,12 @@ module.exports = {
   },
   getEvent: (req, res) => {
     models.Events.findById(req.params.id).then(function (events) {
-      res.send(events)
+      events.getUsers().then(function (user) {
+        events.getQuests().then(function (quest) {
+          res.send({Events: events, Users: user, Quests: quest})
+        })
+
+      })
     }).catch(function (err) {
       res.send(err)
     })

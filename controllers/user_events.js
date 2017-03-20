@@ -43,6 +43,22 @@ module.exports = {
       res.send(err)
     })
   },
+  deleteUserEventByEventId: (req, res) => {
+    models.User_Events.destroy({
+      where: {
+        EventId: req.params.id
+      }
+    }).then(function (userevent) {
+      if(userevent) {
+        res.status(200).json({message: `Deleted userEvent with ID: ${req.params.id}`})
+      }
+      else {
+        res.send(`There is no userEvent with such ID`)
+      }
+    }).catch(function (err) {
+      res.send(err)
+    })
+  },
   updateUserEvent: (req, res) => {
     models.User_Events.findById(req.params.id).then(function (userevent) {
       userevent.update({
