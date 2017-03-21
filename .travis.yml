@@ -4,9 +4,9 @@ node_js:
 services:
   - postgresql
 before_script:
-  - npm install
   - psql -c 'create database geo_arg_production;' -U postgres
   - psql -c 'create extension postgis;' -U postgres
+  - npm install
   - npm start
 script:
   - npm test
