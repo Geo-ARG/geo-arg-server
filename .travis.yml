@@ -4,7 +4,7 @@ node_js:
 services:
   - postgresql
 addons:
-  postgresql: "9.4"
+  postgresql: "9.2"
 before_script:
   - sudo /etc/init.d/postgresql stop
   - sudo cp /etc/postgresql/9.1/main/pg_hba.conf ./
