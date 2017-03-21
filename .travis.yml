@@ -5,7 +5,7 @@ services:
   - postgresql
 before_script:
   - /usr/bin/psql -c 'create database geo_arg_production;' -U postgres
-  - /usr/bin/psql -c 'create extension postgis;' -U postgres
+  - /usr/bin/psql -U postgres -c "create extension postgis"
   - npm install
   - npm start
 script:
