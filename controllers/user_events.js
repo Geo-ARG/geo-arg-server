@@ -69,17 +69,21 @@ module.exports = {
       let arr = []
       if (quests.length > 0) {
         quests.map((quest) => {
-          models.User_Events.create({
-            UserId: req.body.UserId,
-            EventId: req.body.EventId,
-            QuestId: quest.dataValues.id,
-            userAnswer: '',
-            completion: false
-          }).then(function (userevents) {
-            arr.push(userevents)
-            if (arr.length === quests.length) {
-              res.send(arr)
+          models.User_Events.findOrCreate({
+            where: {
+              UserId: req.body.UserId,
+              QuestId: quest.dataValues.id
+            },
+            defaults: {
+              EventId: req.body.EventId,
+              userAnswer: '',
+              completion: false
             }
+          }).then(function (userevents) {
+              arr.push(userevents)
+              if (arr.length === quests.length) {
+                res.send(arr)
+              }
           }).catch(function (err) {
             res.send(err)
           })

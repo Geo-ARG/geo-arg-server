@@ -25,9 +25,13 @@ module.exports = {
     })
   },
   createUserLocation: (req, res) => {
-    models.User_Locations.create({
-      UserId: req.body.UserId,
-      LocationId: req.body.LocationId
+    models.Admins.findOrCreate({
+      where: {
+        UserId: req.body.UserId
+      },
+      defaults: {
+        LocationId: req.body.LocationId
+      }
     }).then(function (userlocation) {
       res.send(userlocation)
     }).catch(function (err) {

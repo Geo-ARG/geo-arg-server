@@ -7,6 +7,7 @@ const eventController = require('../controllers/events')
 const questController = require('../controllers/quests')
 const userEventController = require('../controllers/user_events')
 const userLocationController = require('../controllers/user_locations')
+const middleware = require('../middlewares/auth')
 
 /* GET home page. */
 let dummy = {
@@ -132,6 +133,8 @@ router.put('/api/userlocations/:id', userLocationController.updateUserLocation)
 router.delete('/api/userlocations/:id', userLocationController.deleteUserLocation)
 
 // ==== Admin ====
+
+router.post('/admins/login', adminController.verifyAdmin)
 
 router.get('/admins', adminController.getAdmins)
 
