@@ -1,4 +1,3 @@
-let config = require('../config/secret.json')
 let jwt = require('jsonwebtoken')
 module.exports = {
   verifyLogin: function (req, res, next) {
