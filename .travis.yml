@@ -3,6 +3,8 @@ node_js:
   - "6"
 services:
   - postgresql
+addons:
+  postgresql: "9.4"
 before_script:
   - /usr/bin/psql -c 'create database geo_arg_production;' -U postgres
   - /usr/bin/psql -U postgres -c "create extension postgis"
