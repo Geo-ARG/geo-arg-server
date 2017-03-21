@@ -27,7 +27,7 @@ module.exports = {
       res.send(err)
     })
   },
-  getUserEventByUserIdEventId: => (req, res) {
+  getUserEventByUserIdEventId: (req, res) => {
     models.User_Events.findAll({
       include: [
         {model: models.Quests}
