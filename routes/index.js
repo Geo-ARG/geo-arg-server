@@ -110,9 +110,9 @@ router.post('/api/userevents', userEventController.createUserEvent)
 
 router.put('/api/userevents/:id', userEventController.updateUserEvent)
 
-router.put('/api/userevents/quests/verification', userEventController.updateUserEventByQuestVerification)
+router.put('/api/userevents/:id/quests/verification', userEventController.updateUserEventByQuestVerification)
 
-router.put('/api/userevents/quests/useranswer', userEventController.updateUserEventByUserAnswer)
+router.put('/api/userevents/:id/quests/useranswer', userEventController.updateUserEventByUserAnswer)
 
 router.delete('/api/userevents/:id', userEventController.deleteUserEvent)
 
