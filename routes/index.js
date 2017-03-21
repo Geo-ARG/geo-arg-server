@@ -102,6 +102,8 @@ router.get('/api/userevents', userEventController.getUserEvents)
 
 router.get('/api/userevents/:id', userEventController.getUserEvent)
 
+router.post('/api/userevents/questList', userEventController.getUserEventByUserIdEventId)
+
 router.get('/api/userevents/quests/photo', userEventController.getUserEventByCompletionAndTypePhoto)
 
 router.post('/api/userevents', userEventController.createUserEvent)
