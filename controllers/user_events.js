@@ -173,24 +173,26 @@ module.exports = {
   },
   updateUserEventByUserAnswer: (req, res) => {
     models.User_Events.findById(req.params.id).then(function (userevent) {
-      if (req.body.userAnswer === userevent.Quest.answerKey) {
-        userevent.update({
-          completion: true
-        }).then(function (data) {
-          res.send(data)
-        }).catch(function (err) {
-          res.send(err)
-        })
-      }
-      else {
-        userevent.update({
-          completion: false
-        }).then(function (data) {
-          res.send(data)
-        }).catch(function (err) {
-          res.send(err)
-        })
-      }
+      userevent.getQuest().then(function (quest) {
+        if (req.body.userAnswer === quest.answerKey) {
+          userevent.update({
+            completion: true
+          }).then(function (data) {
+            res.send(data)
+          }).catch(function (err) {
+            res.send(err)
+          })
+        }
+        else {
+          userevent.update({
+            completion: false
+          }).then(function (data) {
+            res.send(data)
+          }).catch(function (err) {
+            res.send(err)
+          })
+        }
+      })
     })
   }
 }
