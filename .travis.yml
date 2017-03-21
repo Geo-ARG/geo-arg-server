@@ -15,7 +15,7 @@ before_script:
 script:
   - /usr/bin/psql --version
   - /usr/bin/psql -d geo_arg_production -c 'SELECT PostGIS_version();' -U postgres
-  - npm run prestart
+  - npm start
   - npm test
 notifications:
   email: false

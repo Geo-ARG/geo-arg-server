@@ -5,7 +5,7 @@ const expect = chai.expect
 const chaiHTTP = require('chai-http')
 chai.use(chaiHTTP)
 
-const url = 'http://localhost:3000'
+const url = require('../app')
 
 function success (status) {
   let isSuccess = (status >= 200 && status < 400)
@@ -16,7 +16,7 @@ function success (status) {
   }
 }
 
-function deleteData() {
+function deleteData () {
   return models.Quests.destroy({
     where: {}
   }).then(function () {
