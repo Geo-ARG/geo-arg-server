@@ -74,7 +74,7 @@ module.exports = {
       } else {
         res.send({message: 'Authentication failed. Wrong password.'})
       }
-    }).catch(function () {
+    }).catch(function (err) {
       res.send({message: 'Authentication failed. Email not found.'})
     })
   }

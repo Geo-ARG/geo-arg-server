@@ -6,7 +6,6 @@ module.exports = {
       res.json("Authentication failed, you aren't authorized .")
     } else {
       let decoded = jwt.decode(req.headers.token)
-      console.log(decoded);
       if (decoded.hasOwnProperty('id')) {
         if (jwt.verify(req.headers.token, process.env.SECRET)) {
           next()
