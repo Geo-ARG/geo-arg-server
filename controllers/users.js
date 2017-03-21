@@ -1,7 +1,6 @@
 const models = require('../models')
 let jwt = require('jsonwebtoken')
 let hash = require('password-hash')
-let config = require('../config/secret.json')
 
 module.exports = {
   getUsers: (req, res) => {
@@ -41,7 +40,7 @@ module.exports = {
         totalScore: 0
       }
     }).then(function (user) {
-      let token = jwt.sign({UserId: user.id}, config.secret, {algorithm: 'HS256'}, {expiresIn: '1h'})
+      let token = jwt.sign({UserId: user.id}, process.env.SECRET, {algorithm: 'HS256'}, {expiresIn: '1h'})
       res.send({
         token: token,
         username: req.body.username

@@ -1,7 +1,6 @@
 const models = require('../models')
 let jwt = require('jsonwebtoken')
 let hash = require('password-hash')
-let config = require('../config/secret.json')
 
 module.exports = {
   getAdmins: (req, res) => {
@@ -68,7 +67,7 @@ module.exports = {
       }
     }).then(function (data) {
       if (hash.verify(req.body.password, data.password)) {
-        let token = jwt.sign({id: data.id}, config.secret, {algorithm: 'HS256'}, {expiresIn: '1h'})
+        let token = jwt.sign({id: data.id}, process.env.SECRET, {algorithm: 'HS256'}, {expiresIn: '1h'})
         res.send({
           token: token
         })
