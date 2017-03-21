@@ -27,14 +27,14 @@ module.exports = {
       res.send(err)
     })
   },
-  getUserEventByUserIdEventId(){
+  getUserEventByUserIdEventId(req, res){
     models.User_Events.findAll({
       include: [
         {model: models.Quests}
       ],
       where : {
-        UserId: req.body.UserId,
-        EventId: req.body.EventId,
+        UserId: req.params.userid,
+        EventId: req.params.eventid,
       }
     }).then(function (questList){
       res.send(questList)
