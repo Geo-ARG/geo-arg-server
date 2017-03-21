@@ -1,4 +1,7 @@
 const models = require('../models')
+let jwt = require('jsonwebtoken')
+let hash = require('password-hash')
+let config = require('../config/secret.json')
 
 module.exports = {
   getUsers: (req, res) => {
@@ -28,12 +31,21 @@ module.exports = {
     })
   },
   createUser: (req, res) => {
-    models.Users.create({
-      username: req.body.username,
-      email: req.body.email,
-      totalScore: 0
+    let toLowerCaseUsername = req.body.username.toLowerCase()
+    models.Users.findOrCreate({
+      where: {
+        username: toLowerCaseUsername
+      },
+      defaults: {
+        email: req.body.email,
+        totalScore: 0
+      }
     }).then(function (user) {
-      res.send(user)
+      let token = jwt.sign({UserId: user.id}, config.secret, {algorithm: 'HS256'}, {expiresIn: '1h'})
+      res.send({
+        token: token,
+        username: req.body.username
+      })
     }).catch(function (err) {
       res.send(err)
     })
