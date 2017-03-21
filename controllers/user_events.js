@@ -137,7 +137,8 @@ module.exports = {
         UserId: req.body.UserId,
         EventId: req.body.EventId,
         QuestId: req.body.QuestId,
-        completion: req.body.completion
+        completion: req.body.completion,
+        userAnswer: req.body.userAnswer
       }).then(function (data) {
         res.send(data)
       }).catch(function (err) {
