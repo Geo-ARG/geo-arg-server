@@ -69,17 +69,25 @@ module.exports = {
       let arr = []
       if (quests.length > 0) {
         quests.map((quest) => {
-          models.User_Events.create({
-            UserId: req.body.UserId,
-            EventId: req.body.EventId,
-            QuestId: quest.dataValues.id,
-            userAnswer: '',
-            completion: false
-          }).then(function (userevents) {
-            arr.push(userevents)
-            if (arr.length === quests.length) {
-              res.send(arr)
+          models.User_Events.findOrCreate({
+            where: {
+              UserId: req.body.UserId,
+              QuestId: quest.dataValues.id
+            },
+            defaults: {
+              EventId: req.body.EventId,
+              userAnswer: '',
+              completion: false
             }
+          }).then(function (userevents) {
+              arr.push(userevents)
+              if (arr.length === quests.length) {
+                if (userevents[1]) {
+                  res.send(arr[0])
+                } else {
+                  res.status(409).json({message: 'UserId && QuestId already exists.'})
+                }
+              }
           }).catch(function (err) {
             res.send(err)
           })
@@ -169,23 +177,26 @@ module.exports = {
   },
   updateUserEventByUserAnswer: (req, res) => {
     models.User_Events.findById(req.params.id).then(function (userevent) {
-      if (req.body.userAnswer === userevent.Quest.answerKey) {
-        userevent.update({
-          completion: true
-        }).then(function (data) {
-          res.send(data)
-        }).catch(function (err) {
-          res.send(err)
-        })
-      } else {
-        userevent.update({
-          completion: false
-        }).then(function (data) {
-          res.send(data)
-        }).catch(function (err) {
-          res.send(err)
-        })
-      }
+      userevent.getQuest().then(function (quest) {
+        if (req.body.userAnswer === quest.answerKey) {
+          userevent.update({
+            completion: true
+          }).then(function (data) {
+            res.send(data)
+          }).catch(function (err) {
+            res.send(err)
+          })
+        }
+        else {
+          userevent.update({
+            completion: false
+          }).then(function (data) {
+            res.send(data)
+          }).catch(function (err) {
+            res.send(err)
+          })
+        }
+      })
     })
   }
 }

@@ -7,6 +7,7 @@ const eventController = require('../controllers/events')
 const questController = require('../controllers/quests')
 const userEventController = require('../controllers/user_events')
 const userLocationController = require('../controllers/user_locations')
+const middleware = require('../middlewares/auth')
 
 /* GET home page. */
 let dummy = {
@@ -24,10 +25,15 @@ router.get('/auth', function (req, res, next) {
   res.send({
     endpoints: [
       '/auth/users',
-      '/auth/users/:id'
+      '/auth/users/:id',
+      '/auth/admins',
+      '/auth/admins/:id',
+      '/auth/admins/login'
     ]
   })
 })
+
+// ==== User ====
 
 router.get('/auth/users', userController.getUsers)
 
@@ -38,6 +44,20 @@ router.post('/auth/users', userController.createUser)
 router.put('/auth/users/:id', userController.updateUser)
 
 router.delete('/auth/users/:id', userController.deleteUser)
+
+// ==== Admin ====
+
+router.post('/auth/admins/login', adminController.verifyAdmin)
+
+router.get('/auth/admins', adminController.getAdmins)
+
+router.get('/auth/admins/:id', adminController.getAdmin)
+
+router.post('/auth/admins', adminController.createAdmin)
+
+router.put('/auth/admins/:id', adminController.updateAdmin)
+
+router.delete('/auth/admins/:id', adminController.deleteAdmin)
 
 // ==== API ====
 
@@ -110,9 +130,9 @@ router.post('/api/userevents', userEventController.createUserEvent)
 
 router.put('/api/userevents/:id', userEventController.updateUserEvent)
 
-router.put('/api/userevents/quests/verification', userEventController.updateUserEventByQuestVerification)
+router.put('/api/userevents/:id/quests/verification', userEventController.updateUserEventByQuestVerification)
 
-router.put('/api/userevents/quests/useranswer', userEventController.updateUserEventByUserAnswer)
+router.put('/api/userevents/:id/quests/useranswer', userEventController.updateUserEventByUserAnswer)
 
 router.delete('/api/userevents/:id', userEventController.deleteUserEvent)
 
@@ -130,17 +150,5 @@ router.post('/api/userlocations', userLocationController.createUserLocation)
 router.put('/api/userlocations/:id', userLocationController.updateUserLocation)
 
 router.delete('/api/userlocations/:id', userLocationController.deleteUserLocation)
-
-// ==== Admin ====
-
-router.get('/admins', adminController.getAdmins)
-
-router.get('/admins/:id', adminController.getAdmin)
-
-router.post('/admins', adminController.createAdmin)
-
-router.put('/admins/:id', adminController.updateAdmin)
-
-router.delete('/admins/:id', adminController.deleteAdmin)
 
 module.exports = router;

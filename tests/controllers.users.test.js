@@ -39,7 +39,10 @@ describe('Auth/users status and response', function () {
           res.should.be.an('object')
           res.body.endpoints.should.deep.equal([
             '/auth/users',
-            '/auth/users/:id'
+            '/auth/users/:id',
+            '/auth/admins',
+            '/auth/admins/:id',
+            '/auth/admins/login'
           ])
           done()
         })

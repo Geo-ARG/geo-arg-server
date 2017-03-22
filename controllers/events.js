@@ -3,6 +3,7 @@ const models = require('../models')
 module.exports = {
   getEvents: (req, res) => {
     models.Events.findAll({
+      limit: 8,
       include: [
         {model: models.Quests},
         {model: models.Users}

@@ -25,11 +25,19 @@ module.exports = {
     })
   },
   createUserLocation: (req, res) => {
-    models.User_Locations.create({
-      UserId: req.body.UserId,
-      LocationId: req.body.LocationId
+    models.User_Locations.findOrCreate({
+      where: {
+        UserId: req.body.UserId
+      },
+      defaults: {
+        LocationId: req.body.LocationId
+      }
     }).then(function (userlocation) {
-      res.send(userlocation)
+      if(userlocation[1]) {
+        res.send(userlocation[0])
+      } else {
+        res.status(409).json({message: 'UserId already exists.'})
+      }
     }).catch(function (err) {
       res.send(err)
     })

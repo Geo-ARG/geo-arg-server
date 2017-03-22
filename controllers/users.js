@@ -1,4 +1,6 @@
 const models = require('../models')
+let jwt = require('jsonwebtoken')
+let hash = require('password-hash')
 
 module.exports = {
   getUsers: (req, res) => {
@@ -28,12 +30,26 @@ module.exports = {
     })
   },
   createUser: (req, res) => {
-    models.Users.create({
-      username: req.body.username,
-      email: req.body.email,
-      totalScore: 0
+    let toLowerCaseEmail = req.body.email.toLowerCase()
+    models.Users.findOrCreate({
+      where: {
+        email: toLowerCaseEmail
+      },
+      defaults: {
+        username: req.body.username,
+        totalScore: 0
+      }
     }).then(function (user) {
-      res.send(user)
+      if(user[1]) {
+        let token = jwt.sign({userid: user[0].dataValues.id}, process.env.SECRET, {algorithm: 'HS256'}, {expiresIn: '1h'})
+        res.send({
+          token: token,
+          id: user[0].dataValues.id,
+          username: req.body.username
+        })
+      } else {
+        res.status(409).json({message: 'Email already exists.'})
+      }
     }).catch(function (err) {
       res.send(err)
     })

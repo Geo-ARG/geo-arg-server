@@ -5,7 +5,10 @@ const expect = chai.expect
 const chaiHTTP = require('chai-http')
 chai.use(chaiHTTP)
 
-const url = require('../app')
+let jwt = require('jsonwebtoken')
+let hash = require('password-hash')
+
+const url = 'http://localhost:3000'
 
 function success (status) {
   let isSuccess = (status >= 200 && status < 400)
@@ -25,23 +28,43 @@ function deleteData () {
 }
 
 describe('Admin status and response', function () {
-  let createdId
+  let createdId, hashedPass
   let dummyData = ['fadly@gmail.com', '123', 'gana@yahoo.com', '345']
 
   setTimeout(function () {
     deleteData()
-  }, 3000)
+  }, 400)
 
-  describe('POST /admins', function () {
+  describe('GET /auth', function () {
+    it('should return /auth endpoints', function (done) {
+      chai.request(url)
+        .get('/auth')
+        .end(function (err, res) {
+          res.should.have.status(success(res.status))
+          res.should.be.an('object')
+          res.body.endpoints.should.deep.equal([
+            '/auth/users',
+            '/auth/users/:id',
+            '/auth/admins',
+            '/auth/admins/:id',
+            '/auth/admins/login'
+          ])
+          done()
+        })
+    })
+  })
+
+  describe('POST /auth/admins', function () {
     it('return 200 <= status < 400, an object, and res.body.email should equal dummyData[0]', function (done) {
       chai.request(url)
-        .post('/admins')
+        .post('/auth/admins')
         .send({
           email: dummyData[0],
           password: dummyData[1]
         })
         .end(function (err, res) {
           createdId = res.body.id
+          hashedPass = res.body.password
           res.should.have.status(success(res.status))
           res.should.be.an('object')
           res.body.email.should.equal(dummyData[0])
@@ -50,23 +73,40 @@ describe('Admin status and response', function () {
     })
   })
 
-  describe('GET /admins', function () {
-    it('return 200 <= status < 400, an object, and res.body[0].password should equal dummyData[1]', function (done) {
+  describe('POST /auth/admins/login', function () {
+    it('return 200 <= status < 400, an object, and res.body.email should equal dummyData[0]', function (done) {
       chai.request(url)
-        .get('/admins')
+        .post('/auth/admins/login')
+        .send({
+          email: dummyData[0],
+          password: dummyData[1]
+        })
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.should.be.an('object')
-          res.body[0].password.should.equal(dummyData[1])
+          res.body.should.have.deep.property('token')
           done()
         })
     })
   })
 
-  describe('PUT /admins/:id', function () {
+  describe('GET /auth/admins', function () {
+    it('return 200 <= status < 400, an object, and res.body[0].password should equal hashedPass', function (done) {
+      chai.request(url)
+        .get('/auth/admins')
+        .end(function (err, res) {
+          res.should.have.status(success(res.status))
+          res.should.be.an('object')
+          res.body[0].password.should.equal(hashedPass)
+          done()
+        })
+    })
+  })
+
+  describe('PUT /auth/admins/:id', function () {
     it('return 200 <= status < 400, an object, and res.body.email should equal dummyData[2]', function (done) {
       chai.request(url)
-        .put(`/admins/${createdId}`)
+        .put(`/auth/admins/${createdId}`)
         .send({
           email: dummyData[2],
           password: dummyData[3]
@@ -80,10 +120,10 @@ describe('Admin status and response', function () {
     })
   })
 
-  describe('DELETE /admins/:id', function () {
+  describe('DELETE /auth/admins/:id', function () {
     it('return 200 <= status < 400, an object, and res.body should return message', function (done) {
       chai.request(url)
-        .delete(`/admins/${createdId}`)
+        .delete(`/auth/admins/${createdId}`)
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.body.should.be.an('object')
