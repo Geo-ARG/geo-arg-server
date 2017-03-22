@@ -48,7 +48,7 @@ module.exports = {
           token: token
         })
       } else {
-        res.status(200).json({
+        res.send({
           id: user[0].dataValues.id,
           username: req.body.username,
           message: 'Username already exists.',
