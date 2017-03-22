@@ -42,6 +42,21 @@ module.exports = {
       res.send(err)
     })
   },
+  getUserEventByUserId: (req, res) => {
+    models.User_Events.findAll({
+      include: [
+        {model: models.Events},
+        {model: models.Quests}
+      ],
+      where: {
+        UserId: req.params.userid
+      }
+    }).then(function (userevent) {
+      res.send(userevent)
+    }).catch(function (err) {
+      res.send(err)
+    })
+  },
   getUserEventByCompletionAndTypePhoto: (req, res) => {
     models.User_Events.findAll({
       include: [
