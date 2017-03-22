@@ -19,6 +19,5 @@ script:
   - npm test
 notifications:
   email: false
-production:
-  adapter: postgresql
-  database: geo_arg_development
+env:
+  - NODE_ENV=production
