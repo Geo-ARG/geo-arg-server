@@ -33,7 +33,11 @@ module.exports = {
         LocationId: req.body.LocationId
       }
     }).then(function (userlocation) {
-      res.send(userlocation[0])
+      if(userlocation[1]) {
+        res.send(userlocation[0])
+      } else {
+        res.status(409).json({message: 'UserId already exists.'})
+      }
     }).catch(function (err) {
       res.send(err)
     })

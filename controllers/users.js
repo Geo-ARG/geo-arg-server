@@ -40,7 +40,7 @@ module.exports = {
         totalScore: 0
       }
     }).then(function (user) {
-      if(user[1] === true) {
+      if(user[1]) {
         let token = jwt.sign({userid: user[0].dataValues.id}, process.env.SECRET, {algorithm: 'HS256'}, {expiresIn: '1h'})
         res.send({
           token: token,

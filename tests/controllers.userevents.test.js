@@ -65,7 +65,8 @@ describe('API/userevents status and response', function () {
         .post('/api/userevents')
         .send({
           EventId: dummyData[0],
-          UserId: dummyData[1]
+          UserId: dummyData[1],
+          QuestId: dummyData[2]
         })
         .end(function (err, res) {
           createdId = res.body.id

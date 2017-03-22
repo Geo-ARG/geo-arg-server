@@ -82,7 +82,11 @@ module.exports = {
           }).then(function (userevents) {
               arr.push(userevents)
               if (arr.length === quests.length) {
-                res.send(arr[0])
+                if (userevents[1]) {
+                  res.send(arr[0])
+                } else {
+                  res.status(409).json({message: 'UserId && QuestId already exists.'})
+                }
               }
           }).catch(function (err) {
             res.send(err)
