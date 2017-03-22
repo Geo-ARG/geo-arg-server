@@ -27,7 +27,11 @@ module.exports = {
         password: hash.generate(req.body.password)
       }
     }).then(function (admin) {
-      res.send(admin[0])
+      if(admin[1] === true) {
+        res.send(admin[0])
+      } else {
+        res.status(409).json({message: 'Email already exists.'})
+      }
     }).catch(function (err) {
       res.send(err)
     })

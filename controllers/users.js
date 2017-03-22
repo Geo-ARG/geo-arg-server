@@ -30,22 +30,26 @@ module.exports = {
     })
   },
   createUser: (req, res) => {
-    let toLowerCaseUsername = req.body.username.toLowerCase()
+    let toLowerCaseEmail = req.body.email.toLowerCase()
     models.Users.findOrCreate({
       where: {
-        username: toLowerCaseUsername
+        email: toLowerCaseEmail
       },
       defaults: {
-        email: req.body.email,
+        username: req.body.username,
         totalScore: 0
       }
     }).then(function (user) {
-      // let token = jwt.sign({UserId: user.id}, process.env.SECRET, {algorithm: 'HS256'}, {expiresIn: '1h'})
-      res.send({
-        // token: token,
-        id: user[0].dataValues.id,
-        username: req.body.username
-      })
+      if(user[1] === true) {
+        let token = jwt.sign({userid: user[0].dataValues.id}, process.env.SECRET, {algorithm: 'HS256'}, {expiresIn: '1h'})
+        res.send({
+          token: token,
+          id: user[0].dataValues.id,
+          username: req.body.username
+        })
+      } else {
+        res.status(409).json({message: 'Email already exists.'})
+      }
     }).catch(function (err) {
       res.send(err)
     })
