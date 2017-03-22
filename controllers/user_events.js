@@ -93,14 +93,22 @@ module.exports = {
           })
         })
       } else {
-        models.User_Events.create({
-          UserId: req.body.UserId,
-          EventId: req.body.EventId,
-          QuestId: req.body.QuestId,
-          userAnswer: '',
-          completion: false
+        models.User_Events.findOrCreate({
+          where: {
+            UserId: req.body.UserId,
+            QuestId: req.body.QuestId
+          },
+          defaults: {
+            EventId: req.body.EventId,
+            userAnswer: '',
+            completion: false
+          }
         }).then(function (userevents) {
-          res.send(userevents)
+          if (userevents[1]) {
+            res.send(userevents[0])
+          } else {
+            res.status(409).json({message: 'UserId && QuestId already exists.'})
+          }
         }).catch(function (err) {
           res.send(err)
         })

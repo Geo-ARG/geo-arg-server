@@ -40,16 +40,11 @@ module.exports = {
         totalScore: 0
       }
     }).then(function (user) {
-      if(user[1]) {
-        let token = jwt.sign({userid: user[0].dataValues.id}, process.env.SECRET, {algorithm: 'HS256'}, {expiresIn: '1h'})
-        res.send({
-          id: user[0].dataValues.id,
-          username: req.body.username,
-          token: token
-        })
-      } else {
-        res.send(user[0].dataValues)
-      }
+      let token = jwt.sign({userid: user[0].dataValues.id}, process.env.SECRET, {algorithm: 'HS256'}, {expiresIn: '1h'})
+      res.send({
+        User: user[0].dataValues,
+        token: token
+      })
     }).catch(function (err) {
       res.send(err)
     })

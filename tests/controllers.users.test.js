@@ -50,7 +50,7 @@ describe('Auth/users status and response', function () {
   })
 
   describe('POST /auth/users', function () {
-    it('return 200 <= status < 400, an object, and res.body.username should equal dummyData[0]', function (done) {
+    it('return 200 <= status < 400, an object, and res.body.User.username should equal dummyData[0]', function (done) {
       chai.request(url)
         .post('/auth/users')
         .send({
@@ -58,10 +58,10 @@ describe('Auth/users status and response', function () {
           email: dummyData[1]
         })
         .end(function (err, res) {
-          createdId = res.body.id
+          createdId = res.body.User.id
           res.should.have.status(success(res.status))
           res.should.be.an('object')
-          res.body.username.should.equal(dummyData[0])
+          res.body.User.username.should.equal(dummyData[0])
           done()
         })
     })
