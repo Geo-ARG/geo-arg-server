@@ -25,7 +25,8 @@
     "psql": "0.0.1",
     "sequelize": "^3.30.2",
     "sequelize-cli": "^2.6.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "mocha": "^3.2.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
