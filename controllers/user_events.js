@@ -82,7 +82,7 @@ module.exports = {
           }).then(function (userevents) {
               arr.push(userevents)
               if (arr.length === quests.length) {
-                res.send(arr)
+                res.send(arr[0])
               }
           }).catch(function (err) {
             res.send(err)

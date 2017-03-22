@@ -39,7 +39,10 @@ describe('Auth/users status and response', function () {
           res.should.be.an('object')
           res.body.endpoints.should.deep.equal([
             '/auth/users',
-            '/auth/users/:id'
+            '/auth/users/:id',
+            '/auth/admins',
+            '/auth/admins/:id',
+            '/auth/admins/login'
           ])
           done()
         })
@@ -56,7 +59,6 @@ describe('Auth/users status and response', function () {
         })
         .end(function (err, res) {
           createdId = res.body.id
-          console.log(res.body);
           res.should.have.status(success(res.status))
           res.should.be.an('object')
           res.body.username.should.equal(dummyData[0])

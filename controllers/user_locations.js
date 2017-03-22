@@ -33,7 +33,7 @@ module.exports = {
         LocationId: req.body.LocationId
       }
     }).then(function (userlocation) {
-      res.send(userlocation)
+      res.send(userlocation[0])
     }).catch(function (err) {
       res.send(err)
     })

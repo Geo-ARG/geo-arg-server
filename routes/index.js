@@ -25,10 +25,15 @@ router.get('/auth', function (req, res, next) {
   res.send({
     endpoints: [
       '/auth/users',
-      '/auth/users/:id'
+      '/auth/users/:id',
+      '/auth/admins',
+      '/auth/admins/:id',
+      '/auth/admins/login'
     ]
   })
 })
+
+// ==== User ====
 
 router.get('/auth/users', userController.getUsers)
 
@@ -39,6 +44,20 @@ router.post('/auth/users', userController.createUser)
 router.put('/auth/users/:id', userController.updateUser)
 
 router.delete('/auth/users/:id', userController.deleteUser)
+
+// ==== Admin ====
+
+router.post('/auth/admins/login', adminController.verifyAdmin)
+
+router.get('/auth/admins', adminController.getAdmins)
+
+router.get('/auth/admins/:id', adminController.getAdmin)
+
+router.post('/auth/admins', adminController.createAdmin)
+
+router.put('/auth/admins/:id', adminController.updateAdmin)
+
+router.delete('/auth/admins/:id', adminController.deleteAdmin)
 
 // ==== API ====
 
@@ -131,19 +150,5 @@ router.post('/api/userlocations', userLocationController.createUserLocation)
 router.put('/api/userlocations/:id', userLocationController.updateUserLocation)
 
 router.delete('/api/userlocations/:id', userLocationController.deleteUserLocation)
-
-// ==== Admin ====
-
-router.post('/admins/login', adminController.verifyAdmin)
-
-router.get('/admins', adminController.getAdmins)
-
-router.get('/admins/:id', adminController.getAdmin)
-
-router.post('/admins', adminController.createAdmin)
-
-router.put('/admins/:id', adminController.updateAdmin)
-
-router.delete('/admins/:id', adminController.deleteAdmin)
 
 module.exports = router;

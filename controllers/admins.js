@@ -27,7 +27,7 @@ module.exports = {
         password: hash.generate(req.body.password)
       }
     }).then(function (admin) {
-      res.send(admin)
+      res.send(admin[0])
     }).catch(function (err) {
       res.send(err)
     })
