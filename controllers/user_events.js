@@ -1,4 +1,5 @@
 const models = require('../models')
+const sequelize = require('sequelize')
 
 module.exports = {
   getUserEvents: (req, res) => {
@@ -198,29 +199,41 @@ module.exports = {
     let userAnswer = req.body.userAnswer
     models.User_Events.findById(req.params.id).then(function (userevent) {
       userevent.getQuest().then(function (quest) {
-        if(/,/.test(userAnswer)){
-          let coordinates = userAnswer.split(', ')
-          let answerKey = answerKey.split(', ')
-        }
-        if (userAnswer === quest.answerKey) {
-          userevent.update({
-            completion: true,
-            userAnswer
-          }).then(function (data) {
-            res.send(data)
-          }).catch(function (err) {
-            res.send(err)
-          })
-        }
-        else {
-          userevent.update({
-            completion: false,
-            userAnswer
-          }).then(function (data) {
-            res.send(data)
-          }).catch(function (err) {
-            res.send(err)
-          })
+        if(typeof userAnswer === 'number'){
+          let key = quest.answerKey.split(', ').map(item => +item)
+          models.Locations.findAll({
+            where: {
+              id: userAnswer
+            },
+            attributes: {
+              include: [[
+                sequelize.fn('ST_Distance',
+                  sequelize.col('geolocation'),
+                  sequelize.literal(`ST_POINT(${key[0]}, ${key[1]})::geography`)
+                ), 'distance'
+              ]]
+            }
+          }).then((data)=> res.send(data))
+        } else {
+          if (userAnswer === quest.answerKey) {
+            userevent.update({
+              completion: true,
+              userAnswer: req.body.userAnswer
+            }).then(function (data) {
+              res.send(data)
+            }).catch(function (err) {
+              res.send(err)
+            })
+          } else {
+            userevent.update({
+              completion: false,
+              userAnswer: req.body.userAnswer
+            }).then(function (data) {
+              res.send(data)
+            }).catch(function (err) {
+              res.send(err)
+            })
+          }
         }
       })
     })
