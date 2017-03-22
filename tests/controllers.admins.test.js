@@ -73,6 +73,23 @@ describe('Admin status and response', function () {
     })
   })
 
+  describe('POST /auth/admins/login', function () {
+    it('return 200 <= status < 400, an object, and res.body.email should equal dummyData[0]', function (done) {
+      chai.request(url)
+        .post('/auth/admins/login')
+        .send({
+          email: dummyData[0],
+          password: dummyData[1]
+        })
+        .end(function (err, res) {
+          res.should.have.status(success(res.status))
+          res.should.be.an('object')
+          res.body.should.have.deep.property('token')
+          done()
+        })
+    })
+  })
+
   describe('GET /auth/admins', function () {
     it('return 200 <= status < 400, an object, and res.body[0].password should equal hashedPass', function (done) {
       chai.request(url)
