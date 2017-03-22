@@ -199,11 +199,17 @@ module.exports = {
     })
   },
   updateUserEventByUserAnswer: (req, res) => {
+    let userAnswer = req.body.userAnswer
     models.User_Events.findById(req.params.id).then(function (userevent) {
       userevent.getQuest().then(function (quest) {
-        if (req.body.userAnswer === quest.answerKey) {
+        if(/,/.test(userAnswer)){
+          let coordinates = userAnswer.split(', ')
+          console.log(coordinates);
+        }
+        if (userAnswer === quest.answerKey) {
           userevent.update({
-            completion: true
+            completion: true,
+            userAnswer
           }).then(function (data) {
             res.send(data)
           }).catch(function (err) {
@@ -212,7 +218,8 @@ module.exports = {
         }
         else {
           userevent.update({
-            completion: false
+            completion: false,
+            userAnswer
           }).then(function (data) {
             res.send(data)
           }).catch(function (err) {

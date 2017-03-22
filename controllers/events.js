@@ -3,6 +3,7 @@ const models = require('../models')
 module.exports = {
   getEvents: (req, res) => {
     models.Events.findAll({
+      order: [['createdAt', 'DESC']],
       limit: 8,
       include: [
         {model: models.Quests},
