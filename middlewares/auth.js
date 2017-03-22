@@ -1,7 +1,7 @@
 let jwt = require('jsonwebtoken')
 module.exports = {
   verifyLogin: function (req, res, next) {
-    if (req.headers.token == null || req.headers.token == 'null') {
+    if (req.headers.token) {
       res.json("Authentication failed, you aren't authorized.")
     } else {
       let decoded = jwt.decode(req.headers.token)
@@ -21,7 +21,7 @@ module.exports = {
     }
   },
   verifyAdmin: function (req, res, next) {
-    if (req.headers.token == null || req.headers.token == 'null') {
+    if (req.headers.token) {
       res.json("Authentication failed, you aren't authorized.")
     } else {
       let decoded = jwt.decode(req.headers.token)
