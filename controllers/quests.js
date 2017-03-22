@@ -16,7 +16,7 @@ module.exports = {
     models.Quests.findById(req.params.id).then(function (quest) {
       quest.getUsers().then(function (user) {
         res.send({Quests: quest, Users: user})
-      })  
+      })
     }).catch(function (err) {
       res.send(err)
     })
@@ -42,10 +42,9 @@ module.exports = {
         id: req.params.id
       }
     }).then(function (quest) {
-      if(quest) {
+      if (quest) {
         res.status(200).json({message: `Deleted quest with ID: ${req.params.id}`})
-      }
-      else {
+      } else {
         res.send(`There is no quest with such ID`)
       }
     }).catch(function (err) {
@@ -58,10 +57,9 @@ module.exports = {
         EventId: req.params.id
       }
     }).then(function (quest) {
-      if(quest) {
+      if (quest) {
         res.status(200).json({message: `Deleted quest with ID: ${req.params.id}`})
-      }
-      else {
+      } else {
         res.send(`There is no quest with such ID`)
       }
     }).catch(function (err) {

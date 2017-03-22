@@ -32,11 +32,11 @@ module.exports = {
       include: [
         {model: models.Quests}
       ],
-      where : {
+      where: {
         UserId: req.params.userid,
-        EventId: req.params.eventid,
+        EventId: req.params.eventid
       }
-    }).then(function (questList){
+    }).then(function (questList) {
       res.send(questList)
     }).catch(function (err) {
       res.send(err)
@@ -92,8 +92,7 @@ module.exports = {
             res.send(err)
           })
         })
-      }
-      else {
+      } else {
         models.User_Events.create({
           UserId: req.body.UserId,
           EventId: req.body.EventId,
@@ -116,10 +115,9 @@ module.exports = {
         id: req.params.id
       }
     }).then(function (userevent) {
-      if(userevent) {
+      if (userevent) {
         res.status(200).json({message: `Deleted userEvent with ID: ${req.params.id}`})
-      }
-      else {
+      } else {
         res.send(`There is no userEvent with such ID`)
       }
     }).catch(function (err) {
@@ -132,10 +130,9 @@ module.exports = {
         EventId: req.params.id
       }
     }).then(function (userevent) {
-      if(userevent) {
+      if (userevent) {
         res.status(200).json({message: `Deleted userEvent with ID: ${req.params.id}`})
-      }
-      else {
+      } else {
         res.send(`There is no userEvent with such ID`)
       }
     }).catch(function (err) {
@@ -167,8 +164,7 @@ module.exports = {
         }).catch(function (err) {
           res.send(err)
         })
-      }
-      else {
+      } else {
         userevent.update({
           userAnswer: null
         }).then(function (data) {

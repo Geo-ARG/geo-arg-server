@@ -19,7 +19,7 @@ function success (status) {
   }
 }
 
-function deleteData() {
+function deleteData () {
   return models.Admins.destroy({
     where: {}
   }).then(function () {

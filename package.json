@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "prestart": "./node_modules/.bin/sequelize db:migrate && ./node_modules/.bin/sequelize db:seed:all",
     "dev": "nodemon ./bin/www",
-    "test": "mocha */*.test.js"
+    "test": "./node_modules/.bin/mocha */*.test.js"
   },
   "dependencies": {
     "body-parser": "~1.15.2",
@@ -28,6 +28,8 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
     "nodemon": "^1.11.0"
   }
 }

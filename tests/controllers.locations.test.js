@@ -1,11 +1,11 @@
-const chai = require('chai');
+const chai = require('chai')
 const models = require('../models')
 const expect = chai.expect
 const should = chai.should()
 const chaiHTTP = require('chai-http')
 chai.use(chaiHTTP)
 
-const url = 'http://localhost:3000'
+const url = require('../app')
 
 function success (status) {
   let isSuccess = (status >= 200 && status < 400)
@@ -16,7 +16,7 @@ function success (status) {
   }
 }
 
-function deleteData() {
+function deleteData () {
   return models.Locations.destroy({
     where: {}
   }).then(function () {
@@ -24,7 +24,7 @@ function deleteData() {
   })
 }
 
-describe('API/locations status and response', function() {
+describe('API/locations status and response', function () {
   let createdId, dummyId1, dummyId2, dummyId3, dummyId4, dummyId5
   let dummyData = [
     6.12345,
@@ -34,22 +34,22 @@ describe('API/locations status and response', function() {
     6.5439,
     106.1232,
     {
-      "type": "Point",
-      "coordinates": [
+      'type': 'Point',
+      'coordinates': [
         6.12345,
         106.4321
       ]
     },
     {
-      "type": "Point",
-      "coordinates": [
+      'type': 'Point',
+      'coordinates': [
         6.5432,
         106.1234
       ],
-      "crs": {
-        "type": "name",
-        "properties": {
-          "name": "EPSG:4326"
+      'crs': {
+        'type': 'name',
+        'properties': {
+          'name': 'EPSG:4326'
         }
       }
     },

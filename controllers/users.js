@@ -60,10 +60,9 @@ module.exports = {
         id: req.params.id
       }
     }).then(function (user) {
-      if(user) {
+      if (user) {
         res.status(200).json({message: `Deleted user with ID: ${req.params.id}`})
-      }
-      else {
+      } else {
         res.send(`There is no user with such ID`)
       }
     }).catch(function (err) {

@@ -48,10 +48,9 @@ module.exports = {
         id: req.params.id
       }
     }).then(function (userlocation) {
-      if(userlocation) {
+      if (userlocation) {
         res.status(200).json({message: `Deleted userLocation with ID: ${req.params.id}`})
-      }
-      else {
+      } else {
         res.send(`There is no userLocation with such ID`)
       }
     }).catch(function (err) {

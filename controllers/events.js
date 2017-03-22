@@ -30,7 +30,7 @@ module.exports = {
       type: 'Point',
       coordinates: [+req.body.latitude, +req.body.longitude],
       crs: { type: 'name', properties: { name: 'EPSG:4326'} }
-    };
+    }
     models.Events.create({
       title: req.body.title,
       description: req.body.description,
@@ -50,10 +50,9 @@ module.exports = {
         id: req.params.id
       }
     }).then(function (events) {
-      if(events) {
+      if (events) {
         res.status(200).json({message: `Deleted event with ID: ${req.params.id}`})
-      }
-      else {
+      } else {
         res.send(`There is no event with such ID`)
       }
     }).catch(function (err) {
@@ -65,7 +64,7 @@ module.exports = {
       type: 'Point',
       coordinates: [+req.body.latitude, +req.body.longitude],
       crs: { type: 'name', properties: { name: 'EPSG:4326'} }
-    };
+    }
     models.Events.findById(req.params.id).then(function (events) {
       events.update({
         title: req.body.title,

@@ -42,10 +42,9 @@ module.exports = {
         id: req.params.id
       }
     }).then(function (admin) {
-      if(admin) {
+      if (admin) {
         res.status(200).json({message: `Deleted admin with ID: ${req.params.id}`})
-      }
-      else {
+      } else {
         res.send(`There is no admin with such ID`)
       }
     }).catch(function (err) {
