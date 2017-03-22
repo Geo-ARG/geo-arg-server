@@ -97,11 +97,7 @@ module.exports = {
           }).then(function (userevents) {
               arr.push(userevents)
               if (arr.length === quests.length) {
-                if (userevents[1]) {
-                  res.send(arr[0])
-                } else {
-                  res.status(409).json({message: 'UserId && QuestId already exists.'})
-                }
+                res.send(arr)
               }
           }).catch(function (err) {
             res.send(err)
@@ -204,7 +200,7 @@ module.exports = {
       userevent.getQuest().then(function (quest) {
         if(/,/.test(userAnswer)){
           let coordinates = userAnswer.split(', ')
-          console.log(coordinates);
+          let answerKey = answerKey.split(', ')
         }
         if (userAnswer === quest.answerKey) {
           userevent.update({
