@@ -56,6 +56,7 @@ describe('Auth/users status and response', function () {
         })
         .end(function (err, res) {
           createdId = res.body.id
+          console.log(res.body);
           res.should.have.status(success(res.status))
           res.should.be.an('object')
           res.body.username.should.equal(dummyData[0])

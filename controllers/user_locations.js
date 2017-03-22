@@ -25,7 +25,7 @@ module.exports = {
     })
   },
   createUserLocation: (req, res) => {
-    models.Admins.findOrCreate({
+    models.User_Locations.findOrCreate({
       where: {
         UserId: req.body.UserId
       },

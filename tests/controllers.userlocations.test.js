@@ -60,7 +60,7 @@ describe('API/userlocations status and response', function () {
   })
 
   describe('POST /api/userlocations', function () {
-    it('return 200 <= status < 400, an object, and res.body.LocationId should equal dummyData[0]', function (done) {
+    it('return 200 <= status < 400, an object, and res.body[0].LocationId should equal dummyData[0]', function (done) {
       chai.request(url)
         .post('/api/userlocations')
         .send({
@@ -68,10 +68,10 @@ describe('API/userlocations status and response', function () {
           LocationId: dummyData[0]
         })
         .end(function (err, res) {
-          createdId = res.body.id
+          createdId = res.body[0].id
           res.should.have.status(success(res.status))
           res.should.be.an('object')
-          res.body.LocationId.should.equal(dummyData[0])
+          res.body[0].LocationId.should.equal(dummyData[0])
           done()
         })
     })

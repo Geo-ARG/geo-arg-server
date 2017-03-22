@@ -43,6 +43,7 @@ module.exports = {
       // let token = jwt.sign({UserId: user.id}, process.env.SECRET, {algorithm: 'HS256'}, {expiresIn: '1h'})
       res.send({
         // token: token,
+        id: user[0].dataValues.id,
         username: req.body.username
       })
     }).catch(function (err) {
