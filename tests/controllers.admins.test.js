@@ -8,7 +8,7 @@ chai.use(chaiHTTP)
 let jwt = require('jsonwebtoken')
 let hash = require('password-hash')
 
-const url = 'http://localhost:3000'
+const url = require('../app')
 
 function success (status) {
   let isSuccess = (status >= 200 && status < 400)
