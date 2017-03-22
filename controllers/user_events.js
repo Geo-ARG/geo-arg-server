@@ -199,9 +199,9 @@ module.exports = {
     let userAnswer = req.body.userAnswer
     models.User_Events.findById(req.params.id).then(function (userevent) {
       userevent.getQuest().then(function (quest) {
-        if(typeof userAnswer === 'number'){
+        if(!isNaN(parseFloat(userAnswer))){
           let key = quest.answerKey.split(', ').map(item => +item)
-          models.Locations.findAll({
+          models.Locations.find({
             where: {
               id: userAnswer
             },
@@ -213,7 +213,29 @@ module.exports = {
                 ), 'distance'
               ]]
             }
-          }).then((data)=> res.send(data))
+          }).then((data)=> {
+            if(data.dataValues.distance/600 < 1){
+              console.log('in 1km');
+              userevent.update({
+                completion: true,
+                userAnswer: 'User get the locations'
+              }).then(function (data) {
+                res.send(data)
+              }).catch(function (err) {
+                res.send(err)
+              })
+            } else {
+              console.log('not in 1km');
+              userevent.update({
+                completion: false,
+                userAnswer: 'Still Too Far'
+              }).then(function (data) {
+                res.send(data)
+              }).catch(function (err) {
+                res.send(err)
+              })
+            }
+          })
         } else {
           if (userAnswer === quest.answerKey) {
             userevent.update({
