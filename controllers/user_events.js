@@ -1,4 +1,5 @@
 const models = require('../models')
+const sequelize = require('sequelize')
 
 module.exports = {
   getUserEvents: (req, res) => {
@@ -97,11 +98,7 @@ module.exports = {
           }).then(function (userevents) {
               arr.push(userevents)
               if (arr.length === quests.length) {
-                if (userevents[1]) {
-                  res.send(arr[0])
-                } else {
-                  res.status(409).json({message: 'UserId && QuestId already exists.'})
-                }
+                res.send(arr)
               }
           }).catch(function (err) {
             res.send(err)
@@ -199,25 +196,66 @@ module.exports = {
     })
   },
   updateUserEventByUserAnswer: (req, res) => {
+    let userAnswer = req.body.userAnswer
     models.User_Events.findById(req.params.id).then(function (userevent) {
       userevent.getQuest().then(function (quest) {
-        if (req.body.userAnswer === quest.answerKey) {
-          userevent.update({
-            completion: true
-          }).then(function (data) {
-            res.send(data)
-          }).catch(function (err) {
-            res.send(err)
+        if(!isNaN(parseFloat(userAnswer))){
+          let key = quest.answerKey.split(', ').map(item => +item)
+          models.Locations.find({
+            where: {
+              id: userAnswer
+            },
+            attributes: {
+              include: [[
+                sequelize.fn('ST_Distance',
+                  sequelize.col('geolocation'),
+                  sequelize.literal(`ST_POINT(${key[0]}, ${key[1]})::geography`)
+                ), 'distance'
+              ]]
+            }
+          }).then((data)=> {
+            if(data.dataValues.distance/600 < 1){
+              console.log('in 1km');
+              userevent.update({
+                completion: true,
+                userAnswer: 'User get the locations'
+              }).then(function (data) {
+                res.send(data)
+              }).catch(function (err) {
+                res.send(err)
+              })
+            } else {
+              console.log('not in 1km');
+              userevent.update({
+                completion: false,
+                userAnswer: 'Still Too Far'
+              }).then(function (data) {
+                res.send(data)
+              }).catch(function (err) {
+                res.send(err)
+              })
+            }
           })
-        }
-        else {
-          userevent.update({
-            completion: false
-          }).then(function (data) {
-            res.send(data)
-          }).catch(function (err) {
-            res.send(err)
-          })
+        } else {
+          if (userAnswer === quest.answerKey) {
+            userevent.update({
+              completion: true,
+              userAnswer: req.body.userAnswer
+            }).then(function (data) {
+              res.send(data)
+            }).catch(function (err) {
+              res.send(err)
+            })
+          } else {
+            userevent.update({
+              completion: false,
+              userAnswer: req.body.userAnswer
+            }).then(function (data) {
+              res.send(data)
+            }).catch(function (err) {
+              res.send(err)
+            })
+          }
         }
       })
     })
