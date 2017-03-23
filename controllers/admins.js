@@ -72,14 +72,15 @@ module.exports = {
       if (hash.verify(req.body.password, data.password)) {
         let token = jwt.sign({id: data.id}, process.env.SECRET, {algorithm: 'HS256'}, {expiresIn: '1h'})
         res.send({
-          token: token
+          token: token,
+          status: true
         })
       } else {
-        res.send({message: 'Authentication failed. Wrong password.'})
+        res.send({message: 'Authentication failed. Wrong password.', status: false})
       }
     }).catch(function (err) {
       console.log(err);
-      res.send({message: 'Authentication failed. Email not found.'})
+      res.send({message: 'Authentication failed. Email not found.', status: false})
     })
   }
 }
