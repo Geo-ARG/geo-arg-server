@@ -38,8 +38,13 @@ module.exports = {
       coordinates: [+req.body.latitude, +req.body.longitude],
       crs: { type: 'name', properties: { name: 'EPSG:4326'} }
     }
-    models.Locations.create({
-      geolocation: point
+    models.Locations.findOrCreate({
+      where: {
+        id: req.body.UserId
+      },
+      defaults: {
+        geolocation: point
+      }
     }).then(function (location) {
       models.User_Locations.findOrCreate({
         where: {
