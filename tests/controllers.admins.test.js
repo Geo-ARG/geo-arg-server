@@ -33,7 +33,7 @@ describe('Admin status and response', function () {
 
   setTimeout(function () {
     deleteData()
-  }, 700)
+  }, 750)
 
   describe('GET /auth', function () {
     it('should return /auth endpoints', function (done) {

@@ -27,7 +27,7 @@ function deleteData () {
 describe('Auth/users status and response', function () {
   let createdId, token, adminId
   let dummyData = ['fadly', 'fadly@gmail.com', 'gana', 'gana@yahoo.com']
-  let dummyData2 = ['fadly6@gmail.com', '123', 'gana6@yahoo.com', '345']
+  let dummyData2 = ['fadly8@gmail.com', '123', 'gana8@yahoo.com', '345']
 
   deleteData()
 
