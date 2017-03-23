@@ -39,7 +39,7 @@ router.get('/auth/users', userController.getUsers)
 
 router.get('/auth/users/:id', userController.getUser)
 
-router.post('/auth/users', userController.createUser)
+router.post('/auth/users', middleware.verifyLogin, userController.createUser)
 
 router.put('/auth/users/:id', userController.updateUser)
 
@@ -49,15 +49,15 @@ router.delete('/auth/users/:id', userController.deleteUser)
 
 router.post('/auth/admins/login', adminController.verifyAdmin)
 
-router.get('/auth/admins', adminController.getAdmins)
+router.get('/auth/admins', middleware.verifyAdmin, adminController.getAdmins)
 
-router.get('/auth/admins/:id', adminController.getAdmin)
+router.get('/auth/admins/:id', middleware.verifyAdmin, adminController.getAdmin)
 
 router.post('/auth/admins', adminController.createAdmin)
 
-router.put('/auth/admins/:id', adminController.updateAdmin)
+router.put('/auth/admins/:id', middleware.verifyAdmin, adminController.updateAdmin)
 
-router.delete('/auth/admins/:id', adminController.deleteAdmin)
+router.delete('/auth/admins/:id', middleware.verifyAdmin, adminController.deleteAdmin)
 
 // ==== API ====
 
@@ -80,25 +80,25 @@ router.get('/api', function (req, res, next) {
 
 // ==== Event ====
 
-router.get('/api/events', eventController.getEvents)
+router.get('/api/events', middleware.verifyLogin, eventController.getEvents)
 
-router.get('/api/events/:id', eventController.getEvent)
+router.get('/api/events/:id', middleware.verifyAdmin, eventController.getEvent)
 
-router.post('/api/events', eventController.createEvent)
+router.post('/api/events', middleware.verifyAdmin, eventController.createEvent)
 
-router.put('/api/events/:id', eventController.updateEvent)
+router.put('/api/events/:id', middleware.verifyAdmin, eventController.updateEvent)
 
-router.delete('/api/events/:id', eventController.deleteEvent)
+router.delete('/api/events/:id', middleware.verifyAdmin, eventController.deleteEvent)
 
 // ==== Location ====
 
 router.get('/api/locations', locationController.getLocations)
 
-router.post('/api/locations/scan', locationController.getLocation)
+router.post('/api/locations/scan', middleware.verifyLogin, locationController.getLocation)
 
-router.post('/api/locations', locationController.createLocation)
+router.post('/api/locations', middleware.verifyLogin, locationController.createLocation)
 
-router.put('/api/locations/:id', locationController.updateLocation)
+router.put('/api/locations/:id', middleware.verifyLogin, locationController.updateLocation)
 
 router.delete('/api/locations/:id', locationController.deleteLocation)
 
@@ -122,19 +122,19 @@ router.get('/api/userevents', userEventController.getUserEvents)
 
 router.get('/api/userevents/:id', userEventController.getUserEvent)
 
-router.get('/api/userevents/user/:userid/', userEventController.getUserEventByUserId)
+router.get('/api/userevents/user/:userid/', middleware.verifyLogin, userEventController.getUserEventByUserId)
 
-router.get('/api/userevents/user/:userid/event/:eventid', userEventController.getUserEventByUserIdEventId)
+router.get('/api/userevents/user/:userid/event/:eventid', middleware.verifyLogin, userEventController.getUserEventByUserIdEventId)
 
 router.get('/api/userevents/quests/photo', userEventController.getUserEventByCompletionAndTypePhoto)
 
-router.post('/api/userevents', userEventController.createUserEvent)
+router.post('/api/userevents', middleware.verifyLogin, userEventController.createUserEvent)
 
-router.put('/api/userevents/:id', userEventController.updateUserEvent)
+router.put('/api/userevents/:id', middleware.verifyLogin, userEventController.updateUserEvent)
 
 router.put('/api/userevents/:id/quests/verification', userEventController.updateUserEventByQuestVerification)
 
-router.put('/api/userevents/:id/quests/useranswer', userEventController.updateUserEventByUserAnswer)
+router.put('/api/userevents/:id/quests/useranswer', middleware.verifyLogin, userEventController.updateUserEventByUserAnswer)
 
 router.delete('/api/userevents/:id', userEventController.deleteUserEvent)
 

@@ -25,7 +25,7 @@ function deleteData () {
 }
 
 describe('API/events status and response', function () {
-  let createdId
+  let createdId, adminId, token
   let dummyData = [
     'Hacktiv8 Campus Hunt',
     'Find an instructor whose nickname Spiderman',
@@ -36,6 +36,7 @@ describe('API/events status and response', function () {
     'Pizza Hut, Mall Pondok Indah, Jak-Sel',
     150
   ]
+  let dummyData2 = ['fadly@gmail.com', '123', 'gana@yahoo.com', '345']
 
   deleteData()
 
@@ -62,11 +63,48 @@ describe('API/events status and response', function () {
         })
     })
   })
+  describe('POST /auth/admins', function () {
+    it('return 200 <= status < 400, an object, and res.body.email should equal dummyData[0]', function (done) {
+      chai.request(url)
+        .post('/auth/admins')
+        .send({
+          email: dummyData2[0],
+          password: dummyData2[1]
+        })
+        .end(function (err, res) {
+          adminId = res.body.id
+          console.log(adminId);
+          res.should.have.status(success(res.status))
+          res.should.be.an('object')
+          res.body.email.should.equal(dummyData2[0])
+          done()
+        })
+    })
+  })
+
+  describe('POST /auth/admins/login', function () {
+    it('return 200 <= status < 400, an object, and res.body should have deep property token', function (done) {
+      chai.request(url)
+        .post('/auth/admins/login')
+        .send({
+          email: dummyData2[0],
+          password: dummyData2[1]
+        })
+        .end(function (err, res) {
+          token = res.body.token
+          res.should.have.status(success(res.status))
+          res.should.be.an('object')
+          res.body.should.have.deep.property('token')
+          done()
+        })
+    })
+  })
 
   describe('POST /api/events', function () {
     it('return 200 <= status < 400, an object, and res.body.title should equal dummyData[0]', function (done) {
       chai.request(url)
         .post('/api/events')
+        .set('token', token)
         .send({
           title: dummyData[0],
           description: dummyData[1],
@@ -88,6 +126,7 @@ describe('API/events status and response', function () {
     it('return 200 <= status < 400, an object, and res.body[0].description should equal dummyData[1]', function (done) {
       chai.request(url)
         .get('/api/events')
+        .set('token', token)
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.should.be.an('object')
@@ -101,6 +140,7 @@ describe('API/events status and response', function () {
     it('return 200 <= status < 400, an object, and res.body.place should equal dummyData[6]', function (done) {
       chai.request(url)
         .put(`/api/events/${createdId}`)
+        .set('token', token)
         .send({
           title: dummyData[4],
           description: dummyData[5],
@@ -117,13 +157,27 @@ describe('API/events status and response', function () {
   })
 
   describe('DELETE /api/events/:id', function () {
-    it('return 200 <= status < 400, an object, and res.body should return message', function (done) {
+    it('return 200 <= status < 400, an object, and res.body should return message delete event with id createdid', function (done) {
       chai.request(url)
         .delete(`/api/events/${createdId}`)
+        .set('token', token)
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.body.should.be.an('object')
           res.body.should.deep.equal({message: `Deleted event with ID: ${createdId}`})
+          done()
+        })
+    })
+  })
+
+  describe('DELETE /auth/admins/:id', function () {
+    it('return 200 <= status < 400, an object, and res.body should return message delete admin with id adminId', function (done) {
+      chai.request(url)
+        .delete(`/auth/admins/${adminId}`)
+        .end(function (err, res) {
+          res.should.have.status(success(res.status))
+          res.body.should.be.an('object')
+          res.body.should.deep.equal({message: `Deleted admin with ID: ${adminId}`})
           done()
         })
     })

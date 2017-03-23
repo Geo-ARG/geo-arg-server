@@ -28,12 +28,12 @@ function deleteData () {
 }
 
 describe('Admin status and response', function () {
-  let createdId, hashedPass
+  let createdId, hashedPass, token
   let dummyData = ['fadly@gmail.com', '123', 'gana@yahoo.com', '345']
 
   setTimeout(function () {
     deleteData()
-  }, 400)
+  }, 700)
 
   describe('GET /auth', function () {
     it('should return /auth endpoints', function (done) {
@@ -73,27 +73,8 @@ describe('Admin status and response', function () {
     })
   })
 
-  // describe('POST /auth/admins/login', function () {
-  //   it('return 200 <= status < 400, an object, and res.body.email should equal dummyData[0]', function (done) {
-  //     chai.request(url)
-  //       .post('/auth/admins')
-  //       .send({
-  //         email: dummyData[0],
-  //         password: dummyData[1]
-  //       })
-  //       .end(function (err, res) {
-  //         createdId = res.body.id
-  //         hashedPass = res.body.password
-  //         res.should.have.status(success(res.status))
-  //         res.should.be.an('object')
-  //         res.body.email.should.equal(dummyData[0])
-  //         done()
-  //       })
-  //   })
-  // })
-
   describe('POST /auth/admins/login', function () {
-    it('return 200 <= status < 400, an object, and res.body.email should equal dummyData[0]', function (done) {
+    it('return 200 <= status < 400, an object, and res.body should have deep property token', function (done) {
       chai.request(url)
         .post('/auth/admins/login')
         .send({
@@ -101,6 +82,7 @@ describe('Admin status and response', function () {
           password: dummyData[1]
         })
         .end(function (err, res) {
+          token = res.body.token
           res.should.have.status(success(res.status))
           res.should.be.an('object')
           res.body.should.have.deep.property('token')
@@ -113,6 +95,7 @@ describe('Admin status and response', function () {
     it('return 200 <= status < 400, an object, and res.body[0].password should equal hashedPass', function (done) {
       chai.request(url)
         .get('/auth/admins')
+        .set('token', token)
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.should.be.an('object')
@@ -126,6 +109,7 @@ describe('Admin status and response', function () {
     it('return 200 <= status < 400, an object, and res.body.email should equal dummyData[2]', function (done) {
       chai.request(url)
         .put(`/auth/admins/${createdId}`)
+        .set('token', token)
         .send({
           email: dummyData[2],
           password: dummyData[3]
@@ -143,6 +127,7 @@ describe('Admin status and response', function () {
     it('return 200 <= status < 400, an object, and res.body should return message', function (done) {
       chai.request(url)
         .delete(`/auth/admins/${createdId}`)
+        .set('token', token)
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.body.should.be.an('object')
