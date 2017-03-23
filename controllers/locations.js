@@ -51,10 +51,10 @@ module.exports = {
           UserId: req.body.UserId
         },
         defaults: {
-          LocationId: location.id
+          LocationId: location[0].dataValues.id
         }
       }).then(function (userlocation) {
-        res.send({Locations: location, User_Locations: userlocation})
+        res.send({Locations: location[0].dataValues, User_Locations: userlocation[0].dataValues})
       })
     }).catch(function (err) {
       res.send(err)

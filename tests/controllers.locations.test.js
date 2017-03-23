@@ -29,10 +29,10 @@ describe('API/locations status and response', function () {
   let dummyData = [
     6.12345,
     106.4321,
-    6.5432,
-    106.1234,
     6.5439,
-    106.1232,
+    106.12323,
+    6.5439,
+    106.12321,
     {
       'type': 'Point',
       'coordinates': [
@@ -139,6 +139,7 @@ describe('API/locations status and response', function () {
           longitude: dummyData[5]
         })
         .end(function (err, res) {
+          console.log(res.body);
           res.should.have.status(success(res.status))
           res.should.be.an('object')
           res.body.should.be.an('array')
