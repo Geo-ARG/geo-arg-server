@@ -25,7 +25,7 @@ function deleteData () {
 }
 
 describe('API/quests status and response', function () {
-  let createdId
+  let createdId, adminId, token
   let dummyData = [
     'Go to PIM 3rd F',
     'Find a girl',
@@ -36,6 +36,7 @@ describe('API/quests status and response', function () {
     'Text',
     'Syanmil'
   ]
+  let dummyData2 = ['fadly1@gmail.com', '123', 'gana1@yahoo.com', '345']
 
   deleteData()
 
@@ -63,10 +64,47 @@ describe('API/quests status and response', function () {
     })
   })
 
+  describe('POST /auth/admins', function () {
+    it('return 200 <= status < 400, an object, and res.body.email should equal dummyData[0]', function (done) {
+      chai.request(url)
+        .post('/auth/admins')
+        .send({
+          email: dummyData2[0],
+          password: dummyData2[1]
+        })
+        .end(function (err, res) {
+          adminId = res.body.id
+          res.should.have.status(success(res.status))
+          res.should.be.an('object')
+          res.body.email.should.equal(dummyData2[0])
+          done()
+        })
+    })
+  })
+
+  describe('POST /auth/admins/login', function () {
+    it('return 200 <= status < 400, an object, and res.body should have deep property token', function (done) {
+      chai.request(url)
+        .post('/auth/admins/login')
+        .send({
+          email: dummyData2[0],
+          password: dummyData2[1]
+        })
+        .end(function (err, res) {
+          token = res.body.token
+          res.should.have.status(success(res.status))
+          res.should.be.an('object')
+          res.body.should.have.deep.property('token')
+          done()
+        })
+    })
+  })
+
   describe('POST /api/quests', function () {
     it('return 200 <= status < 400, an object, and res.body.task should equal dummyData[1]', function (done) {
       chai.request(url)
         .post('/api/quests')
+        .set('token', token)
         .send({
           title: dummyData[0],
           task: dummyData[1],
@@ -87,6 +125,7 @@ describe('API/quests status and response', function () {
     it('return 200 <= status < 400, an object, and res.body[0].answerKey should equal dummyData[3]', function (done) {
       chai.request(url)
         .get('/api/quests')
+        .set('token', token)
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.should.be.an('object')
@@ -100,6 +139,7 @@ describe('API/quests status and response', function () {
     it('return 200 <= status < 400, an object, and res.body.type should equal dummyData[6]', function (done) {
       chai.request(url)
         .put(`/api/quests/${createdId}`)
+        .set('token', token)
         .send({
           title: dummyData[4],
           task: dummyData[5],
@@ -116,13 +156,28 @@ describe('API/quests status and response', function () {
   })
 
   describe('DELETE /api/quests/:id', function () {
-    it('return 200 <= status < 400, an object, and res.body should return message', function (done) {
+    it('return 200 <= status < 400, an object, and res.body should return message delete quest with id createdId', function (done) {
       chai.request(url)
         .delete(`/api/quests/${createdId}`)
+        .set('token', token)
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.body.should.be.an('object')
           res.body.should.deep.equal({message: `Deleted quest with ID: ${createdId}`})
+          done()
+        })
+    })
+  })
+
+  describe('DELETE /auth/admins/:id', function () {
+    it('return 200 <= status < 400, an object, and res.body should return message delete admin with id adminId', function (done) {
+      chai.request(url)
+        .delete(`/auth/admins/${adminId}`)
+        .set('token', token)
+        .end(function (err, res) {
+          res.should.have.status(success(res.status))
+          res.body.should.be.an('object')
+          res.body.should.deep.equal({message: `Deleted admin with ID: ${adminId}`})
           done()
         })
     })

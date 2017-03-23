@@ -124,7 +124,7 @@ describe('Admin status and response', function () {
   })
 
   describe('DELETE /auth/admins/:id', function () {
-    it('return 200 <= status < 400, an object, and res.body should return message', function (done) {
+    it('return 200 <= status < 400, an object, and res.body should return message delete admin with id createdId', function (done) {
       chai.request(url)
         .delete(`/auth/admins/${createdId}`)
         .set('token', token)

@@ -36,7 +36,7 @@ describe('API/events status and response', function () {
     'Pizza Hut, Mall Pondok Indah, Jak-Sel',
     150
   ]
-  let dummyData2 = ['fadly@gmail.com', '123', 'gana@yahoo.com', '345']
+  let dummyData2 = ['fadly3@gmail.com', '123', 'gana3@yahoo.com', '345']
 
   deleteData()
 
@@ -63,6 +63,7 @@ describe('API/events status and response', function () {
         })
     })
   })
+
   describe('POST /auth/admins', function () {
     it('return 200 <= status < 400, an object, and res.body.email should equal dummyData[0]', function (done) {
       chai.request(url)
@@ -73,7 +74,6 @@ describe('API/events status and response', function () {
         })
         .end(function (err, res) {
           adminId = res.body.id
-          console.log(adminId);
           res.should.have.status(success(res.status))
           res.should.be.an('object')
           res.body.email.should.equal(dummyData2[0])
@@ -157,7 +157,7 @@ describe('API/events status and response', function () {
   })
 
   describe('DELETE /api/events/:id', function () {
-    it('return 200 <= status < 400, an object, and res.body should return message delete event with id createdid', function (done) {
+    it('return 200 <= status < 400, an object, and res.body should return message delete event with id createdId', function (done) {
       chai.request(url)
         .delete(`/api/events/${createdId}`)
         .set('token', token)
@@ -174,6 +174,7 @@ describe('API/events status and response', function () {
     it('return 200 <= status < 400, an object, and res.body should return message delete admin with id adminId', function (done) {
       chai.request(url)
         .delete(`/auth/admins/${adminId}`)
+        .set('token', token)
         .end(function (err, res) {
           res.should.have.status(success(res.status))
           res.body.should.be.an('object')

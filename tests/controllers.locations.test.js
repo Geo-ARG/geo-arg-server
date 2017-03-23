@@ -57,9 +57,33 @@ describe('API/locations status and response', function () {
     2,
     3
   ]
-  let dummyData2 = ['fadly@gmail.com', '123', 'gana@yahoo.com', '345']
+  let dummyData2 = ['fadly2@gmail.com', '123', 'gana2@yahoo.com', '345']
 
   deleteData()
+
+  describe('GET /api', function () {
+    it('should return /api endpoints', function (done) {
+      chai.request(url)
+        .get('/api')
+        .end(function (err, res) {
+          res.should.have.status(success(res.status))
+          res.should.be.an('object')
+          res.body.endpoints.should.deep.equal([
+            '/api/events',
+            '/api/events/:id',
+            '/api/locations',
+            '/api/locations/:id',
+            '/api/quests',
+            '/api/quests/:id',
+            '/api/userevents',
+            '/api/userevents/:id',
+            '/api/userlocations',
+            '/api/userlocations/:id'
+          ])
+          done()
+        })
+    })
+  })
 
   describe('POST /auth/admins', function () {
     it('return 200 <= status < 400, an object, and res.body.email should equal dummyData[0]', function (done) {
@@ -71,7 +95,6 @@ describe('API/locations status and response', function () {
         })
         .end(function (err, res) {
           adminId = res.body.id
-          console.log(adminId);
           res.should.have.status(success(res.status))
           res.should.be.an('object')
           res.body.email.should.equal(dummyData2[0])
