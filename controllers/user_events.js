@@ -215,7 +215,6 @@ module.exports = {
             }
           }).then((data)=> {
             if(data.dataValues.distance/600 < 1){
-              console.log('in 1km');
               userevent.update({
                 completion: true,
                 userAnswer: 'User get the locations'
@@ -225,7 +224,6 @@ module.exports = {
                 res.send(err)
               })
             } else {
-              console.log('not in 1km');
               userevent.update({
                 completion: false,
                 userAnswer: 'Still Too Far'
