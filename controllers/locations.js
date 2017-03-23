@@ -41,9 +41,13 @@ module.exports = {
     models.Locations.create({
       geolocation: point
     }).then(function (location) {
-      models.User_Locations.create({
-        UserId: req.body.UserId,
-        LocationId: location.id
+      models.User_Locations.findOrCreate({
+        where: {
+          UserId: req.body.UserId
+        },
+        defaults: {
+          LocationId: location.id
+        }
       }).then(function (userlocation) {
         res.send({Locations: location, User_Locations: userlocation})
       })
